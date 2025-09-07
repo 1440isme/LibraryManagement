@@ -1,0 +1,209 @@
+﻿namespace QuanLyThuVien.UI
+{
+    partial class frmMain
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            this.mainContainer = new DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormContainer();
+            this.accordionControl1 = new DevExpress.XtraBars.Navigation.AccordionControl();
+            this.btnDanhMuc = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.mnTrangChu = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.mnSach = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.mnDocGia = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.mnMuonTra = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.mnTKBC = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.btnHeThong = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.mnSetup = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.mnNV = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.fluentDesignFormControl1 = new DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl();
+            this.lblTieuDe = new DevExpress.XtraBars.BarStaticItem();
+            this.fluentFormDefaultManager1 = new DevExpress.XtraBars.FluentDesignSystem.FluentFormDefaultManager(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.accordionControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fluentDesignFormControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fluentFormDefaultManager1)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // mainContainer
+            // 
+            this.mainContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainContainer.Location = new System.Drawing.Point(303, 31);
+            this.mainContainer.Margin = new System.Windows.Forms.Padding(4);
+            this.mainContainer.Name = "mainContainer";
+            this.mainContainer.Size = new System.Drawing.Size(1188, 909);
+            this.mainContainer.TabIndex = 0;
+            // 
+            // accordionControl1
+            // 
+            this.accordionControl1.Appearance.Item.Default.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
+            this.accordionControl1.Appearance.Item.Default.Options.UseFont = true;
+            this.accordionControl1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.accordionControl1.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
+            this.btnDanhMuc,
+            this.btnHeThong});
+            this.accordionControl1.Location = new System.Drawing.Point(0, 31);
+            this.accordionControl1.Margin = new System.Windows.Forms.Padding(4);
+            this.accordionControl1.Name = "accordionControl1";
+            this.accordionControl1.ScrollBarMode = DevExpress.XtraBars.Navigation.ScrollBarMode.Hidden;
+            this.accordionControl1.Size = new System.Drawing.Size(303, 909);
+            this.accordionControl1.TabIndex = 1;
+            this.accordionControl1.ViewType = DevExpress.XtraBars.Navigation.AccordionControlViewType.HamburgerMenu;
+            // 
+            // btnDanhMuc
+            // 
+            this.btnDanhMuc.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
+            this.mnTrangChu,
+            this.mnSach,
+            this.mnDocGia,
+            this.mnMuonTra,
+            this.mnTKBC});
+            this.btnDanhMuc.Expanded = true;
+            this.btnDanhMuc.Name = "btnDanhMuc";
+            this.btnDanhMuc.Text = "DANH MỤC";
+            // 
+            // mnTrangChu
+            // 
+            this.mnTrangChu.Name = "mnTrangChu";
+            this.mnTrangChu.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.mnTrangChu.Text = "Trang chủ";
+            // 
+            // mnSach
+            // 
+            this.mnSach.Name = "mnSach";
+            this.mnSach.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.mnSach.Text = "Quản lý Sách";
+            this.mnSach.Click += new System.EventHandler(this.mnSach_Click);
+            // 
+            // mnDocGia
+            // 
+            this.mnDocGia.Name = "mnDocGia";
+            this.mnDocGia.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.mnDocGia.Text = "Quản lý Độc giả";
+            this.mnDocGia.Click += new System.EventHandler(this.mnDocGia_Click);
+            // 
+            // mnMuonTra
+            // 
+            this.mnMuonTra.Name = "mnMuonTra";
+            this.mnMuonTra.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.mnMuonTra.Text = "Quản lý Mượn - Trả";
+            // 
+            // mnTKBC
+            // 
+            this.mnTKBC.Name = "mnTKBC";
+            this.mnTKBC.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.mnTKBC.Text = "Thống kê - Báo cáo";
+            // 
+            // btnHeThong
+            // 
+            this.btnHeThong.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
+            this.mnSetup,
+            this.mnNV});
+            this.btnHeThong.Expanded = true;
+            this.btnHeThong.Name = "btnHeThong";
+            this.btnHeThong.Text = "HỆ THỐNG";
+            // 
+            // mnSetup
+            // 
+            this.mnSetup.Name = "mnSetup";
+            this.mnSetup.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.mnSetup.Text = "Cài dặt";
+            // 
+            // mnNV
+            // 
+            this.mnNV.Name = "mnNV";
+            this.mnNV.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.mnNV.Text = "Quản lý Nhân viên";
+            // 
+            // fluentDesignFormControl1
+            // 
+            this.fluentDesignFormControl1.FluentDesignForm = this;
+            this.fluentDesignFormControl1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
+            this.lblTieuDe});
+            this.fluentDesignFormControl1.Location = new System.Drawing.Point(0, 0);
+            this.fluentDesignFormControl1.Manager = this.fluentFormDefaultManager1;
+            this.fluentDesignFormControl1.Margin = new System.Windows.Forms.Padding(4);
+            this.fluentDesignFormControl1.Name = "fluentDesignFormControl1";
+            this.fluentDesignFormControl1.Size = new System.Drawing.Size(1491, 31);
+            this.fluentDesignFormControl1.TabIndex = 2;
+            this.fluentDesignFormControl1.TabStop = false;
+            this.fluentDesignFormControl1.TitleItemLinks.Add(this.lblTieuDe);
+            // 
+            // lblTieuDe
+            // 
+            this.lblTieuDe.Caption = "Trương Công Bình";
+            this.lblTieuDe.Id = 0;
+            this.lblTieuDe.ItemAppearance.Normal.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.lblTieuDe.ItemAppearance.Normal.Options.UseFont = true;
+            this.lblTieuDe.Name = "lblTieuDe";
+            // 
+            // fluentFormDefaultManager1
+            // 
+            this.fluentFormDefaultManager1.Form = this;
+            this.fluentFormDefaultManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
+            this.lblTieuDe});
+            this.fluentFormDefaultManager1.MaxItemId = 1;
+            // 
+            // frmMain
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1491, 940);
+            this.ControlContainer = this.mainContainer;
+            this.Controls.Add(this.mainContainer);
+            this.Controls.Add(this.accordionControl1);
+            this.Controls.Add(this.fluentDesignFormControl1);
+            this.FluentDesignFormControl = this.fluentDesignFormControl1;
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "frmMain";
+            this.NavigationControl = this.accordionControl1;
+            this.Text = "frmMain";
+            this.Load += new System.EventHandler(this.frmMain_Load);
+            this.Resize += new System.EventHandler(this.frmMain_Resize);
+            ((System.ComponentModel.ISupportInitialize)(this.accordionControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fluentDesignFormControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fluentFormDefaultManager1)).EndInit();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+        private DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormContainer mainContainer;
+        private DevExpress.XtraBars.Navigation.AccordionControl accordionControl1;
+        private DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl fluentDesignFormControl1;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement btnDanhMuc;
+        private DevExpress.XtraBars.FluentDesignSystem.FluentFormDefaultManager fluentFormDefaultManager1;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement mnTrangChu;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement btnHeThong;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement mnSach;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement mnDocGia;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement mnMuonTra;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement mnTKBC;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement mnSetup;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement mnNV;
+        private DevExpress.XtraBars.BarStaticItem lblTieuDe;
+    }
+}
