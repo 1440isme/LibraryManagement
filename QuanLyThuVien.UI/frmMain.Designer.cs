@@ -54,7 +54,7 @@
             this.mainContainer.Location = new System.Drawing.Point(303, 31);
             this.mainContainer.Margin = new System.Windows.Forms.Padding(4);
             this.mainContainer.Name = "mainContainer";
-            this.mainContainer.Size = new System.Drawing.Size(1188, 909);
+            this.mainContainer.Size = new System.Drawing.Size(1188, 854);
             this.mainContainer.TabIndex = 0;
             // 
             // accordionControl1
@@ -69,7 +69,7 @@
             this.accordionControl1.Margin = new System.Windows.Forms.Padding(4);
             this.accordionControl1.Name = "accordionControl1";
             this.accordionControl1.ScrollBarMode = DevExpress.XtraBars.Navigation.ScrollBarMode.Hidden;
-            this.accordionControl1.Size = new System.Drawing.Size(303, 909);
+            this.accordionControl1.Size = new System.Drawing.Size(303, 854);
             this.accordionControl1.TabIndex = 1;
             this.accordionControl1.ViewType = DevExpress.XtraBars.Navigation.AccordionControlViewType.HamburgerMenu;
             // 
@@ -156,8 +156,10 @@
             // 
             this.lblTieuDe.Caption = "Trương Công Bình";
             this.lblTieuDe.Id = 0;
-            this.lblTieuDe.ItemAppearance.Normal.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.lblTieuDe.ItemAppearance.Normal.Font = new System.Drawing.Font("SF Pro Display", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTieuDe.ItemAppearance.Normal.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.lblTieuDe.ItemAppearance.Normal.Options.UseFont = true;
+            this.lblTieuDe.ItemAppearance.Normal.Options.UseForeColor = true;
             this.lblTieuDe.Name = "lblTieuDe";
             // 
             // fluentFormDefaultManager1
@@ -169,9 +171,9 @@
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1491, 940);
+            this.ClientSize = new System.Drawing.Size(1491, 885);
             this.ControlContainer = this.mainContainer;
             this.Controls.Add(this.mainContainer);
             this.Controls.Add(this.accordionControl1);

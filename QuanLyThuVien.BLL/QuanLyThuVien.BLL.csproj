@@ -42,7 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\NXBService.cs" />
     <Compile Include="Services\SachService.cs" />
+    <Compile Include="Services\TacGiaService.cs" />
+    <Compile Include="Services\TheLoaiService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\QuanLyThuVien.DAL\QuanLyThuVien.DAL.csproj">
