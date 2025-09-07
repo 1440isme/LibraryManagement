@@ -43,6 +43,8 @@
             this.fluentDesignFormControl1 = new DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl();
             this.lblTieuDe = new DevExpress.XtraBars.BarStaticItem();
             this.fluentFormDefaultManager1 = new DevExpress.XtraBars.FluentDesignSystem.FluentFormDefaultManager(this.components);
+            this.mnDatTruoc = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.mnLog = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             ((System.ComponentModel.ISupportInitialize)(this.accordionControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fluentDesignFormControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fluentFormDefaultManager1)).BeginInit();
@@ -80,6 +82,7 @@
             this.mnSach,
             this.mnDocGia,
             this.mnMuonTra,
+            this.mnDatTruoc,
             this.mnTKBC});
             this.btnDanhMuc.Expanded = true;
             this.btnDanhMuc.Name = "btnDanhMuc";
@@ -102,14 +105,14 @@
             // 
             this.mnDocGia.Name = "mnDocGia";
             this.mnDocGia.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
-            this.mnDocGia.Text = "Quản lý Độc giả";
+            this.mnDocGia.Text = "Quản lý Thành viên";
             this.mnDocGia.Click += new System.EventHandler(this.mnDocGia_Click);
             // 
             // mnMuonTra
             // 
             this.mnMuonTra.Name = "mnMuonTra";
             this.mnMuonTra.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
-            this.mnMuonTra.Text = "Quản lý Mượn - Trả";
+            this.mnMuonTra.Text = "Quản lý Mượn/Trả - Gia hạn";
             // 
             // mnTKBC
             // 
@@ -120,8 +123,9 @@
             // btnHeThong
             // 
             this.btnHeThong.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
+            this.mnNV,
             this.mnSetup,
-            this.mnNV});
+            this.mnLog});
             this.btnHeThong.Expanded = true;
             this.btnHeThong.Name = "btnHeThong";
             this.btnHeThong.Text = "HỆ THỐNG";
@@ -130,7 +134,7 @@
             // 
             this.mnSetup.Name = "mnSetup";
             this.mnSetup.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
-            this.mnSetup.Text = "Cài dặt";
+            this.mnSetup.Text = "Cấu hình hệ thống";
             // 
             // mnNV
             // 
@@ -156,11 +160,13 @@
             // 
             this.lblTieuDe.Caption = "Trương Công Bình";
             this.lblTieuDe.Id = 0;
-            this.lblTieuDe.ItemAppearance.Normal.Font = new System.Drawing.Font("SF Pro Display", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTieuDe.ItemAppearance.Normal.Font = new System.Drawing.Font("SF Pro Display", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTieuDe.ItemAppearance.Normal.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.lblTieuDe.ItemAppearance.Normal.Options.UseFont = true;
             this.lblTieuDe.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.lblTieuDe.MaxWidth = 50;
             this.lblTieuDe.Name = "lblTieuDe";
+            this.lblTieuDe.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             // 
             // fluentFormDefaultManager1
             // 
@@ -168,6 +174,18 @@
             this.fluentFormDefaultManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.lblTieuDe});
             this.fluentFormDefaultManager1.MaxItemId = 1;
+            // 
+            // mnDatTruoc
+            // 
+            this.mnDatTruoc.Name = "mnDatTruoc";
+            this.mnDatTruoc.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.mnDatTruoc.Text = "Quản lý danh sách đặt trước";
+            // 
+            // mnLog
+            // 
+            this.mnLog.Name = "mnLog";
+            this.mnLog.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.mnLog.Text = "Log System";
             // 
             // frmMain
             // 
@@ -207,5 +225,7 @@
         private DevExpress.XtraBars.Navigation.AccordionControlElement mnSetup;
         private DevExpress.XtraBars.Navigation.AccordionControlElement mnNV;
         private DevExpress.XtraBars.BarStaticItem lblTieuDe;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement mnDatTruoc;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement mnLog;
     }
 }

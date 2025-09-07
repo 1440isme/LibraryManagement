@@ -56,6 +56,7 @@ namespace QuanLyThuVien.UI.UI
             showHideControl(true);
             _enable(false);
             _reset();
+            tabQLSach.SelectedTabPage = pageSach;
         }
         void LoadTacGia()
         {

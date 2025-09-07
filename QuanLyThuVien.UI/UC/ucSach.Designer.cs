@@ -74,6 +74,9 @@
             this.txtTenSach = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.tabQLSach = new DevExpress.XtraTab.XtraTabControl();
+            this.pageSach = new DevExpress.XtraTab.XtraTabPage();
+            this.pageBanSaoSach = new DevExpress.XtraTab.XtraTabPage();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcSach)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvSach)).BeginInit();
@@ -88,6 +91,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel2)).BeginInit();
             this.splitContainerControl1.Panel2.SuspendLayout();
             this.splitContainerControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tabQLSach)).BeginInit();
+            this.tabQLSach.SuspendLayout();
+            this.pageSach.SuspendLayout();
             this.SuspendLayout();
             // 
             // barManager1
@@ -113,6 +119,7 @@
             this.bar1.DockCol = 0;
             this.bar1.DockRow = 0;
             this.bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
+            this.bar1.FloatLocation = new System.Drawing.Point(401, 75);
             this.bar1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnThem, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnSua, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
@@ -203,7 +210,7 @@
             this.gcSach.MainView = this.gvSach;
             this.gcSach.MenuManager = this.barManager1;
             this.gcSach.Name = "gcSach";
-            this.gcSach.Size = new System.Drawing.Size(1280, 496);
+            this.gcSach.Size = new System.Drawing.Size(1278, 474);
             this.gcSach.TabIndex = 4;
             this.gcSach.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvSach});
@@ -380,7 +387,7 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1280, 174);
+            this.panelControl1.Size = new System.Drawing.Size(1278, 168);
             this.panelControl1.TabIndex = 9;
             // 
             // numNamXB
@@ -556,7 +563,7 @@
             // 
             this.splitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerControl1.Horizontal = false;
-            this.splitContainerControl1.Location = new System.Drawing.Point(0, 40);
+            this.splitContainerControl1.Location = new System.Drawing.Point(0, 0);
             this.splitContainerControl1.Name = "splitContainerControl1";
             // 
             // splitContainerControl1.Panel1
@@ -568,15 +575,44 @@
             // 
             this.splitContainerControl1.Panel2.Controls.Add(this.panelControl1);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(1280, 680);
-            this.splitContainerControl1.SplitterPosition = 496;
+            this.splitContainerControl1.Size = new System.Drawing.Size(1278, 652);
+            this.splitContainerControl1.SplitterPosition = 474;
             this.splitContainerControl1.TabIndex = 10;
+            // 
+            // tabQLSach
+            // 
+            this.tabQLSach.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabQLSach.Location = new System.Drawing.Point(0, 40);
+            this.tabQLSach.Name = "tabQLSach";
+            this.tabQLSach.SelectedTabPage = this.pageSach;
+            this.tabQLSach.Size = new System.Drawing.Size(1280, 680);
+            this.tabQLSach.TabIndex = 62;
+            this.tabQLSach.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.pageSach,
+            this.pageBanSaoSach});
+            // 
+            // pageSach
+            // 
+            this.pageSach.Appearance.Header.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold);
+            this.pageSach.Appearance.Header.Options.UseFont = true;
+            this.pageSach.Controls.Add(this.splitContainerControl1);
+            this.pageSach.Name = "pageSach";
+            this.pageSach.Size = new System.Drawing.Size(1278, 652);
+            this.pageSach.Text = "QUẢN LÝ SÁCH";
+            // 
+            // pageBanSaoSach
+            // 
+            this.pageBanSaoSach.Appearance.Header.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold);
+            this.pageBanSaoSach.Appearance.Header.Options.UseFont = true;
+            this.pageBanSaoSach.Name = "pageBanSaoSach";
+            this.pageBanSaoSach.Size = new System.Drawing.Size(1278, 652);
+            this.pageBanSaoSach.Text = "QUẢN LÝ BẢN SAO SÁCH";
             // 
             // ucSach
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.splitContainerControl1);
+            this.Controls.Add(this.tabQLSach);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
@@ -600,6 +636,9 @@
             this.splitContainerControl1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
             this.splitContainerControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tabQLSach)).EndInit();
+            this.tabQLSach.ResumeLayout(false);
+            this.pageSach.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -652,5 +691,8 @@
         private DevExpress.XtraBars.BarButtonItem btnLuu;
         private DevExpress.XtraBars.BarButtonItem btnBoQua;
         private System.Windows.Forms.NumericUpDown numNamXB;
+        private DevExpress.XtraTab.XtraTabControl tabQLSach;
+        private DevExpress.XtraTab.XtraTabPage pageSach;
+        private DevExpress.XtraTab.XtraTabPage pageBanSaoSach;
     }
 }

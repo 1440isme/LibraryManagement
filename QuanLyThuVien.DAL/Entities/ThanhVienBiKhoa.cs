@@ -7,14 +7,11 @@ using System.Collections.Generic;
 
 namespace QuanLyThuVien.DAL.Entities
 {
-    public partial class DanhSachSachDangMuon
+    public partial class ThanhVienBiKhoa
     {
-        public int MaMuonSach { get; set; }
-        public string BarcodeOrSachId { get; set; }
-        public string TenSach { get; set; }
+        public int MaThanhVien { get; set; }
         public string TenThanhVien { get; set; }
-        public DateTime NgayMuon { get; set; }
-        public DateTime NgayTraDuKien { get; set; }
-        public int? MaBanSao { get; set; }
+        public decimal? TongNo { get; set; }
+        public int? MaxNgayQuaHan { get; set; }
     }
 }

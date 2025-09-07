@@ -11,7 +11,9 @@ namespace QuanLyThuVien.DAL.Entities
     {
         public Sach()
         {
+            BanSaoSach = new HashSet<BanSaoSach>();
             MuonSach = new HashSet<MuonSach>();
+            Reservation = new HashSet<Reservation>();
         }
 
         public int MaSach { get; set; }
@@ -28,6 +30,8 @@ namespace QuanLyThuVien.DAL.Entities
         public virtual NhaXuatBan MaNhaXuatBanNavigation { get; set; }
         public virtual TacGia MaTacGiaNavigation { get; set; }
         public virtual TheLoai MaTheLoaiNavigation { get; set; }
+        public virtual ICollection<BanSaoSach> BanSaoSach { get; set; }
         public virtual ICollection<MuonSach> MuonSach { get; set; }
+        public virtual ICollection<Reservation> Reservation { get; set; }
     }
 }

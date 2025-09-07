@@ -9,6 +9,11 @@ namespace QuanLyThuVien.DAL.Entities
 {
     public partial class Phat
     {
+        public Phat()
+        {
+            PaymentHistory = new HashSet<PaymentHistory>();
+        }
+
         public int MaPhat { get; set; }
         public int MaMuonSach { get; set; }
         public decimal SoTien { get; set; }
@@ -17,5 +22,6 @@ namespace QuanLyThuVien.DAL.Entities
         public string TrangThai { get; set; }
 
         public virtual MuonSach MaMuonSachNavigation { get; set; }
+        public virtual ICollection<PaymentHistory> PaymentHistory { get; set; }
     }
 }
