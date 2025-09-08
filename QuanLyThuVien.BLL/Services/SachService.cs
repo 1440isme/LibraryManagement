@@ -40,7 +40,6 @@ namespace QuanLyThuVien.BLL.Services
             if (sach == null)
                 throw new ArgumentNullException(nameof(sach), "Sách không được để null.");
 
-            // Có thể kiểm tra các trường bắt buộc ở đây nếu cần
             if (string.IsNullOrWhiteSpace(sach.TenSach))
                 throw new ArgumentException("Tên sách không được để trống.", nameof(sach.TenSach));
             if (string.IsNullOrWhiteSpace(sach.ISBN))

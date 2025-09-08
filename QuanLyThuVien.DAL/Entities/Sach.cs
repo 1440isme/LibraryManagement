@@ -26,6 +26,7 @@ namespace QuanLyThuVien.DAL.Entities
         public decimal Gia { get; set; }
         public int SoLuong { get; set; }
         public bool? TrangThai { get; set; }
+        public byte[] RowVersion { get; set; }
 
         public virtual NhaXuatBan MaNhaXuatBanNavigation { get; set; }
         public virtual TacGia MaTacGiaNavigation { get; set; }

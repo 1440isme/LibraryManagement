@@ -44,7 +44,6 @@ namespace QuanLyThuVien.DAL.Entities
         {
             if (!optionsBuilder.IsConfigured)
             {
-                // Read connection string from app.config
                 var connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVienConnectionString"].ConnectionString;
                 optionsBuilder.UseSqlServer(connectionString);
             }
@@ -91,16 +90,19 @@ namespace QuanLyThuVien.DAL.Entities
 
                 entity.Property(e => e.GhiChu).HasMaxLength(500);
 
-                entity.Property(e => e.Gia).HasColumnType("decimal(18, 2)");
-
                 entity.Property(e => e.NgayNhap)
                     .HasColumnType("date")
                     .HasDefaultValueSql("(getdate())");
 
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+
                 entity.Property(e => e.TinhTrang)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .HasDefaultValueSql("('Available')");
+                    .HasDefaultValueSql("(N'Sẵn sàng')");
 
                 entity.Property(e => e.ViTri).HasMaxLength(100);
 
@@ -165,6 +167,11 @@ namespace QuanLyThuVien.DAL.Entities
 
                 entity.Property(e => e.NgayTraThucTe).HasColumnType("date");
 
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+
                 entity.Property(e => e.TrangThai)
                     .IsRequired()
                     .HasMaxLength(20)
@@ -217,19 +224,7 @@ namespace QuanLyThuVien.DAL.Entities
                 entity.HasKey(e => e.MaNhanVien)
                     .HasName("PK__NhanVien__77B2CA475BCCA911");
 
-                entity.HasIndex(e => e.Email)
-                    .HasName("UQ__NhanVien__A9D10534C644F99C")
-                    .IsUnique();
-
                 entity.Property(e => e.ChucVu)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.Email)
-                    .IsRequired()
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.MatKhau)
                     .IsRequired()
                     .HasMaxLength(50);
 
@@ -359,6 +354,11 @@ namespace QuanLyThuVien.DAL.Entities
                     .HasColumnName("ISBN")
                     .HasMaxLength(13);
 
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+
                 entity.Property(e => e.SoLuong).HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.TenSach)
@@ -443,6 +443,11 @@ namespace QuanLyThuVien.DAL.Entities
                     .HasColumnType("date")
                     .HasDefaultValueSql("(getdate())");
 
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+
                 entity.Property(e => e.SoDienThoai).HasMaxLength(20);
 
                 entity.Property(e => e.TenThanhVien)
@@ -522,6 +527,11 @@ namespace QuanLyThuVien.DAL.Entities
                 entity.Property(e => e.UserName)
                     .IsRequired()
                     .HasMaxLength(100);
+
+                entity.HasOne(d => d.MaNhanVienNavigation)
+                    .WithMany(p => p.Users)
+                    .HasForeignKey(d => d.MaNhanVien)
+                    .HasConstraintName("FK_Users_NhanVien");
 
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.Users)

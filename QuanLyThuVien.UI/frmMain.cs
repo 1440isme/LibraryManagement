@@ -26,20 +26,8 @@ namespace QuanLyThuVien.UI
             this.UpdateStyles();
         }
         ucSach _ucSach;
-        ucDocGia _ucDocGia;
-        private void mnSach_Click(object sender, EventArgs e)
-        {
-            if (_ucSach == null)
-            {
-                _ucSach = new ucSach();
-                _ucSach.Dock = DockStyle.Fill;
-                mainContainer.Controls.Add(_ucSach);
-                _ucSach.BringToFront();
-            }
-            else
-                _ucSach.BringToFront();
-            lblTieuDe.Caption = mnSach.Text;
-        }
+        ucThanhVien _ucThanhVien;
+       
 
         private void frmMain_Load(object sender, EventArgs e)
         {
@@ -98,19 +86,31 @@ namespace QuanLyThuVien.UI
             }
             parent.ResumeLayout();
         }
-
-        private void mnDocGia_Click(object sender, EventArgs e)
+        private void mnSach_Click(object sender, EventArgs e)
         {
-            if (_ucDocGia == null)
+            if (_ucSach == null)
             {
-                _ucDocGia = new ucDocGia();
-                _ucDocGia.Dock = DockStyle.Fill;
-                mainContainer.Controls.Add(_ucDocGia);
-                _ucDocGia.BringToFront();
+                _ucSach = new ucSach();
+                _ucSach.Dock = DockStyle.Fill;
+                mainContainer.Controls.Add(_ucSach);
+                _ucSach.BringToFront();
             }
             else
-                _ucDocGia.BringToFront();
+                _ucSach.BringToFront();
             lblTieuDe.Caption = mnSach.Text;
+        }
+        private void mnThanhVien_Click(object sender, EventArgs e)
+        {
+            if (_ucThanhVien == null)
+            {
+                _ucThanhVien = new ucThanhVien();
+                _ucThanhVien.Dock = DockStyle.Fill;
+                mainContainer.Controls.Add(_ucThanhVien);
+                _ucThanhVien.BringToFront();
+            }
+            else
+                _ucThanhVien.BringToFront();
+            lblTieuDe.Caption = mnThanhVien.Text;
         }
     }
 }

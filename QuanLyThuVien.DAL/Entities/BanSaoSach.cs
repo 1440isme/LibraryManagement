@@ -19,9 +19,9 @@ namespace QuanLyThuVien.DAL.Entities
         public string Barcode { get; set; }
         public string ViTri { get; set; }
         public string TinhTrang { get; set; }
-        public decimal? Gia { get; set; }
         public DateTime NgayNhap { get; set; }
         public string GhiChu { get; set; }
+        public byte[] RowVersion { get; set; }
 
         public virtual Sach MaSachNavigation { get; set; }
         public virtual ICollection<MuonSach> MuonSach { get; set; }

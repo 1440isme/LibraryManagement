@@ -23,6 +23,7 @@ namespace QuanLyThuVien.DAL.Entities
         public string DiaChi { get; set; }
         public string LoaiThanhVien { get; set; }
         public DateTime NgayDangKy { get; set; }
+        public byte[] RowVersion { get; set; }
 
         public virtual ICollection<MuonSach> MuonSach { get; set; }
         public virtual ICollection<PaymentHistory> PaymentHistory { get; set; }

@@ -34,17 +34,17 @@
             this.btnDanhMuc = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.mnTrangChu = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.mnSach = new DevExpress.XtraBars.Navigation.AccordionControlElement();
-            this.mnDocGia = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.mnThanhVien = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.mnMuonTra = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.mnDatTruoc = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.mnTKBC = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.btnHeThong = new DevExpress.XtraBars.Navigation.AccordionControlElement();
-            this.mnSetup = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.mnNV = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.mnSetup = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.mnLog = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.fluentDesignFormControl1 = new DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl();
             this.lblTieuDe = new DevExpress.XtraBars.BarStaticItem();
             this.fluentFormDefaultManager1 = new DevExpress.XtraBars.FluentDesignSystem.FluentFormDefaultManager(this.components);
-            this.mnDatTruoc = new DevExpress.XtraBars.Navigation.AccordionControlElement();
-            this.mnLog = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             ((System.ComponentModel.ISupportInitialize)(this.accordionControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fluentDesignFormControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fluentFormDefaultManager1)).BeginInit();
@@ -80,7 +80,7 @@
             this.btnDanhMuc.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
             this.mnTrangChu,
             this.mnSach,
-            this.mnDocGia,
+            this.mnThanhVien,
             this.mnMuonTra,
             this.mnDatTruoc,
             this.mnTKBC});
@@ -101,18 +101,24 @@
             this.mnSach.Text = "Quản lý Sách";
             this.mnSach.Click += new System.EventHandler(this.mnSach_Click);
             // 
-            // mnDocGia
+            // mnThanhVien
             // 
-            this.mnDocGia.Name = "mnDocGia";
-            this.mnDocGia.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
-            this.mnDocGia.Text = "Quản lý Thành viên";
-            this.mnDocGia.Click += new System.EventHandler(this.mnDocGia_Click);
+            this.mnThanhVien.Name = "mnThanhVien";
+            this.mnThanhVien.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.mnThanhVien.Text = "Quản lý Thành viên";
+            this.mnThanhVien.Click += new System.EventHandler(this.mnThanhVien_Click);
             // 
             // mnMuonTra
             // 
             this.mnMuonTra.Name = "mnMuonTra";
             this.mnMuonTra.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             this.mnMuonTra.Text = "Quản lý Mượn/Trả - Gia hạn";
+            // 
+            // mnDatTruoc
+            // 
+            this.mnDatTruoc.Name = "mnDatTruoc";
+            this.mnDatTruoc.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.mnDatTruoc.Text = "Quản lý danh sách đặt trước";
             // 
             // mnTKBC
             // 
@@ -130,17 +136,23 @@
             this.btnHeThong.Name = "btnHeThong";
             this.btnHeThong.Text = "HỆ THỐNG";
             // 
+            // mnNV
+            // 
+            this.mnNV.Name = "mnNV";
+            this.mnNV.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.mnNV.Text = "Quản lý Nhân viên";
+            // 
             // mnSetup
             // 
             this.mnSetup.Name = "mnSetup";
             this.mnSetup.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             this.mnSetup.Text = "Cấu hình hệ thống";
             // 
-            // mnNV
+            // mnLog
             // 
-            this.mnNV.Name = "mnNV";
-            this.mnNV.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
-            this.mnNV.Text = "Quản lý Nhân viên";
+            this.mnLog.Name = "mnLog";
+            this.mnLog.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.mnLog.Text = "Log System";
             // 
             // fluentDesignFormControl1
             // 
@@ -175,18 +187,6 @@
             this.lblTieuDe});
             this.fluentFormDefaultManager1.MaxItemId = 1;
             // 
-            // mnDatTruoc
-            // 
-            this.mnDatTruoc.Name = "mnDatTruoc";
-            this.mnDatTruoc.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
-            this.mnDatTruoc.Text = "Quản lý danh sách đặt trước";
-            // 
-            // mnLog
-            // 
-            this.mnLog.Name = "mnLog";
-            this.mnLog.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
-            this.mnLog.Text = "Log System";
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -200,6 +200,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmMain";
             this.NavigationControl = this.accordionControl1;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmMain";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.Resize += new System.EventHandler(this.frmMain_Resize);
@@ -219,7 +220,7 @@
         private DevExpress.XtraBars.Navigation.AccordionControlElement mnTrangChu;
         private DevExpress.XtraBars.Navigation.AccordionControlElement btnHeThong;
         private DevExpress.XtraBars.Navigation.AccordionControlElement mnSach;
-        private DevExpress.XtraBars.Navigation.AccordionControlElement mnDocGia;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement mnThanhVien;
         private DevExpress.XtraBars.Navigation.AccordionControlElement mnMuonTra;
         private DevExpress.XtraBars.Navigation.AccordionControlElement mnTKBC;
         private DevExpress.XtraBars.Navigation.AccordionControlElement mnSetup;

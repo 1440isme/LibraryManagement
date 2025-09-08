@@ -23,6 +23,7 @@ namespace QuanLyThuVien.DAL.Entities
         public DateTime? NgayTraThucTe { get; set; }
         public string TrangThai { get; set; }
         public int? MaBanSao { get; set; }
+        public byte[] RowVersion { get; set; }
 
         public virtual BanSaoSach MaBanSaoNavigation { get; set; }
         public virtual NhanVien MaNhanVienNavigation { get; set; }

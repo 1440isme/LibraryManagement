@@ -12,14 +12,14 @@ namespace QuanLyThuVien.DAL.Entities
         public NhanVien()
         {
             MuonSach = new HashSet<MuonSach>();
+            Users = new HashSet<Users>();
         }
 
         public int MaNhanVien { get; set; }
         public string TenNhanVien { get; set; }
         public string ChucVu { get; set; }
-        public string Email { get; set; }
-        public string MatKhau { get; set; }
 
         public virtual ICollection<MuonSach> MuonSach { get; set; }
+        public virtual ICollection<Users> Users { get; set; }
     }
 }

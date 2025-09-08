@@ -1,5 +1,7 @@
 ﻿using QuanLyThuVien.BLL.Services;
 using QuanLyThuVien.DAL.Entities;
+using QuanLyThuVien.UI.Interfaces;
+using QuanLyThuVien.UI.UC.Pages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,65 +18,51 @@ namespace QuanLyThuVien.UI.UI
     {
         private Size originalFormSize;
         private Dictionary<Control, Rectangle> controlBounds = new Dictionary<Control, Rectangle>();
-        private SachService _sachService;
-        private TheLoaiService _theLoaiService;
-        private NXBService _nxbService;
-        private TacGiaService _tacGiaService;
+        private ucPageSach _pageSach;
+        private ucPageBanSaoSach _pageBanSaoSach;
+
         public ucSach()
         {
             InitializeComponent();
+            _pageSach = new ucPageSach();
+            _pageBanSaoSach = new ucPageBanSaoSach();
+
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer |
                   ControlStyles.AllPaintingInWmPaint |
                   ControlStyles.UserPaint, true);
-            gvSach.CustomUnboundColumnData += GvSach_CustomUnboundColumnData;
             this.UpdateStyles();
-            var dbContext = new QuanLyThuVienContext();
-            var sachRepo = new GenericRepository<Sach>(dbContext);
-            _sachService = new SachService(sachRepo);
-
-            var tacGiaRepo = new GenericRepository<TacGia>(dbContext);
-            _tacGiaService = new TacGiaService(tacGiaRepo);
-
-            var theLoaiRepo = new GenericRepository<TheLoai>(dbContext);
-            _theLoaiService = new TheLoaiService(theLoaiRepo);
-
-            var nxbRepo = new GenericRepository<NhaXuatBan>(dbContext);
-            _nxbService = new NXBService(nxbRepo);
+            pageSach.Controls.Add(_pageSach);
+            pageBanSaoSach.Controls.Add(_pageBanSaoSach);
+            _pageSach.DataChanged += (s, e) => _pageBanSaoSach.RefreshData();
         }
 
-        int _right;
-        bool _them;
+            
+        
+        private ICrudOperations GetActiveCrudPage()
+        {
+            if (tabQLSach.SelectedTabPage.Controls.Count > 0)
+                return tabQLSach.SelectedTabPage.Controls[0] as ICrudOperations;
+            return null;
+        }
+
+
+        
         private void ucSach_Load(object sender, EventArgs e)
         {
             originalFormSize = this.Size;
             StoreControlBounds(this);
-            var danhSachSach = _sachService.GetAllBooks();
-            gcSach.DataSource = danhSachSach;
-            LoadTacGia();
-            LoadTheLoai();
-            LoadNXB();
             showHideControl(true);
-            _enable(false);
-            _reset();
-            tabQLSach.SelectedTabPage = pageSach;
+
         }
-        void LoadTacGia()
+
+        void showHideControl(bool t)
         {
-            cboTacGia.DataSource = _tacGiaService.GetAllAuthors();
-            cboTacGia.DisplayMember = "TenTacGia";
-            cboTacGia.ValueMember = "MaTacGia";
-        }
-        void LoadTheLoai()
-        {
-            cboTheLoai.DataSource = _theLoaiService.GetAllCategories();
-            cboTheLoai.DisplayMember = "TenTheLoai";
-            cboTheLoai.ValueMember = "MaTheLoai";
-        }
-        void LoadNXB()
-        {
-            cboNXB.DataSource = _nxbService.GetAllPublishers();
-            cboNXB.DisplayMember = "TenNhaXuatBan";
-            cboNXB.ValueMember = "MaNhaXuatBan";
+            btnThem.Enabled = t;
+            btnSua.Enabled = t;
+            btnXoa.Enabled = t;
+            btnLuu.Enabled = !t;
+            btnBoQua.Enabled = !t;
+
         }
         private void StoreControlBounds(Control parent)
         {
@@ -144,164 +132,38 @@ namespace QuanLyThuVien.UI.UI
             }
         }
 
-        void showHideControl(bool t)
-        {
-            btnThem.Enabled = t;
-            btnSua.Enabled = t;
-            btnXoa.Enabled = t;
-            btnLuu.Enabled = !t;
-            btnBoQua.Enabled = !t;
-
-        }
-        void _enable(bool t)
-        {
-            txtTenSach.Enabled = t;
-            txtISBN.Enabled = t;
-            cboTacGia.Enabled = t;
-            cboNXB.Enabled = t;
-            cboTheLoai.Enabled = t;
-            numNamXB.Enabled = t;
-            numGia.Enabled = t;
-            numSoLuong.Enabled = t;
-            chkTrangThai.Enabled = t;
-        }
-        void _reset()
-        {
-            txtTenSach.Text = "";
-            txtISBN.Text = "";
-            cboTacGia.SelectedIndex = -1;
-            cboNXB.SelectedIndex = -1;
-            cboTheLoai.SelectedIndex = -1;
-            numNamXB.Value = 0;
-            numGia.Value = 0;
-            numSoLuong.Value = 0;
-            chkTrangThai.Checked = false;
-        }
+        
 
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            _them = true;
             showHideControl(false);
-            _enable(true);
-            _reset();
+            GetActiveCrudPage()?.Add();
         }
 
         private void btnSua_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            _them = false;
-            _enable(true);
 
             showHideControl(false);
+            GetActiveCrudPage()?.Edit();
         }
 
         private void btnXoa_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            try
-            {
-                if (gvSach.RowCount > 0)
-                {
-                    var sach = gvSach.GetFocusedRow() as Sach;
-                    if (sach != null)
-                    {
-                        if (MessageBox.Show("Bạn có chắc chắn muốn xóa sách này không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        {
-                            _sachService.DeleteBook(sach.MaSach);
-                            gcSach.DataSource = _sachService.GetAllBooks();
-                            MessageBox.Show("Xóa sách thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi xóa sách: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            GetActiveCrudPage()?.Delete();
         }
 
         private void btnLuu_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (cboTacGia.SelectedValue == null || cboNXB.SelectedValue == null || cboTheLoai.SelectedValue == null)
-            {
-                MessageBox.Show("Vui lòng chọn Tác giả, NXB và Thể loại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            try
-            {
-                if (_them)
-                {
-                    var sach = new Sach
-                    {
-                        TenSach = txtTenSach.Text,
-                        ISBN = txtISBN.Text,
-                        MaTacGia = Convert.ToInt32(cboTacGia.SelectedValue),
-                        MaNhaXuatBan = Convert.ToInt32(cboNXB.SelectedValue),
-                        MaTheLoai = Convert.ToInt32(cboTheLoai.SelectedValue),
-                        NamXuatBan = (int)numNamXB.Value,
-                        Gia = numGia.Value,
-                        SoLuong = (int)numSoLuong.Value,
-                        TrangThai = chkTrangThai.Checked
-                    };
-                    _sachService.AddBook(sach);
-                    gcSach.DataSource = _sachService.GetAllBooks();
-                    MessageBox.Show("Thêm sách thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    showHideControl(true);
-                    _enable(false);
-                }
-                else
-                {
-                    var sach = gvSach.GetFocusedRow() as Sach;
-                    if (sach.MaSach == 0)
-                    {
-                        MessageBox.Show("Vui lòng chọn sách để sửa.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                    if (sach != null)
-                    {
-                        sach.TenSach = txtTenSach.Text;
-                        sach.ISBN = txtISBN.Text;
-                        sach.MaTacGia = (int)cboTacGia.SelectedValue;
-                        sach.MaNhaXuatBan = (int)cboNXB.SelectedValue;
-                        sach.MaTheLoai = (int)cboTheLoai.SelectedValue;
-                        sach.NamXuatBan = (int)numNamXB.Value;
-                        sach.Gia = numGia.Value;
-                        sach.SoLuong = (int)numSoLuong.Value;
-                        sach.TrangThai = chkTrangThai.Checked;
-                        _sachService.UpdateBook(sach);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi lưu dữ liệu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
+            showHideControl(true);
+            GetActiveCrudPage()?.Save();
         }
 
         private void btnBoQua_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            _them = false;
             showHideControl(true);
-            _enable(false);
+            GetActiveCrudPage()?.Cancel();
         }
 
-        private void gvSach_Click(object sender, EventArgs e)
-        {
-            if (gvSach.RowCount > 0)
-            {
-                var sach = gvSach.GetFocusedRow() as Sach;
-                if (sach != null)
-                {
-                    txtTenSach.Text = sach.TenSach;
-                    txtISBN.Text = sach.ISBN;
-                    cboTacGia.SelectedValue = sach.MaTacGia;
-                    cboNXB.SelectedValue = sach.MaNhaXuatBan;
-                    cboTheLoai.SelectedValue = sach.MaTheLoai;
-                    numNamXB.Value = sach.NamXuatBan;
-                    numGia.Value = sach.Gia;
-                    numSoLuong.Value = sach.SoLuong;
-                    chkTrangThai.Checked = sach.TrangThai ?? false;
-                }
-            }
-        }
+        
     }
 }

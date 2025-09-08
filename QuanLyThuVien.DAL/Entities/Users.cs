@@ -17,7 +17,9 @@ namespace QuanLyThuVien.DAL.Entities
         public int? RoleId { get; set; }
         public bool? IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
+        public int? MaNhanVien { get; set; }
 
+        public virtual NhanVien MaNhanVienNavigation { get; set; }
         public virtual Roles Role { get; set; }
     }
 }
