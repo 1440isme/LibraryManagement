@@ -17,7 +17,6 @@ namespace QuanLyThuVien.UI.UC.Pages
     {
         private Size originalFormSize;
         private Dictionary<Control, Rectangle> controlBounds = new Dictionary<Control, Rectangle>();
-        private SachService _sachService;
         private BanSaoSachService _banSaoSachService;
         public ucPageBanSaoSach()
         {

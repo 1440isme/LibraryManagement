@@ -21,11 +21,13 @@ namespace QuanLyThuVien.UI.UI
         private ucPageSach _pageSach;
         private ucPageBanSaoSach _pageBanSaoSach;
 
+
         public ucSach()
         {
             InitializeComponent();
             _pageSach = new ucPageSach();
             _pageBanSaoSach = new ucPageBanSaoSach();
+
 
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer |
                   ControlStyles.AllPaintingInWmPaint |
@@ -33,6 +35,7 @@ namespace QuanLyThuVien.UI.UI
             this.UpdateStyles();
             pageSach.Controls.Add(_pageSach);
             pageBanSaoSach.Controls.Add(_pageBanSaoSach);
+            pageTacGia.Controls.Add(new ucPageTacGia());
             _pageSach.DataChanged += (s, e) => _pageBanSaoSach.RefreshData();
         }
 

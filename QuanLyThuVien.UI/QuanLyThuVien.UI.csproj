@@ -222,11 +222,53 @@
     <Compile Include="UC\Pages\ucPageBanSaoSach.Designer.cs">
       <DependentUpon>ucPageBanSaoSach.cs</DependentUpon>
     </Compile>
+    <Compile Include="UC\Pages\ucPageGiaHanSach.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\Pages\ucPageGiaHanSach.Designer.cs">
+      <DependentUpon>ucPageGiaHanSach.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\Pages\ucPageMuonSach.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\Pages\ucPageMuonSach.Designer.cs">
+      <DependentUpon>ucPageMuonSach.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\Pages\ucPageNXB.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\Pages\ucPageNXB.Designer.cs">
+      <DependentUpon>ucPageNXB.cs</DependentUpon>
+    </Compile>
     <Compile Include="UC\Pages\ucPageSach.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UC\Pages\ucPageSach.Designer.cs">
       <DependentUpon>ucPageSach.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\Pages\ucPageTacGia.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\Pages\ucPageTacGia.Designer.cs">
+      <DependentUpon>ucPageTacGia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\Pages\ucPageTheLoai.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\Pages\ucPageTheLoai.Designer.cs">
+      <DependentUpon>ucPageTheLoai.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\Pages\ucPageTraSach.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\Pages\ucPageTraSach.Designer.cs">
+      <DependentUpon>ucPageTraSach.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\ucMuonTra.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\ucMuonTra.Designer.cs">
+      <DependentUpon>ucMuonTra.cs</DependentUpon>
     </Compile>
     <Compile Include="UC\ucSach.cs">
       <SubType>UserControl</SubType>
@@ -259,6 +301,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UC\Pages\ucPageSach.resx">
       <DependentUpon>ucPageSach.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\Pages\ucPageTacGia.resx">
+      <DependentUpon>ucPageTacGia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\ucMuonTra.resx">
+      <DependentUpon>ucMuonTra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC\ucSach.resx">
       <DependentUpon>ucSach.cs</DependentUpon>

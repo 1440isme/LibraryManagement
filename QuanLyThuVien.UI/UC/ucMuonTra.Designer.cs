@@ -1,6 +1,6 @@
-﻿namespace QuanLyThuVien.UI.UI
+﻿namespace QuanLyThuVien.UI.UC
 {
-    partial class ucSach
+    partial class ucMuonTra
     {
         /// <summary> 
         /// Required designer variable.
@@ -41,11 +41,9 @@
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.tabQLSach = new DevExpress.XtraTab.XtraTabControl();
-            this.pageSach = new DevExpress.XtraTab.XtraTabPage();
-            this.pageBanSaoSach = new DevExpress.XtraTab.XtraTabPage();
-            this.pageTacGia = new DevExpress.XtraTab.XtraTabPage();
-            this.pageNXB = new DevExpress.XtraTab.XtraTabPage();
-            this.pageTheLoai = new DevExpress.XtraTab.XtraTabPage();
+            this.pageMuonSach = new DevExpress.XtraTab.XtraTabPage();
+            this.pageTraSach = new DevExpress.XtraTab.XtraTabPage();
+            this.pageGiaHanSach = new DevExpress.XtraTab.XtraTabPage();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabQLSach)).BeginInit();
             this.tabQLSach.SuspendLayout();
@@ -92,7 +90,6 @@
             this.btnThem.ImageOptions.SvgImage = global::QuanLyThuVien.UI.Properties.Resources.addparagraphtotableofcontents3;
             this.btnThem.Name = "btnThem";
             this.btnThem.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionInMenu;
-            this.btnThem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnThem_ItemClick);
             // 
             // btnSua
             // 
@@ -100,7 +97,6 @@
             this.btnSua.Id = 1;
             this.btnSua.ImageOptions.SvgImage = global::QuanLyThuVien.UI.Properties.Resources.trackingchanges_allmarkup2;
             this.btnSua.Name = "btnSua";
-            this.btnSua.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSua_ItemClick);
             // 
             // btnXoa
             // 
@@ -108,7 +104,6 @@
             this.btnXoa.Id = 2;
             this.btnXoa.ImageOptions.SvgImage = global::QuanLyThuVien.UI.Properties.Resources.snapdeletelist2;
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnXoa_ItemClick);
             // 
             // btnLuu
             // 
@@ -116,7 +111,6 @@
             this.btnLuu.Id = 3;
             this.btnLuu.ImageOptions.SvgImage = global::QuanLyThuVien.UI.Properties.Resources.save;
             this.btnLuu.Name = "btnLuu";
-            this.btnLuu.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnLuu_ItemClick);
             // 
             // btnBoQua
             // 
@@ -124,7 +118,6 @@
             this.btnBoQua.Id = 4;
             this.btnBoQua.ImageOptions.SvgImage = global::QuanLyThuVien.UI.Properties.Resources.forward;
             this.btnBoQua.Name = "btnBoQua";
-            this.btnBoQua.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnBoQua_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -163,57 +156,39 @@
             this.tabQLSach.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabQLSach.Location = new System.Drawing.Point(0, 40);
             this.tabQLSach.Name = "tabQLSach";
-            this.tabQLSach.SelectedTabPage = this.pageSach;
+            this.tabQLSach.SelectedTabPage = this.pageMuonSach;
             this.tabQLSach.Size = new System.Drawing.Size(1280, 680);
-            this.tabQLSach.TabIndex = 62;
+            this.tabQLSach.TabIndex = 63;
             this.tabQLSach.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.pageSach,
-            this.pageBanSaoSach,
-            this.pageTacGia,
-            this.pageNXB,
-            this.pageTheLoai});
+            this.pageMuonSach,
+            this.pageTraSach,
+            this.pageGiaHanSach});
             // 
-            // pageSach
+            // pageMuonSach
             // 
-            this.pageSach.Appearance.Header.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold);
-            this.pageSach.Appearance.Header.Options.UseFont = true;
-            this.pageSach.Name = "pageSach";
-            this.pageSach.Size = new System.Drawing.Size(1278, 652);
-            this.pageSach.Text = "QUẢN LÝ SÁCH";
+            this.pageMuonSach.Appearance.Header.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold);
+            this.pageMuonSach.Appearance.Header.Options.UseFont = true;
+            this.pageMuonSach.Name = "pageMuonSach";
+            this.pageMuonSach.Size = new System.Drawing.Size(1278, 652);
+            this.pageMuonSach.Text = "MƯỢN SÁCH";
             // 
-            // pageBanSaoSach
+            // pageTraSach
             // 
-            this.pageBanSaoSach.Appearance.Header.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold);
-            this.pageBanSaoSach.Appearance.Header.Options.UseFont = true;
-            this.pageBanSaoSach.Name = "pageBanSaoSach";
-            this.pageBanSaoSach.Size = new System.Drawing.Size(1278, 652);
-            this.pageBanSaoSach.Text = "QUẢN LÝ BẢN SAO SÁCH";
+            this.pageTraSach.Appearance.Header.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold);
+            this.pageTraSach.Appearance.Header.Options.UseFont = true;
+            this.pageTraSach.Name = "pageTraSach";
+            this.pageTraSach.Size = new System.Drawing.Size(1278, 652);
+            this.pageTraSach.Text = "TRẢ SÁCH";
             // 
-            // pageTacGia
+            // pageGiaHanSach
             // 
-            this.pageTacGia.Appearance.Header.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold);
-            this.pageTacGia.Appearance.Header.Options.UseFont = true;
-            this.pageTacGia.Name = "pageTacGia";
-            this.pageTacGia.Size = new System.Drawing.Size(1278, 652);
-            this.pageTacGia.Text = "TÁC GIẢ";
+            this.pageGiaHanSach.Appearance.Header.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold);
+            this.pageGiaHanSach.Appearance.Header.Options.UseFont = true;
+            this.pageGiaHanSach.Name = "pageGiaHanSach";
+            this.pageGiaHanSach.Size = new System.Drawing.Size(1278, 652);
+            this.pageGiaHanSach.Text = "GIA HẠN SÁCH";
             // 
-            // pageNXB
-            // 
-            this.pageNXB.Appearance.Header.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold);
-            this.pageNXB.Appearance.Header.Options.UseFont = true;
-            this.pageNXB.Name = "pageNXB";
-            this.pageNXB.Size = new System.Drawing.Size(1278, 652);
-            this.pageNXB.Text = "NHÀ XUẤT BẢN";
-            // 
-            // pageTheLoai
-            // 
-            this.pageTheLoai.Appearance.Header.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold);
-            this.pageTheLoai.Appearance.Header.Options.UseFont = true;
-            this.pageTheLoai.Name = "pageTheLoai";
-            this.pageTheLoai.Size = new System.Drawing.Size(1278, 652);
-            this.pageTheLoai.Text = "THỂ LOẠI";
-            // 
-            // ucSach
+            // ucMuonTra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -222,10 +197,10 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.Name = "ucSach";
+            this.Name = "ucMuonTra";
             this.Size = new System.Drawing.Size(1280, 720);
-            this.Load += new System.EventHandler(this.ucSach_Load);
-            this.Resize += new System.EventHandler(this.ucSach_Resize);
+            this.Load += new System.EventHandler(this.ucMuonTra_Load);
+            this.Resize += new System.EventHandler(this.ucMuonTra_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabQLSach)).EndInit();
             this.tabQLSach.ResumeLayout(false);
@@ -238,20 +213,18 @@
 
         private DevExpress.XtraBars.BarManager barManager1;
         private DevExpress.XtraBars.Bar bar1;
-        private DevExpress.XtraBars.BarDockControl barDockControlTop;
-        private DevExpress.XtraBars.BarDockControl barDockControlBottom;
-        private DevExpress.XtraBars.BarDockControl barDockControlLeft;
-        private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraBars.BarButtonItem btnThem;
         private DevExpress.XtraBars.BarButtonItem btnSua;
         private DevExpress.XtraBars.BarButtonItem btnXoa;
         private DevExpress.XtraBars.BarButtonItem btnLuu;
         private DevExpress.XtraBars.BarButtonItem btnBoQua;
+        private DevExpress.XtraBars.BarDockControl barDockControlTop;
+        private DevExpress.XtraBars.BarDockControl barDockControlBottom;
+        private DevExpress.XtraBars.BarDockControl barDockControlLeft;
+        private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraTab.XtraTabControl tabQLSach;
-        private DevExpress.XtraTab.XtraTabPage pageSach;
-        private DevExpress.XtraTab.XtraTabPage pageBanSaoSach;
-        private DevExpress.XtraTab.XtraTabPage pageTacGia;
-        private DevExpress.XtraTab.XtraTabPage pageNXB;
-        private DevExpress.XtraTab.XtraTabPage pageTheLoai;
+        private DevExpress.XtraTab.XtraTabPage pageMuonSach;
+        private DevExpress.XtraTab.XtraTabPage pageTraSach;
+        private DevExpress.XtraTab.XtraTabPage pageGiaHanSach;
     }
 }
