@@ -17,18 +17,18 @@ namespace QuanLyThuVien.UI.UC.Pages
 {
     public partial class ucPageTacGia : UserControl, ICrudOperations
     {
-        private Size originalFormSize;
-        private Dictionary<Control, Rectangle> controlBounds = new Dictionary<Control, Rectangle>();
+        //private Size originalFormSize;
+        //private Dictionary<Control, Rectangle> controlBounds = new Dictionary<Control, Rectangle>();
 
         private TacGiaService _tacGiaService;
 
         public ucPageTacGia()
         {
             InitializeComponent();
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer |
-                  ControlStyles.AllPaintingInWmPaint |
-                  ControlStyles.UserPaint, true);
-            this.UpdateStyles();
+            //this.SetStyle(ControlStyles.OptimizedDoubleBuffer |
+            //      ControlStyles.AllPaintingInWmPaint |
+            //      ControlStyles.UserPaint, true);
+            //this.UpdateStyles();
             var dbContext = new QuanLyThuVienContext();
             var tacGiaRepo = new GenericRepository<TacGia>(dbContext);
             _tacGiaService = new TacGiaService(tacGiaRepo);
@@ -38,69 +38,66 @@ namespace QuanLyThuVien.UI.UC.Pages
 
         private void ucPageTacGia_Load(object sender, EventArgs e)
         {
-            originalFormSize = this.Size;
-            StoreControlBounds(this);
+            //originalFormSize = this.Size;
+            //StoreControlBounds(this);
 
             
             gcTacGia.DataSource = _tacGiaService.GetAllAuthors().ToList();
-           
-            
-
-
+                  
 
             _enable(false);
             _reset();
         }
-        private void StoreControlBounds(Control parent)
-        {
-            foreach (Control ctrl in parent.Controls)
-            {
-                if (!controlBounds.ContainsKey(ctrl))
-                {
-                    controlBounds[ctrl] = ctrl.Bounds;
-                }
-                if (ctrl.HasChildren)
-                {
-                    StoreControlBounds(ctrl);
-                }
-            }
-        }
-        private void ucPageTacGia_Resize(object sender, EventArgs e)
-        {
+        //private void StoreControlBounds(Control parent)
+        //{
+        //    foreach (Control ctrl in parent.Controls)
+        //    {
+        //        if (!controlBounds.ContainsKey(ctrl))
+        //        {
+        //            controlBounds[ctrl] = ctrl.Bounds;
+        //        }
+        //        if (ctrl.HasChildren)
+        //        {
+        //            StoreControlBounds(ctrl);
+        //        }
+        //    }
+        //}
+        //private void ucPageTacGia_Resize(object sender, EventArgs e)
+        //{
 
-            if (originalFormSize.Width == 0 || originalFormSize.Height == 0)
-                return;
+        //    if (originalFormSize.Width == 0 || originalFormSize.Height == 0)
+        //        return;
 
-            float xRatio = (float)this.Width / originalFormSize.Width;
-            float yRatio = (float)this.Height / originalFormSize.Height;
+        //    float xRatio = (float)this.Width / originalFormSize.Width;
+        //    float yRatio = (float)this.Height / originalFormSize.Height;
 
-            this.SuspendLayout();
-            ResizeControls(this, xRatio, yRatio);
-            this.ResumeLayout();
-        }
-        private void ResizeControls(Control parent, float xRatio, float yRatio)
-        {
-            parent.SuspendLayout();
-            foreach (Control ctrl in parent.Controls)
-            {
-                if (controlBounds.TryGetValue(ctrl, out Rectangle originalBounds))
-                {
-                    int newX = (int)(originalBounds.X * xRatio);
-                    int newY = (int)(originalBounds.Y * yRatio);
-                    int newWidth = (int)(originalBounds.Width * xRatio);
-                    int newHeight = (int)(originalBounds.Height * yRatio);
+        //    this.SuspendLayout();
+        //    ResizeControls(this, xRatio, yRatio);
+        //    this.ResumeLayout();
+        //}
+        //private void ResizeControls(Control parent, float xRatio, float yRatio)
+        //{
+        //    parent.SuspendLayout();
+        //    foreach (Control ctrl in parent.Controls)
+        //    {
+        //        if (controlBounds.TryGetValue(ctrl, out Rectangle originalBounds))
+        //        {
+        //            int newX = (int)(originalBounds.X * xRatio);
+        //            int newY = (int)(originalBounds.Y * yRatio);
+        //            int newWidth = (int)(originalBounds.Width * xRatio);
+        //            int newHeight = (int)(originalBounds.Height * yRatio);
 
-                    // Chỉ set Bounds nếu thực sự thay đổi
-                    if (ctrl.Bounds != new Rectangle(newX, newY, newWidth, newHeight))
-                        ctrl.Bounds = new Rectangle(newX, newY, newWidth, newHeight);
-                }
-                if (ctrl.HasChildren)
-                {
-                    ResizeControls(ctrl, xRatio, yRatio);
-                }
-            }
-            parent.ResumeLayout();
-        }
+        //            // Chỉ set Bounds nếu thực sự thay đổi
+        //            if (ctrl.Bounds != new Rectangle(newX, newY, newWidth, newHeight))
+        //                ctrl.Bounds = new Rectangle(newX, newY, newWidth, newHeight);
+        //        }
+        //        if (ctrl.HasChildren)
+        //        {
+        //            ResizeControls(ctrl, xRatio, yRatio);
+        //        }
+        //    }
+        //    parent.ResumeLayout();
+        //}
 
         void _enable(bool t)
         {

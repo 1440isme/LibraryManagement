@@ -30,10 +30,7 @@ namespace QuanLyThuVien.BLL.Services
                 throw new ArgumentNullException(nameof(tacGia), "Tác giả không được để null.");
             if (string.IsNullOrWhiteSpace(tacGia.TenTacGia))
                 throw new ArgumentException("Tên tác giả không được để trống.", nameof(tacGia.TenTacGia));
-            if (string.IsNullOrWhiteSpace(tacGia.QuocTich))
-                throw new ArgumentException("Quốc tịch không được để trống.", nameof(tacGia.QuocTich));
-            if (tacGia.NamSinh < 0 || tacGia.NamSinh > DateTime.Now.Year)
-                throw new ArgumentException("Năm sinh không hợp lệ.", nameof(tacGia.NamSinh));
+           
             _repository.Insert(tacGia);
             _repository.Save();
         }
@@ -43,10 +40,7 @@ namespace QuanLyThuVien.BLL.Services
                 throw new ArgumentNullException(nameof(tacGia), "Tác giả không được để null.");
             if (string.IsNullOrWhiteSpace(tacGia.TenTacGia))
                 throw new ArgumentException("Tên tác giả không được để trống.", nameof(tacGia.TenTacGia));
-            if (string.IsNullOrWhiteSpace(tacGia.QuocTich))
-                throw new ArgumentException("Quốc tịch không được để trống.", nameof(tacGia.QuocTich));
-            if (tacGia.NamSinh < 0 || tacGia.NamSinh > DateTime.Now.Year)
-                throw new ArgumentException("Năm sinh không hợp lệ.", nameof(tacGia.NamSinh));
+            
 
             var existing = _repository.GetById(tacGia.MaTacGia);
             if (existing == null)

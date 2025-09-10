@@ -26,7 +26,6 @@ namespace QuanLyThuVien.DAL.Entities
         public virtual DbSet<DanhSachSachDangMuon> DanhSachSachDangMuon { get; set; }
         public virtual DbSet<MuonSach> MuonSach { get; set; }
         public virtual DbSet<NhaXuatBan> NhaXuatBan { get; set; }
-        public virtual DbSet<NhanVien> NhanVien { get; set; }
         public virtual DbSet<PaymentHistory> PaymentHistory { get; set; }
         public virtual DbSet<Phat> Phat { get; set; }
         public virtual DbSet<Reservation> Reservation { get; set; }
@@ -177,16 +176,12 @@ namespace QuanLyThuVien.DAL.Entities
                     .HasMaxLength(20)
                     .HasDefaultValueSql("('DangMuon')");
 
+                entity.Property(e => e.UserId).HasColumnName("UserID");
+
                 entity.HasOne(d => d.MaBanSaoNavigation)
                     .WithMany(p => p.MuonSach)
                     .HasForeignKey(d => d.MaBanSao)
                     .HasConstraintName("FK_MuonSach_BanSao");
-
-                entity.HasOne(d => d.MaNhanVienNavigation)
-                    .WithMany(p => p.MuonSach)
-                    .HasForeignKey(d => d.MaNhanVien)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_MuonSach_NhanVien");
 
                 entity.HasOne(d => d.MaSachNavigation)
                     .WithMany(p => p.MuonSach)
@@ -199,6 +194,12 @@ namespace QuanLyThuVien.DAL.Entities
                     .HasForeignKey(d => d.MaThanhVien)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_MuonSach_ThanhVien");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.MuonSach)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_MuonSach_Users");
             });
 
             modelBuilder.Entity<NhaXuatBan>(entity =>
@@ -215,20 +216,6 @@ namespace QuanLyThuVien.DAL.Entities
                 entity.Property(e => e.SoDienThoai).HasMaxLength(20);
 
                 entity.Property(e => e.TenNhaXuatBan)
-                    .IsRequired()
-                    .HasMaxLength(100);
-            });
-
-            modelBuilder.Entity<NhanVien>(entity =>
-            {
-                entity.HasKey(e => e.MaNhanVien)
-                    .HasName("PK__NhanVien__77B2CA475BCCA911");
-
-                entity.Property(e => e.ChucVu)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.TenNhanVien)
                     .IsRequired()
                     .HasMaxLength(100);
             });
@@ -527,11 +514,6 @@ namespace QuanLyThuVien.DAL.Entities
                 entity.Property(e => e.UserName)
                     .IsRequired()
                     .HasMaxLength(100);
-
-                entity.HasOne(d => d.MaNhanVienNavigation)
-                    .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.MaNhanVien)
-                    .HasConstraintName("FK_Users_NhanVien");
 
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.Users)

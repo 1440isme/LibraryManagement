@@ -15,15 +15,15 @@ namespace QuanLyThuVien.UI
 {
     public partial class frmMain : DevExpress.XtraBars.FluentDesignSystem.FluentDesignForm
     {
-        private Size originalFormSize;
-        private Dictionary<Control, Rectangle> controlBounds = new Dictionary<Control, Rectangle>();
+        //private Size originalFormSize;
+        //private Dictionary<Control, Rectangle> controlBounds = new Dictionary<Control, Rectangle>();
         public frmMain()
         {
             InitializeComponent();
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer |
-                  ControlStyles.AllPaintingInWmPaint |
-                  ControlStyles.UserPaint, true);
-            this.UpdateStyles();
+            //this.SetStyle(ControlStyles.OptimizedDoubleBuffer |
+            //      ControlStyles.AllPaintingInWmPaint |
+            //      ControlStyles.UserPaint, true);
+            //this.UpdateStyles();
         }
         ucSach _ucSach;
         ucThanhVien _ucThanhVien;
@@ -31,61 +31,61 @@ namespace QuanLyThuVien.UI
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            originalFormSize = this.Size;
-            StoreControlBounds(this);
+            //originalFormSize = this.Size;
+            //StoreControlBounds(this);
         }
 
-        private void StoreControlBounds(Control parent)
-        {
-            foreach (Control ctrl in parent.Controls)
-            {
-                if (!controlBounds.ContainsKey(ctrl))
-                {
-                    controlBounds[ctrl] = ctrl.Bounds;
-                }
-                if (ctrl.HasChildren)
-                {
-                    StoreControlBounds(ctrl);
-                }
-            }
-        }
+        //private void StoreControlBounds(Control parent)
+        //{
+        //    foreach (Control ctrl in parent.Controls)
+        //    {
+        //        if (!controlBounds.ContainsKey(ctrl))
+        //        {
+        //            controlBounds[ctrl] = ctrl.Bounds;
+        //        }
+        //        if (ctrl.HasChildren)
+        //        {
+        //            StoreControlBounds(ctrl);
+        //        }
+        //    }
+        //}
 
-        private void frmMain_Resize(object sender, EventArgs e)
-        {
-            if (originalFormSize.Width == 0 || originalFormSize.Height == 0)
-                return;
+        //private void frmMain_Resize(object sender, EventArgs e)
+        //{
+        //    if (originalFormSize.Width == 0 || originalFormSize.Height == 0)
+        //        return;
 
-            float xRatio = (float)this.Width / originalFormSize.Width;
-            float yRatio = (float)this.Height / originalFormSize.Height;
+        //    float xRatio = (float)this.Width / originalFormSize.Width;
+        //    float yRatio = (float)this.Height / originalFormSize.Height;
 
-            this.SuspendLayout();
-            ResizeControls(this, xRatio, yRatio);
-            this.ResumeLayout();
-        }
+        //    this.SuspendLayout();
+        //    ResizeControls(this, xRatio, yRatio);
+        //    this.ResumeLayout();
+        //}
 
-        private void ResizeControls(Control parent, float xRatio, float yRatio)
-        {
-            parent.SuspendLayout();
-            foreach (Control ctrl in parent.Controls)
-            {
-                if (controlBounds.TryGetValue(ctrl, out Rectangle originalBounds))
-                {
-                    int newX = (int)(originalBounds.X * xRatio);
-                    int newY = (int)(originalBounds.Y * yRatio);
-                    int newWidth = (int)(originalBounds.Width * xRatio);
-                    int newHeight = (int)(originalBounds.Height * yRatio);
+        //private void ResizeControls(Control parent, float xRatio, float yRatio)
+        //{
+        //    parent.SuspendLayout();
+        //    foreach (Control ctrl in parent.Controls)
+        //    {
+        //        if (controlBounds.TryGetValue(ctrl, out Rectangle originalBounds))
+        //        {
+        //            int newX = (int)(originalBounds.X * xRatio);
+        //            int newY = (int)(originalBounds.Y * yRatio);
+        //            int newWidth = (int)(originalBounds.Width * xRatio);
+        //            int newHeight = (int)(originalBounds.Height * yRatio);
 
-                    Rectangle newBounds = new Rectangle(newX, newY, newWidth, newHeight);
-                    if (ctrl.Bounds != newBounds)
-                        ctrl.Bounds = newBounds;
-                }
-                if (ctrl.HasChildren)
-                {
-                    ResizeControls(ctrl, xRatio, yRatio);
-                }
-            }
-            parent.ResumeLayout();
-        }
+        //            Rectangle newBounds = new Rectangle(newX, newY, newWidth, newHeight);
+        //            if (ctrl.Bounds != newBounds)
+        //                ctrl.Bounds = newBounds;
+        //        }
+        //        if (ctrl.HasChildren)
+        //        {
+        //            ResizeControls(ctrl, xRatio, yRatio);
+        //        }
+        //    }
+        //    parent.ResumeLayout();
+        //}
         private void mnSach_Click(object sender, EventArgs e)
         {
             if (_ucSach == null)

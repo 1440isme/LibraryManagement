@@ -200,7 +200,6 @@
             this.Name = "ucMuonTra";
             this.Size = new System.Drawing.Size(1280, 720);
             this.Load += new System.EventHandler(this.ucMuonTra_Load);
-            this.Resize += new System.EventHandler(this.ucMuonTra_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabQLSach)).EndInit();
             this.tabQLSach.ResumeLayout(false);

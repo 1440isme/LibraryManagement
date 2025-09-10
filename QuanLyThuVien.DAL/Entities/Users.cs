@@ -9,6 +9,11 @@ namespace QuanLyThuVien.DAL.Entities
 {
     public partial class Users
     {
+        public Users()
+        {
+            MuonSach = new HashSet<MuonSach>();
+        }
+
         public int UserId { get; set; }
         public string UserName { get; set; }
         public string FullName { get; set; }
@@ -19,7 +24,7 @@ namespace QuanLyThuVien.DAL.Entities
         public DateTime CreatedAt { get; set; }
         public int? MaNhanVien { get; set; }
 
-        public virtual NhanVien MaNhanVienNavigation { get; set; }
         public virtual Roles Role { get; set; }
+        public virtual ICollection<MuonSach> MuonSach { get; set; }
     }
 }

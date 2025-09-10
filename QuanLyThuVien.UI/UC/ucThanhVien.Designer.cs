@@ -442,7 +442,6 @@
             this.Name = "ucThanhVien";
             this.Size = new System.Drawing.Size(1280, 720);
             this.Load += new System.EventHandler(this.ucThanhVien_Load);
-            this.Resize += new System.EventHandler(this.ucThanhVien_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).EndInit();
             this.splitContainerControl1.Panel1.ResumeLayout(false);

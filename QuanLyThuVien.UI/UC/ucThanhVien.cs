@@ -15,16 +15,16 @@ namespace QuanLyThuVien.UI.UC
 {
     public partial class ucThanhVien : UserControl
     {
-        private Size originalFormSize;
-        private Dictionary<Control, Rectangle> controlBounds = new Dictionary<Control, Rectangle>();
+        //private Size originalFormSize;
+        //private Dictionary<Control, Rectangle> controlBounds = new Dictionary<Control, Rectangle>();
         private ThanhVienService _thanhVienService;
         public ucThanhVien()
         {
             InitializeComponent();
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer |
-                  ControlStyles.AllPaintingInWmPaint |
-                  ControlStyles.UserPaint, true);
-            this.UpdateStyles();
+            //this.SetStyle(ControlStyles.OptimizedDoubleBuffer |
+            //      ControlStyles.AllPaintingInWmPaint |
+            //      ControlStyles.UserPaint, true);
+            //this.UpdateStyles();
             var dbContext = new QuanLyThuVienContext();
             var TVRepo = new GenericRepository<ThanhVien>(dbContext);
             _thanhVienService = new ThanhVienService(TVRepo);
@@ -32,64 +32,64 @@ namespace QuanLyThuVien.UI.UC
         bool _them;
         private void ucThanhVien_Load(object sender, EventArgs e)
         {
-            originalFormSize = this.Size;
-            StoreControlBounds(this);
+            //originalFormSize = this.Size;
+            //StoreControlBounds(this);
             gcThanhVien.DataSource = _thanhVienService.GetAllMembers();
 
             showHideControl(true);
             _enable(false);
             _reset();
         }
-        private void StoreControlBounds(Control parent)
-        {
-            foreach (Control ctrl in parent.Controls)
-            {
-                if (!controlBounds.ContainsKey(ctrl))
-                {
-                    controlBounds[ctrl] = ctrl.Bounds;
-                }
-                if (ctrl.HasChildren)
-                {
-                    StoreControlBounds(ctrl);
-                }
-            }
-        }
+        //private void StoreControlBounds(Control parent)
+        //{
+        //    foreach (Control ctrl in parent.Controls)
+        //    {
+        //        if (!controlBounds.ContainsKey(ctrl))
+        //        {
+        //            controlBounds[ctrl] = ctrl.Bounds;
+        //        }
+        //        if (ctrl.HasChildren)
+        //        {
+        //            StoreControlBounds(ctrl);
+        //        }
+        //    }
+        //}
 
-        private void ucThanhVien_Resize(object sender, EventArgs e)
-        {
-            if (originalFormSize.Width == 0 || originalFormSize.Height == 0)
-                return;
+        //private void ucThanhVien_Resize(object sender, EventArgs e)
+        //{
+        //    if (originalFormSize.Width == 0 || originalFormSize.Height == 0)
+        //        return;
 
-            float xRatio = (float)this.Width / originalFormSize.Width;
-            float yRatio = (float)this.Height / originalFormSize.Height;
+        //    float xRatio = (float)this.Width / originalFormSize.Width;
+        //    float yRatio = (float)this.Height / originalFormSize.Height;
 
-            this.SuspendLayout();
-            ResizeControls(this, xRatio, yRatio);
-            this.ResumeLayout();
-        }
-        private void ResizeControls(Control parent, float xRatio, float yRatio)
-        {
-            parent.SuspendLayout();
-            foreach (Control ctrl in parent.Controls)
-            {
-                if (controlBounds.TryGetValue(ctrl, out Rectangle originalBounds))
-                {
-                    int newX = (int)(originalBounds.X * xRatio);
-                    int newY = (int)(originalBounds.Y * yRatio);
-                    int newWidth = (int)(originalBounds.Width * xRatio);
-                    int newHeight = (int)(originalBounds.Height * yRatio);
+        //    this.SuspendLayout();
+        //    ResizeControls(this, xRatio, yRatio);
+        //    this.ResumeLayout();
+        //}
+        //private void ResizeControls(Control parent, float xRatio, float yRatio)
+        //{
+        //    parent.SuspendLayout();
+        //    foreach (Control ctrl in parent.Controls)
+        //    {
+        //        if (controlBounds.TryGetValue(ctrl, out Rectangle originalBounds))
+        //        {
+        //            int newX = (int)(originalBounds.X * xRatio);
+        //            int newY = (int)(originalBounds.Y * yRatio);
+        //            int newWidth = (int)(originalBounds.Width * xRatio);
+        //            int newHeight = (int)(originalBounds.Height * yRatio);
 
-                    // Chỉ set Bounds nếu thực sự thay đổi
-                    if (ctrl.Bounds != new Rectangle(newX, newY, newWidth, newHeight))
-                        ctrl.Bounds = new Rectangle(newX, newY, newWidth, newHeight);
-                }
-                if (ctrl.HasChildren)
-                {
-                    ResizeControls(ctrl, xRatio, yRatio);
-                }
-            }
-            parent.ResumeLayout();
-        }
+        //            // Chỉ set Bounds nếu thực sự thay đổi
+        //            if (ctrl.Bounds != new Rectangle(newX, newY, newWidth, newHeight))
+        //                ctrl.Bounds = new Rectangle(newX, newY, newWidth, newHeight);
+        //        }
+        //        if (ctrl.HasChildren)
+        //        {
+        //            ResizeControls(ctrl, xRatio, yRatio);
+        //        }
+        //    }
+        //    parent.ResumeLayout();
+        //}
 
         void showHideControl(bool t)
         {

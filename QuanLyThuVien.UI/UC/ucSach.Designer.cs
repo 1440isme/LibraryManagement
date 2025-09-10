@@ -225,7 +225,6 @@
             this.Name = "ucSach";
             this.Size = new System.Drawing.Size(1280, 720);
             this.Load += new System.EventHandler(this.ucSach_Load);
-            this.Resize += new System.EventHandler(this.ucSach_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabQLSach)).EndInit();
             this.tabQLSach.ResumeLayout(false);

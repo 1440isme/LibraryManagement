@@ -80,7 +80,7 @@
             // 
             this.splitContainerControl1.Panel2.Controls.Add(this.panelControl1);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(1278, 652);
+            this.splitContainerControl1.Size = new System.Drawing.Size(1200, 652);
             this.splitContainerControl1.SplitterPosition = 518;
             this.splitContainerControl1.TabIndex = 12;
             // 
@@ -90,7 +90,7 @@
             this.gcBanSaoSach.Location = new System.Drawing.Point(0, 0);
             this.gcBanSaoSach.MainView = this.gvBanSaoSach;
             this.gcBanSaoSach.Name = "gcBanSaoSach";
-            this.gcBanSaoSach.Size = new System.Drawing.Size(1278, 518);
+            this.gcBanSaoSach.Size = new System.Drawing.Size(1200, 518);
             this.gcBanSaoSach.TabIndex = 4;
             this.gcBanSaoSach.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvBanSaoSach});
@@ -109,6 +109,7 @@
             this.gvBanSaoSach.GridControl = this.gcBanSaoSach;
             this.gvBanSaoSach.Name = "gvBanSaoSach";
             this.gvBanSaoSach.OptionsBehavior.Editable = false;
+            this.gvBanSaoSach.OptionsView.ColumnAutoWidth = false;
             this.gvBanSaoSach.RowHeight = 25;
             this.gvBanSaoSach.CustomUnboundColumnData += new DevExpress.XtraGrid.Views.Base.CustomColumnDataEventHandler(this.gvBanSaoSach_CustomUnboundColumnData);
             this.gvBanSaoSach.Click += new System.EventHandler(this.gvBanSaoSach_Click);
@@ -135,6 +136,7 @@
             this.TenSach.UnboundDataType = typeof(string);
             this.TenSach.Visible = true;
             this.TenSach.VisibleIndex = 0;
+            this.TenSach.Width = 200;
             // 
             // Barcode
             // 
@@ -145,6 +147,7 @@
             this.Barcode.Name = "Barcode";
             this.Barcode.Visible = true;
             this.Barcode.VisibleIndex = 1;
+            this.Barcode.Width = 180;
             // 
             // ViTri
             // 
@@ -155,6 +158,7 @@
             this.ViTri.Name = "ViTri";
             this.ViTri.Visible = true;
             this.ViTri.VisibleIndex = 2;
+            this.ViTri.Width = 180;
             // 
             // TinhTrang
             // 
@@ -165,6 +169,7 @@
             this.TinhTrang.Name = "TinhTrang";
             this.TinhTrang.Visible = true;
             this.TinhTrang.VisibleIndex = 3;
+            this.TinhTrang.Width = 180;
             // 
             // NgayNhap
             // 
@@ -175,6 +180,7 @@
             this.NgayNhap.Name = "NgayNhap";
             this.NgayNhap.Visible = true;
             this.NgayNhap.VisibleIndex = 4;
+            this.NgayNhap.Width = 200;
             // 
             // GhiChu
             // 
@@ -185,6 +191,7 @@
             this.GhiChu.Name = "GhiChu";
             this.GhiChu.Visible = true;
             this.GhiChu.VisibleIndex = 5;
+            this.GhiChu.Width = 250;
             // 
             // panelControl1
             // 
@@ -203,13 +210,13 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1278, 124);
+            this.panelControl1.Size = new System.Drawing.Size(1200, 124);
             this.panelControl1.TabIndex = 9;
             // 
             // dtNgayNhap
             // 
             this.dtNgayNhap.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtNgayNhap.Location = new System.Drawing.Point(958, 22);
+            this.dtNgayNhap.Location = new System.Drawing.Point(917, 22);
             this.dtNgayNhap.Name = "dtNgayNhap";
             this.dtNgayNhap.Size = new System.Drawing.Size(231, 23);
             this.dtNgayNhap.TabIndex = 66;
@@ -217,7 +224,7 @@
             // txtGhiChu
             // 
             this.txtGhiChu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtGhiChu.Location = new System.Drawing.Point(958, 72);
+            this.txtGhiChu.Location = new System.Drawing.Point(917, 72);
             this.txtGhiChu.Name = "txtGhiChu";
             this.txtGhiChu.Size = new System.Drawing.Size(231, 23);
             this.txtGhiChu.TabIndex = 65;
@@ -227,7 +234,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(876, 79);
+            this.label6.Location = new System.Drawing.Point(835, 79);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(50, 16);
             this.label6.TabIndex = 64;
@@ -236,7 +243,7 @@
             // txtViTri
             // 
             this.txtViTri.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtViTri.Location = new System.Drawing.Point(570, 22);
+            this.txtViTri.Location = new System.Drawing.Point(517, 22);
             this.txtViTri.Name = "txtViTri";
             this.txtViTri.Size = new System.Drawing.Size(231, 23);
             this.txtViTri.TabIndex = 63;
@@ -244,7 +251,7 @@
             // txtTenSach
             // 
             this.txtTenSach.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTenSach.Location = new System.Drawing.Point(145, 22);
+            this.txtTenSach.Location = new System.Drawing.Point(124, 22);
             this.txtTenSach.Name = "txtTenSach";
             this.txtTenSach.Size = new System.Drawing.Size(231, 23);
             this.txtTenSach.TabIndex = 62;
@@ -253,7 +260,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(876, 29);
+            this.label5.Location = new System.Drawing.Point(835, 29);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(70, 16);
             this.label5.TabIndex = 52;
@@ -266,7 +273,7 @@
             this.cboTinhTrang.Items.AddRange(new object[] {
             "Sẵn sàng",
             "Đang mượn"});
-            this.cboTinhTrang.Location = new System.Drawing.Point(570, 71);
+            this.cboTinhTrang.Location = new System.Drawing.Point(517, 71);
             this.cboTinhTrang.Name = "cboTinhTrang";
             this.cboTinhTrang.Size = new System.Drawing.Size(231, 24);
             this.cboTinhTrang.TabIndex = 51;
@@ -275,7 +282,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(482, 79);
+            this.label4.Location = new System.Drawing.Point(429, 79);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(66, 16);
             this.label4.TabIndex = 50;
@@ -285,7 +292,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(482, 29);
+            this.label3.Location = new System.Drawing.Point(429, 29);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(36, 16);
             this.label3.TabIndex = 48;
@@ -294,7 +301,7 @@
             // txtBarcode
             // 
             this.txtBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBarcode.Location = new System.Drawing.Point(145, 72);
+            this.txtBarcode.Location = new System.Drawing.Point(124, 72);
             this.txtBarcode.Name = "txtBarcode";
             this.txtBarcode.Size = new System.Drawing.Size(231, 23);
             this.txtBarcode.TabIndex = 47;
@@ -303,7 +310,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(63, 79);
+            this.label2.Location = new System.Drawing.Point(42, 79);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 16);
             this.label2.TabIndex = 46;
@@ -314,7 +321,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(63, 29);
+            this.label1.Location = new System.Drawing.Point(42, 29);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 16);
             this.label1.TabIndex = 44;
@@ -326,9 +333,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.splitContainerControl1);
             this.Name = "ucPageBanSaoSach";
-            this.Size = new System.Drawing.Size(1278, 652);
+            this.Size = new System.Drawing.Size(1200, 652);
             this.Load += new System.EventHandler(this.ucPageBanSaoSach_Load);
-            this.Resize += new System.EventHandler(this.ucPageBanSaoSach_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).EndInit();
             this.splitContainerControl1.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel2)).EndInit();

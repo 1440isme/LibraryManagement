@@ -299,11 +299,17 @@
     <EmbeddedResource Include="UC\Pages\ucPageBanSaoSach.resx">
       <DependentUpon>ucPageBanSaoSach.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UC\Pages\ucPageNXB.resx">
+      <DependentUpon>ucPageNXB.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UC\Pages\ucPageSach.resx">
       <DependentUpon>ucPageSach.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC\Pages\ucPageTacGia.resx">
       <DependentUpon>ucPageTacGia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\Pages\ucPageTheLoai.resx">
+      <DependentUpon>ucPageTheLoai.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC\ucMuonTra.resx">
       <DependentUpon>ucMuonTra.cs</DependentUpon>

@@ -17,7 +17,7 @@ namespace QuanLyThuVien.DAL.Entities
         public int MaMuonSach { get; set; }
         public int MaSach { get; set; }
         public int MaThanhVien { get; set; }
-        public int MaNhanVien { get; set; }
+        public int UserId { get; set; }
         public DateTime NgayMuon { get; set; }
         public DateTime NgayTraDuKien { get; set; }
         public DateTime? NgayTraThucTe { get; set; }
@@ -26,9 +26,9 @@ namespace QuanLyThuVien.DAL.Entities
         public byte[] RowVersion { get; set; }
 
         public virtual BanSaoSach MaBanSaoNavigation { get; set; }
-        public virtual NhanVien MaNhanVienNavigation { get; set; }
         public virtual Sach MaSachNavigation { get; set; }
         public virtual ThanhVien MaThanhVienNavigation { get; set; }
+        public virtual Users User { get; set; }
         public virtual ICollection<Phat> Phat { get; set; }
     }
 }

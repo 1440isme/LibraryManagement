@@ -34,6 +34,7 @@
             this.MaTacGia = new DevExpress.XtraGrid.Columns.GridColumn();
             this.TenTacGia = new DevExpress.XtraGrid.Columns.GridColumn();
             this.QuocTich = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.NamSinh = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.txtNamSinh = new System.Windows.Forms.TextBox();
             this.txtQuocTich = new System.Windows.Forms.TextBox();
@@ -41,7 +42,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtTenTacGia = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.NamSinh = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).BeginInit();
             this.splitContainerControl1.Panel1.SuspendLayout();
@@ -70,7 +70,7 @@
             // 
             this.splitContainerControl1.Panel2.Controls.Add(this.panelControl1);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(1278, 652);
+            this.splitContainerControl1.Size = new System.Drawing.Size(1200, 680);
             this.splitContainerControl1.SplitterPosition = 561;
             this.splitContainerControl1.TabIndex = 12;
             // 
@@ -80,7 +80,7 @@
             this.gcTacGia.Location = new System.Drawing.Point(0, 0);
             this.gcTacGia.MainView = this.gvTacGia;
             this.gcTacGia.Name = "gcTacGia";
-            this.gcTacGia.Size = new System.Drawing.Size(1278, 561);
+            this.gcTacGia.Size = new System.Drawing.Size(1200, 561);
             this.gcTacGia.TabIndex = 4;
             this.gcTacGia.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvTacGia});
@@ -95,6 +95,7 @@
             this.gvTacGia.GridControl = this.gcTacGia;
             this.gvTacGia.Name = "gvTacGia";
             this.gvTacGia.OptionsBehavior.Editable = false;
+            this.gvTacGia.OptionsView.ColumnAutoWidth = false;
             this.gvTacGia.RowHeight = 25;
             this.gvTacGia.Click += new System.EventHandler(this.gvTacGia_Click);
             // 
@@ -113,6 +114,7 @@
             this.TenTacGia.Name = "TenTacGia";
             this.TenTacGia.Visible = true;
             this.TenTacGia.VisibleIndex = 0;
+            this.TenTacGia.Width = 200;
             // 
             // QuocTich
             // 
@@ -123,6 +125,18 @@
             this.QuocTich.Name = "QuocTich";
             this.QuocTich.Visible = true;
             this.QuocTich.VisibleIndex = 1;
+            this.QuocTich.Width = 200;
+            // 
+            // NamSinh
+            // 
+            this.NamSinh.AppearanceHeader.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold);
+            this.NamSinh.AppearanceHeader.Options.UseFont = true;
+            this.NamSinh.Caption = "NĂM SINH";
+            this.NamSinh.FieldName = "NamSinh";
+            this.NamSinh.Name = "NamSinh";
+            this.NamSinh.Visible = true;
+            this.NamSinh.VisibleIndex = 2;
+            this.NamSinh.Width = 200;
             // 
             // panelControl1
             // 
@@ -135,13 +149,13 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1278, 81);
+            this.panelControl1.Size = new System.Drawing.Size(1200, 109);
             this.panelControl1.TabIndex = 9;
             // 
             // txtNamSinh
             // 
             this.txtNamSinh.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNamSinh.Location = new System.Drawing.Point(973, 29);
+            this.txtNamSinh.Location = new System.Drawing.Point(879, 30);
             this.txtNamSinh.Name = "txtNamSinh";
             this.txtNamSinh.Size = new System.Drawing.Size(231, 23);
             this.txtNamSinh.TabIndex = 59;
@@ -149,7 +163,7 @@
             // txtQuocTich
             // 
             this.txtQuocTich.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtQuocTich.Location = new System.Drawing.Point(565, 29);
+            this.txtQuocTich.Location = new System.Drawing.Point(515, 30);
             this.txtQuocTich.Name = "txtQuocTich";
             this.txtQuocTich.Size = new System.Drawing.Size(231, 23);
             this.txtQuocTich.TabIndex = 58;
@@ -158,7 +172,7 @@
             // 
             this.lbl.AutoSize = true;
             this.lbl.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl.Location = new System.Drawing.Point(895, 32);
+            this.lbl.Location = new System.Drawing.Point(801, 33);
             this.lbl.Name = "lbl";
             this.lbl.Size = new System.Drawing.Size(60, 16);
             this.lbl.TabIndex = 57;
@@ -168,7 +182,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(484, 32);
+            this.label4.Location = new System.Drawing.Point(434, 33);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 16);
             this.label4.TabIndex = 50;
@@ -177,7 +191,7 @@
             // txtTenTacGia
             // 
             this.txtTenTacGia.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTenTacGia.Location = new System.Drawing.Point(166, 29);
+            this.txtTenTacGia.Location = new System.Drawing.Point(160, 30);
             this.txtTenTacGia.Name = "txtTenTacGia";
             this.txtTenTacGia.Size = new System.Drawing.Size(231, 23);
             this.txtTenTacGia.TabIndex = 45;
@@ -187,19 +201,11 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(84, 32);
+            this.label1.Location = new System.Drawing.Point(78, 33);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 16);
             this.label1.TabIndex = 44;
             this.label1.Text = "Tên tác giả";
-            // 
-            // NamSinh
-            // 
-            this.NamSinh.Caption = "NĂM SINH";
-            this.NamSinh.FieldName = "NamSinh";
-            this.NamSinh.Name = "NamSinh";
-            this.NamSinh.Visible = true;
-            this.NamSinh.VisibleIndex = 2;
             // 
             // ucPageTacGia
             // 
@@ -207,9 +213,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.splitContainerControl1);
             this.Name = "ucPageTacGia";
-            this.Size = new System.Drawing.Size(1278, 652);
+            this.Size = new System.Drawing.Size(1200, 680);
             this.Load += new System.EventHandler(this.ucPageTacGia_Load);
-            this.Resize += new System.EventHandler(this.ucPageTacGia_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).EndInit();
             this.splitContainerControl1.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel2)).EndInit();
