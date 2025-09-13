@@ -42,6 +42,7 @@ namespace QuanLyThuVien.DAL.Entities
         public virtual DbSet<TheLoai> TheLoai { get; set; }
         public virtual DbSet<TopSachMuon> TopSachMuon { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<ThongTinThanhVienProc> ThongTinThanhVien { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -555,6 +556,7 @@ namespace QuanLyThuVien.DAL.Entities
                     .HasForeignKey(d => d.RoleId)
                     .HasConstraintName("FK_Users_Roles");
             });
+            modelBuilder.Entity<ThongTinThanhVienProc>().HasNoKey();
 
             OnModelCreatingPartial(modelBuilder);
         }

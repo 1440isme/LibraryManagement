@@ -51,6 +51,8 @@
             this.LoaiThanhVien = new DevExpress.XtraGrid.Columns.GridColumn();
             this.NgayDangKy = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.txtMaThanhVien = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.txtSDT = new System.Windows.Forms.TextBox();
             this.txtDiaChi = new System.Windows.Forms.TextBox();
             this.dtNgayDK = new System.Windows.Forms.DateTimePicker();
@@ -63,8 +65,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtTenThanhVien = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtMaThanhVien = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).BeginInit();
@@ -331,6 +331,25 @@
             this.panelControl1.Size = new System.Drawing.Size(1200, 137);
             this.panelControl1.TabIndex = 9;
             // 
+            // txtMaThanhVien
+            // 
+            this.txtMaThanhVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMaThanhVien.Location = new System.Drawing.Point(152, 30);
+            this.txtMaThanhVien.Name = "txtMaThanhVien";
+            this.txtMaThanhVien.Size = new System.Drawing.Size(148, 23);
+            this.txtMaThanhVien.TabIndex = 71;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label7.Location = new System.Drawing.Point(56, 33);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(87, 16);
+            this.label7.TabIndex = 70;
+            this.label7.Text = "Mã thành viên";
+            // 
             // txtSDT
             // 
             this.txtSDT.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -443,25 +462,6 @@
             this.label1.Size = new System.Drawing.Size(90, 16);
             this.label1.TabIndex = 44;
             this.label1.Text = "Tên thành viên";
-            // 
-            // txtMaThanhVien
-            // 
-            this.txtMaThanhVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMaThanhVien.Location = new System.Drawing.Point(152, 30);
-            this.txtMaThanhVien.Name = "txtMaThanhVien";
-            this.txtMaThanhVien.Size = new System.Drawing.Size(148, 23);
-            this.txtMaThanhVien.TabIndex = 71;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(56, 33);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(87, 16);
-            this.label7.TabIndex = 70;
-            this.label7.Text = "Mã thành viên";
             // 
             // ucThanhVien
             // 

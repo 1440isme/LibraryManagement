@@ -31,8 +31,8 @@
             this.gcDanhSachMuon = new DevExpress.XtraGrid.GridControl();
             this.gvDanhSachMuon = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.MaPhieuMuon = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.MaThanhVien = new DevExpress.XtraGrid.Columns.GridColumn();
             this.TenThanhVien = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.MaThanhVien = new DevExpress.XtraGrid.Columns.GridColumn();
             this.NgayMuon = new DevExpress.XtraGrid.Columns.GridColumn();
             this.NgayTraDuKien = new DevExpress.XtraGrid.Columns.GridColumn();
             this.TrangThai = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -71,6 +71,7 @@
             this.gvDanhSachMuon.OptionsBehavior.Editable = false;
             this.gvDanhSachMuon.OptionsView.ColumnAutoWidth = false;
             this.gvDanhSachMuon.RowHeight = 25;
+            this.gvDanhSachMuon.CustomUnboundColumnData += new DevExpress.XtraGrid.Views.Base.CustomColumnDataEventHandler(this.gvDanhSachMuon_CustomUnboundColumnData);
             // 
             // MaPhieuMuon
             // 
@@ -82,12 +83,6 @@
             this.MaPhieuMuon.Visible = true;
             this.MaPhieuMuon.VisibleIndex = 0;
             // 
-            // MaThanhVien
-            // 
-            this.MaThanhVien.Caption = "gridColumn1";
-            this.MaThanhVien.FieldName = "MaThanhVien";
-            this.MaThanhVien.Name = "MaThanhVien";
-            // 
             // TenThanhVien
             // 
             this.TenThanhVien.AppearanceHeader.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold);
@@ -98,6 +93,12 @@
             this.TenThanhVien.Visible = true;
             this.TenThanhVien.VisibleIndex = 1;
             this.TenThanhVien.Width = 200;
+            // 
+            // MaThanhVien
+            // 
+            this.MaThanhVien.Caption = "gridColumn1";
+            this.MaThanhVien.FieldName = "MaThanhVien";
+            this.MaThanhVien.Name = "MaThanhVien";
             // 
             // NgayMuon
             // 
@@ -164,6 +165,7 @@
             this.Controls.Add(this.gcDanhSachMuon);
             this.Name = "ucPageDanhSach";
             this.Size = new System.Drawing.Size(1200, 680);
+            this.Load += new System.EventHandler(this.ucPageDanhSach_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gcDanhSachMuon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvDanhSachMuon)).EndInit();
             this.ResumeLayout(false);

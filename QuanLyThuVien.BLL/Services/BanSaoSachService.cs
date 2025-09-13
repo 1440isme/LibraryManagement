@@ -26,6 +26,19 @@ namespace QuanLyThuVien.BLL.Services
             }
             return _repository.GetAll();
         }
+
+        //Lấy bản sao sách theo số sách chưa được mượn (trạng thái bằng = 'Sẵn sàng')
+        public IEnumerable<BanSaoSach> GetBaoSaoChuaMuon()
+        {
+            var repo = _repository as GenericRepository<BanSaoSach>;
+            if (repo != null)
+            {
+                return repo.GetAllIncluding(bss => bss.MaSachNavigation)
+                .Where(bss => bss.TinhTrang == "Sẵn sàng")
+                .ToList();
+            }
+            return _repository.GetAll();
+        }
         public void UpdateBanSaoSach(BanSaoSach bssach)
         {
             var banSao = _repository.GetById(bssach.MaBanSao);

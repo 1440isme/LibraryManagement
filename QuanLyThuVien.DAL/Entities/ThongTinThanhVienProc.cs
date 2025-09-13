@@ -16,7 +16,7 @@ namespace QuanLyThuVien.DAL.Entities
 
         public string LoaiThanhVien { get; set; }
 
-        public int SoPhieuDangMo { get; set; }
+        public int SoPhieuDangMuon { get; set; }
         public int SoSachDangMuon { get; set; }
         public decimal TongNoPhat { get; set; }
     }
