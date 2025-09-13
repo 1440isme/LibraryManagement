@@ -10,7 +10,7 @@ namespace QuanLyThuVien.DAL.Entities
     public partial class BaoCaoPhat
     {
         public int MaPhat { get; set; }
-        public int MaMuonSach { get; set; }
+        public int MaChiTiet { get; set; }
         public string TenThanhVien { get; set; }
         public decimal SoTien { get; set; }
         public string LyDo { get; set; }

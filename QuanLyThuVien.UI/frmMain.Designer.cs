@@ -113,6 +113,7 @@
             this.mnMuonTra.Name = "mnMuonTra";
             this.mnMuonTra.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             this.mnMuonTra.Text = "Quản lý Mượn/Trả - Gia hạn";
+            this.mnMuonTra.Click += new System.EventHandler(this.mnMuonTra_Click);
             // 
             // mnDatTruoc
             // 

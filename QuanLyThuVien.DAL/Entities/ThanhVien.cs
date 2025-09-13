@@ -11,8 +11,8 @@ namespace QuanLyThuVien.DAL.Entities
     {
         public ThanhVien()
         {
-            MuonSach = new HashSet<MuonSach>();
             PaymentHistory = new HashSet<PaymentHistory>();
+            PhieuMuon = new HashSet<PhieuMuon>();
             Reservation = new HashSet<Reservation>();
         }
 
@@ -25,8 +25,8 @@ namespace QuanLyThuVien.DAL.Entities
         public DateTime NgayDangKy { get; set; }
         public byte[] RowVersion { get; set; }
 
-        public virtual ICollection<MuonSach> MuonSach { get; set; }
         public virtual ICollection<PaymentHistory> PaymentHistory { get; set; }
+        public virtual ICollection<PhieuMuon> PhieuMuon { get; set; }
         public virtual ICollection<Reservation> Reservation { get; set; }
     }
 }

@@ -41,9 +41,8 @@
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.tabQLSach = new DevExpress.XtraTab.XtraTabControl();
-            this.pageMuonSach = new DevExpress.XtraTab.XtraTabPage();
-            this.pageTraSach = new DevExpress.XtraTab.XtraTabPage();
-            this.pageGiaHanSach = new DevExpress.XtraTab.XtraTabPage();
+            this.pageDanhSachMuon = new DevExpress.XtraTab.XtraTabPage();
+            this.pageChiTiet = new DevExpress.XtraTab.XtraTabPage();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabQLSach)).BeginInit();
             this.tabQLSach.SuspendLayout();
@@ -156,37 +155,28 @@
             this.tabQLSach.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabQLSach.Location = new System.Drawing.Point(0, 40);
             this.tabQLSach.Name = "tabQLSach";
-            this.tabQLSach.SelectedTabPage = this.pageMuonSach;
+            this.tabQLSach.SelectedTabPage = this.pageDanhSachMuon;
             this.tabQLSach.Size = new System.Drawing.Size(1280, 680);
             this.tabQLSach.TabIndex = 63;
             this.tabQLSach.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.pageMuonSach,
-            this.pageTraSach,
-            this.pageGiaHanSach});
+            this.pageDanhSachMuon,
+            this.pageChiTiet});
             // 
-            // pageMuonSach
+            // pageDanhSachMuon
             // 
-            this.pageMuonSach.Appearance.Header.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold);
-            this.pageMuonSach.Appearance.Header.Options.UseFont = true;
-            this.pageMuonSach.Name = "pageMuonSach";
-            this.pageMuonSach.Size = new System.Drawing.Size(1278, 652);
-            this.pageMuonSach.Text = "MƯỢN SÁCH";
+            this.pageDanhSachMuon.Appearance.Header.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold);
+            this.pageDanhSachMuon.Appearance.Header.Options.UseFont = true;
+            this.pageDanhSachMuon.Name = "pageDanhSachMuon";
+            this.pageDanhSachMuon.Size = new System.Drawing.Size(1278, 652);
+            this.pageDanhSachMuon.Text = "DANH SÁCH MƯỢN";
             // 
-            // pageTraSach
+            // pageChiTiet
             // 
-            this.pageTraSach.Appearance.Header.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold);
-            this.pageTraSach.Appearance.Header.Options.UseFont = true;
-            this.pageTraSach.Name = "pageTraSach";
-            this.pageTraSach.Size = new System.Drawing.Size(1278, 652);
-            this.pageTraSach.Text = "TRẢ SÁCH";
-            // 
-            // pageGiaHanSach
-            // 
-            this.pageGiaHanSach.Appearance.Header.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold);
-            this.pageGiaHanSach.Appearance.Header.Options.UseFont = true;
-            this.pageGiaHanSach.Name = "pageGiaHanSach";
-            this.pageGiaHanSach.Size = new System.Drawing.Size(1278, 652);
-            this.pageGiaHanSach.Text = "GIA HẠN SÁCH";
+            this.pageChiTiet.Appearance.Header.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold);
+            this.pageChiTiet.Appearance.Header.Options.UseFont = true;
+            this.pageChiTiet.Name = "pageChiTiet";
+            this.pageChiTiet.Size = new System.Drawing.Size(1278, 652);
+            this.pageChiTiet.Text = "CHI TIẾT";
             // 
             // ucMuonTra
             // 
@@ -222,8 +212,7 @@
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraTab.XtraTabControl tabQLSach;
-        private DevExpress.XtraTab.XtraTabPage pageMuonSach;
-        private DevExpress.XtraTab.XtraTabPage pageTraSach;
-        private DevExpress.XtraTab.XtraTabPage pageGiaHanSach;
+        private DevExpress.XtraTab.XtraTabPage pageDanhSachMuon;
+        private DevExpress.XtraTab.XtraTabPage pageChiTiet;
     }
 }

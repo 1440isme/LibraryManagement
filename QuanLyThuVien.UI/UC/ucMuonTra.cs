@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyThuVien.UI.UC.Pages;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,6 +22,8 @@ namespace QuanLyThuVien.UI.UC
                   ControlStyles.AllPaintingInWmPaint |
                   ControlStyles.UserPaint, true);
             this.UpdateStyles();
+
+            pageChiTiet.Controls.Add(new ucPageChiTiet());
         }
 
         private void ucMuonTra_Load(object sender, EventArgs e)

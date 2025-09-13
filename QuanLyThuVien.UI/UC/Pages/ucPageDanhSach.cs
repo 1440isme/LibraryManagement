@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace QuanLyThuVien.UI.UC.Pages
 {
-    public partial class ucPageTraSach : UserControl
+    public partial class ucPageDanhSach : UserControl
     {
-        public ucPageTraSach()
+        public ucPageDanhSach()
         {
             InitializeComponent();
         }

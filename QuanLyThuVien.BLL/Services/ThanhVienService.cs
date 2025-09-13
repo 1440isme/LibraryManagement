@@ -25,6 +25,8 @@ namespace QuanLyThuVien.BLL.Services
         {
             if (member == null)
                 throw new ArgumentNullException(nameof(member), "Thành viên không được để null");
+            if (member.MaThanhVien <= 0)
+                throw new ArgumentException("Mã thành viên phải lớn hơn 0", nameof(member.MaThanhVien));
             if (string.IsNullOrWhiteSpace(member.TenThanhVien))
                 throw new ArgumentException("Tên thành viên không được để trống", nameof(member.TenThanhVien));
             if (string.IsNullOrWhiteSpace(member.Email))

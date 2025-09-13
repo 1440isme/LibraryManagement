@@ -13,8 +13,8 @@ namespace QuanLyThuVien.DAL.Entities
         public string BarcodeOrSachId { get; set; }
         public string TenSach { get; set; }
         public string TenThanhVien { get; set; }
-        public DateTime NgayMuon { get; set; }
-        public DateTime NgayTraDuKien { get; set; }
+        public DateTime? NgayMuon { get; set; }
+        public DateTime? NgayTraDuKien { get; set; }
         public int? MaBanSao { get; set; }
     }
 }

@@ -63,6 +63,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtTenThanhVien = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtMaThanhVien = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).BeginInit();
@@ -157,7 +159,7 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Size = new System.Drawing.Size(1280, 40);
+            this.barDockControlTop.Size = new System.Drawing.Size(1200, 40);
             // 
             // barDockControlBottom
             // 
@@ -165,7 +167,7 @@
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 720);
             this.barDockControlBottom.Manager = this.barManager1;
-            this.barDockControlBottom.Size = new System.Drawing.Size(1280, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1200, 0);
             // 
             // barDockControlLeft
             // 
@@ -179,7 +181,7 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1280, 40);
+            this.barDockControlRight.Location = new System.Drawing.Point(1200, 40);
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 680);
             // 
@@ -199,7 +201,7 @@
             // 
             this.splitContainerControl1.Panel2.Controls.Add(this.panelControl1);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(1280, 680);
+            this.splitContainerControl1.Size = new System.Drawing.Size(1200, 680);
             this.splitContainerControl1.SplitterPosition = 533;
             this.splitContainerControl1.TabIndex = 12;
             // 
@@ -209,7 +211,7 @@
             this.gcThanhVien.Location = new System.Drawing.Point(0, 0);
             this.gcThanhVien.MainView = this.gvThanhVien;
             this.gcThanhVien.Name = "gcThanhVien";
-            this.gcThanhVien.Size = new System.Drawing.Size(1280, 533);
+            this.gcThanhVien.Size = new System.Drawing.Size(1200, 533);
             this.gcThanhVien.TabIndex = 4;
             this.gcThanhVien.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvThanhVien});
@@ -232,9 +234,14 @@
             // 
             // MaThanhVien
             // 
-            this.MaThanhVien.Caption = "gridColumn1";
+            this.MaThanhVien.AppearanceHeader.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold);
+            this.MaThanhVien.AppearanceHeader.Options.UseFont = true;
+            this.MaThanhVien.Caption = "MÃ";
             this.MaThanhVien.FieldName = "MaThanhVien";
             this.MaThanhVien.Name = "MaThanhVien";
+            this.MaThanhVien.Visible = true;
+            this.MaThanhVien.VisibleIndex = 0;
+            this.MaThanhVien.Width = 103;
             // 
             // TenThanhVien
             // 
@@ -244,7 +251,8 @@
             this.TenThanhVien.FieldName = "TenThanhVien";
             this.TenThanhVien.Name = "TenThanhVien";
             this.TenThanhVien.Visible = true;
-            this.TenThanhVien.VisibleIndex = 0;
+            this.TenThanhVien.VisibleIndex = 1;
+            this.TenThanhVien.Width = 177;
             // 
             // Email
             // 
@@ -254,7 +262,8 @@
             this.Email.FieldName = "Email";
             this.Email.Name = "Email";
             this.Email.Visible = true;
-            this.Email.VisibleIndex = 1;
+            this.Email.VisibleIndex = 2;
+            this.Email.Width = 177;
             // 
             // SoDienThoai
             // 
@@ -264,7 +273,8 @@
             this.SoDienThoai.FieldName = "SoDienThoai";
             this.SoDienThoai.Name = "SoDienThoai";
             this.SoDienThoai.Visible = true;
-            this.SoDienThoai.VisibleIndex = 2;
+            this.SoDienThoai.VisibleIndex = 3;
+            this.SoDienThoai.Width = 177;
             // 
             // DiaChi
             // 
@@ -274,7 +284,8 @@
             this.DiaChi.FieldName = "DiaChi";
             this.DiaChi.Name = "DiaChi";
             this.DiaChi.Visible = true;
-            this.DiaChi.VisibleIndex = 3;
+            this.DiaChi.VisibleIndex = 4;
+            this.DiaChi.Width = 177;
             // 
             // LoaiThanhVien
             // 
@@ -284,7 +295,8 @@
             this.LoaiThanhVien.FieldName = "LoaiThanhVien";
             this.LoaiThanhVien.Name = "LoaiThanhVien";
             this.LoaiThanhVien.Visible = true;
-            this.LoaiThanhVien.VisibleIndex = 4;
+            this.LoaiThanhVien.VisibleIndex = 5;
+            this.LoaiThanhVien.Width = 177;
             // 
             // NgayDangKy
             // 
@@ -294,10 +306,13 @@
             this.NgayDangKy.FieldName = "NgayDangKy";
             this.NgayDangKy.Name = "NgayDangKy";
             this.NgayDangKy.Visible = true;
-            this.NgayDangKy.VisibleIndex = 5;
+            this.NgayDangKy.VisibleIndex = 6;
+            this.NgayDangKy.Width = 187;
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.txtMaThanhVien);
+            this.panelControl1.Controls.Add(this.label7);
             this.panelControl1.Controls.Add(this.txtSDT);
             this.panelControl1.Controls.Add(this.txtDiaChi);
             this.panelControl1.Controls.Add(this.dtNgayDK);
@@ -313,13 +328,13 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1280, 137);
+            this.panelControl1.Size = new System.Drawing.Size(1200, 137);
             this.panelControl1.TabIndex = 9;
             // 
             // txtSDT
             // 
             this.txtSDT.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSDT.Location = new System.Drawing.Point(577, 77);
+            this.txtSDT.Location = new System.Drawing.Point(515, 77);
             this.txtSDT.Name = "txtSDT";
             this.txtSDT.Size = new System.Drawing.Size(231, 23);
             this.txtSDT.TabIndex = 69;
@@ -327,15 +342,15 @@
             // txtDiaChi
             // 
             this.txtDiaChi.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDiaChi.Location = new System.Drawing.Point(577, 30);
+            this.txtDiaChi.Location = new System.Drawing.Point(705, 30);
             this.txtDiaChi.Name = "txtDiaChi";
-            this.txtDiaChi.Size = new System.Drawing.Size(231, 23);
+            this.txtDiaChi.Size = new System.Drawing.Size(148, 23);
             this.txtDiaChi.TabIndex = 68;
             // 
             // dtNgayDK
             // 
             this.dtNgayDK.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtNgayDK.Location = new System.Drawing.Point(986, 77);
+            this.dtNgayDK.Location = new System.Drawing.Point(910, 77);
             this.dtNgayDK.Name = "dtNgayDK";
             this.dtNgayDK.Size = new System.Drawing.Size(231, 23);
             this.dtNgayDK.TabIndex = 67;
@@ -344,7 +359,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(873, 78);
+            this.label6.Location = new System.Drawing.Point(797, 78);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(88, 16);
             this.label6.TabIndex = 54;
@@ -356,18 +371,17 @@
             this.cboLoaiThanhVien.FormattingEnabled = true;
             this.cboLoaiThanhVien.Items.AddRange(new object[] {
             "SinhVien",
-            "GiangVien",
-            "Khach"});
-            this.cboLoaiThanhVien.Location = new System.Drawing.Point(986, 29);
+            "GiangVien"});
+            this.cboLoaiThanhVien.Location = new System.Drawing.Point(993, 30);
             this.cboLoaiThanhVien.Name = "cboLoaiThanhVien";
-            this.cboLoaiThanhVien.Size = new System.Drawing.Size(231, 24);
+            this.cboLoaiThanhVien.Size = new System.Drawing.Size(148, 24);
             this.cboLoaiThanhVien.TabIndex = 53;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(873, 32);
+            this.label5.Location = new System.Drawing.Point(892, 33);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(93, 16);
             this.label5.TabIndex = 52;
@@ -377,7 +391,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(476, 32);
+            this.label4.Location = new System.Drawing.Point(641, 33);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(46, 16);
             this.label4.TabIndex = 50;
@@ -387,7 +401,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(476, 78);
+            this.label3.Location = new System.Drawing.Point(414, 78);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(81, 16);
             this.label3.TabIndex = 48;
@@ -414,9 +428,9 @@
             // txtTenThanhVien
             // 
             this.txtTenThanhVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTenThanhVien.Location = new System.Drawing.Point(152, 30);
+            this.txtTenThanhVien.Location = new System.Drawing.Point(452, 30);
             this.txtTenThanhVien.Name = "txtTenThanhVien";
-            this.txtTenThanhVien.Size = new System.Drawing.Size(231, 23);
+            this.txtTenThanhVien.Size = new System.Drawing.Size(148, 23);
             this.txtTenThanhVien.TabIndex = 45;
             // 
             // label1
@@ -424,11 +438,30 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(56, 32);
+            this.label1.Location = new System.Drawing.Point(349, 33);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(90, 16);
             this.label1.TabIndex = 44;
             this.label1.Text = "Tên thành viên";
+            // 
+            // txtMaThanhVien
+            // 
+            this.txtMaThanhVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMaThanhVien.Location = new System.Drawing.Point(152, 30);
+            this.txtMaThanhVien.Name = "txtMaThanhVien";
+            this.txtMaThanhVien.Size = new System.Drawing.Size(148, 23);
+            this.txtMaThanhVien.TabIndex = 71;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label7.Location = new System.Drawing.Point(56, 33);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(87, 16);
+            this.label7.TabIndex = 70;
+            this.label7.Text = "Mã thành viên";
             // 
             // ucThanhVien
             // 
@@ -440,7 +473,7 @@
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.Name = "ucThanhVien";
-            this.Size = new System.Drawing.Size(1280, 720);
+            this.Size = new System.Drawing.Size(1200, 720);
             this.Load += new System.EventHandler(this.ucThanhVien_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).EndInit();
@@ -495,5 +528,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn DiaChi;
         private DevExpress.XtraGrid.Columns.GridColumn LoaiThanhVien;
         private DevExpress.XtraGrid.Columns.GridColumn NgayDangKy;
+        private System.Windows.Forms.TextBox txtMaThanhVien;
+        private System.Windows.Forms.Label label7;
     }
 }

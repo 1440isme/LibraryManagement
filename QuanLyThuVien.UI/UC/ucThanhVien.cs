@@ -102,6 +102,7 @@ namespace QuanLyThuVien.UI.UC
         }
         void _enable(bool t)
         {
+            txtMaThanhVien.Enabled = t;
             txtTenThanhVien.Enabled = t;
             txtEmail.Enabled = t;
             txtSDT.Enabled = t;
@@ -111,6 +112,7 @@ namespace QuanLyThuVien.UI.UC
         }
         void _reset()
         {
+            txtMaThanhVien.Text = "";
             txtTenThanhVien.Text = "";
             txtEmail.Text = "";
             txtSDT.Text = "";
@@ -173,6 +175,7 @@ namespace QuanLyThuVien.UI.UC
                 {
                     var tvien = new ThanhVien
                     {
+                        MaThanhVien = int.Parse(txtMaThanhVien.Text),
                         TenThanhVien = txtTenThanhVien.Text,
                         Email = txtEmail.Text,
                         SoDienThoai = txtSDT.Text,
@@ -234,6 +237,7 @@ namespace QuanLyThuVien.UI.UC
                 var tvien = gvThanhVien.GetFocusedRow() as ThanhVien;
                 if (tvien != null)
                 {
+                    txtMaThanhVien.Text = tvien.MaThanhVien.ToString();
                     txtTenThanhVien.Text = tvien.TenThanhVien;
                     txtEmail.Text = tvien.Email;
                     txtSDT.Text = tvien.SoDienThoai;

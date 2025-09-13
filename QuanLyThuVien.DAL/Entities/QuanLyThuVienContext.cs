@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -23,11 +26,12 @@ namespace QuanLyThuVien.DAL.Entities
         public virtual DbSet<AuditLog> AuditLog { get; set; }
         public virtual DbSet<BanSaoSach> BanSaoSach { get; set; }
         public virtual DbSet<BaoCaoPhat> BaoCaoPhat { get; set; }
+        public virtual DbSet<ChiTietPhieuMuon> ChiTietPhieuMuon { get; set; }
         public virtual DbSet<DanhSachSachDangMuon> DanhSachSachDangMuon { get; set; }
-        public virtual DbSet<MuonSach> MuonSach { get; set; }
         public virtual DbSet<NhaXuatBan> NhaXuatBan { get; set; }
         public virtual DbSet<PaymentHistory> PaymentHistory { get; set; }
         public virtual DbSet<Phat> Phat { get; set; }
+        public virtual DbSet<PhieuMuon> PhieuMuon { get; set; }
         public virtual DbSet<Reservation> Reservation { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Sach> Sach { get; set; }
@@ -129,6 +133,51 @@ namespace QuanLyThuVien.DAL.Entities
                     .HasMaxLength(100);
             });
 
+            modelBuilder.Entity<ChiTietPhieuMuon>(entity =>
+            {
+                entity.HasKey(e => e.MaChiTiet)
+                    .HasName("PK__ChiTietP__CDF0A114C7D002CC");
+
+                entity.HasIndex(e => e.MaBanSao)
+                    .HasName("IX_CTPM_MaBanSao");
+
+                entity.HasIndex(e => e.MaPhieuMuon)
+                    .HasName("IX_CTPM_MaPhieuMuon");
+
+                entity.Property(e => e.GhiChu).HasMaxLength(400);
+
+                entity.Property(e => e.NgayTraDuKien).HasColumnType("datetime");
+
+                entity.Property(e => e.NgayTraThucTe).HasColumnType("datetime");
+
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+
+                entity.Property(e => e.TrangThai)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'Đang mượn')");
+
+                entity.HasOne(d => d.MaBanSaoNavigation)
+                    .WithMany(p => p.ChiTietPhieuMuon)
+                    .HasForeignKey(d => d.MaBanSao)
+                    .HasConstraintName("FK_CTPM_BanSao");
+
+                entity.HasOne(d => d.MaPhieuMuonNavigation)
+                    .WithMany(p => p.ChiTietPhieuMuon)
+                    .HasForeignKey(d => d.MaPhieuMuon)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CTPM_PhieuMuon");
+
+                entity.HasOne(d => d.MaSachNavigation)
+                    .WithMany(p => p.ChiTietPhieuMuon)
+                    .HasForeignKey(d => d.MaSach)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CTPM_Sach");
+            });
+
             modelBuilder.Entity<DanhSachSachDangMuon>(entity =>
             {
                 entity.HasNoKey();
@@ -139,67 +188,13 @@ namespace QuanLyThuVien.DAL.Entities
                     .HasColumnName("BarcodeOrSachID")
                     .HasMaxLength(100);
 
-                entity.Property(e => e.NgayMuon).HasColumnType("date");
+                entity.Property(e => e.NgayMuon).HasColumnType("datetime");
 
-                entity.Property(e => e.NgayTraDuKien).HasColumnType("date");
+                entity.Property(e => e.NgayTraDuKien).HasColumnType("datetime");
 
                 entity.Property(e => e.TenSach).HasMaxLength(200);
 
                 entity.Property(e => e.TenThanhVien).HasMaxLength(100);
-            });
-
-            modelBuilder.Entity<MuonSach>(entity =>
-            {
-                entity.HasKey(e => e.MaMuonSach)
-                    .HasName("PK__MuonSach__DCE29B5CC23DDAD0");
-
-                entity.HasIndex(e => e.MaBanSao);
-
-                entity.HasIndex(e => e.NgayMuon)
-                    .HasName("IDX_MuonSach_NgayMuon");
-
-                entity.Property(e => e.NgayMuon)
-                    .HasColumnType("date")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.NgayTraDuKien).HasColumnType("date");
-
-                entity.Property(e => e.NgayTraThucTe).HasColumnType("date");
-
-                entity.Property(e => e.RowVersion)
-                    .IsRequired()
-                    .IsRowVersion()
-                    .IsConcurrencyToken();
-
-                entity.Property(e => e.TrangThai)
-                    .IsRequired()
-                    .HasMaxLength(20)
-                    .HasDefaultValueSql("('DangMuon')");
-
-                entity.Property(e => e.UserId).HasColumnName("UserID");
-
-                entity.HasOne(d => d.MaBanSaoNavigation)
-                    .WithMany(p => p.MuonSach)
-                    .HasForeignKey(d => d.MaBanSao)
-                    .HasConstraintName("FK_MuonSach_BanSao");
-
-                entity.HasOne(d => d.MaSachNavigation)
-                    .WithMany(p => p.MuonSach)
-                    .HasForeignKey(d => d.MaSach)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_MuonSach_Sach");
-
-                entity.HasOne(d => d.MaThanhVienNavigation)
-                    .WithMany(p => p.MuonSach)
-                    .HasForeignKey(d => d.MaThanhVien)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_MuonSach_ThanhVien");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.MuonSach)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_MuonSach_Users");
             });
 
             modelBuilder.Entity<NhaXuatBan>(entity =>
@@ -270,7 +265,45 @@ namespace QuanLyThuVien.DAL.Entities
                     .WithMany(p => p.Phat)
                     .HasForeignKey(d => d.MaMuonSach)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Phat_MuonSach");
+                    .HasConstraintName("FK_Phat_ChiTietPhieuMuon");
+            });
+
+            modelBuilder.Entity<PhieuMuon>(entity =>
+            {
+                entity.HasKey(e => e.MaPhieuMuon)
+                    .HasName("PK__PhieuMuo__C4C8222280F89A44");
+
+                entity.Property(e => e.GhiChu).HasMaxLength(400);
+
+                entity.Property(e => e.NgayMuon)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(sysutcdatetime())");
+
+                entity.Property(e => e.NgayTraDuKien).HasColumnType("datetime");
+
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+
+                entity.Property(e => e.TrangThai)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("(N'Đang mượn')");
+
+                entity.Property(e => e.UserId).HasColumnName("UserID");
+
+                entity.HasOne(d => d.MaThanhVienNavigation)
+                    .WithMany(p => p.PhieuMuon)
+                    .HasForeignKey(d => d.MaThanhVien)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PhieuMuon_ThanhVien");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.PhieuMuon)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PhieuMuon_Users");
             });
 
             modelBuilder.Entity<Reservation>(entity =>
@@ -381,9 +414,9 @@ namespace QuanLyThuVien.DAL.Entities
 
                 entity.ToView("SachQuaHan");
 
-                entity.Property(e => e.NgayMuon).HasColumnType("date");
+                entity.Property(e => e.NgayMuon).HasColumnType("datetime");
 
-                entity.Property(e => e.NgayTraDuKien).HasColumnType("date");
+                entity.Property(e => e.NgayTraDuKien).HasColumnType("datetime");
 
                 entity.Property(e => e.TenSach)
                     .IsRequired()
@@ -414,6 +447,8 @@ namespace QuanLyThuVien.DAL.Entities
                 entity.HasIndex(e => e.Email)
                     .HasName("UQ__ThanhVie__A9D10534AD39C5D7")
                     .IsUnique();
+
+                entity.Property(e => e.MaThanhVien).ValueGeneratedNever();
 
                 entity.Property(e => e.DiaChi).HasMaxLength(200);
 

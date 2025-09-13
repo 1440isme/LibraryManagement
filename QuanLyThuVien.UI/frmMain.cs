@@ -27,7 +27,8 @@ namespace QuanLyThuVien.UI
         }
         ucSach _ucSach;
         ucThanhVien _ucThanhVien;
-       
+        ucMuonTra _ucMuonTra;
+
 
         private void frmMain_Load(object sender, EventArgs e)
         {
@@ -111,6 +112,20 @@ namespace QuanLyThuVien.UI
             else
                 _ucThanhVien.BringToFront();
             lblTieuDe.Caption = mnThanhVien.Text;
+        }
+
+        private void mnMuonTra_Click(object sender, EventArgs e)
+        {
+            if (_ucMuonTra == null)
+            {
+                _ucMuonTra = new ucMuonTra();
+                _ucMuonTra.Dock = DockStyle.Fill;
+                mainContainer.Controls.Add(_ucMuonTra);
+                _ucMuonTra.BringToFront();
+            }
+            else
+                _ucMuonTra.BringToFront();
+            lblTieuDe.Caption = mnMuonTra.Text;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace QuanLyThuVien.DAL.Entities
     {
         public Users()
         {
-            MuonSach = new HashSet<MuonSach>();
+            PhieuMuon = new HashSet<PhieuMuon>();
         }
 
         public int UserId { get; set; }
@@ -25,6 +25,6 @@ namespace QuanLyThuVien.DAL.Entities
         public int? MaNhanVien { get; set; }
 
         public virtual Roles Role { get; set; }
-        public virtual ICollection<MuonSach> MuonSach { get; set; }
+        public virtual ICollection<PhieuMuon> PhieuMuon { get; set; }
     }
 }

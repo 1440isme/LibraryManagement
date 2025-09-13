@@ -21,7 +21,7 @@ namespace QuanLyThuVien.DAL.Entities
         public DateTime NgayPhat { get; set; }
         public string TrangThai { get; set; }
 
-        public virtual MuonSach MaMuonSachNavigation { get; set; }
+        public virtual ChiTietPhieuMuon MaMuonSachNavigation { get; set; }
         public virtual ICollection<PaymentHistory> PaymentHistory { get; set; }
     }
 }

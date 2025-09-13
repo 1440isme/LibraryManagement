@@ -127,6 +127,7 @@
             this.gvSach.GridControl = this.gcSach;
             this.gvSach.Name = "gvSach";
             this.gvSach.OptionsBehavior.Editable = false;
+            this.gvSach.OptionsFind.AlwaysVisible = true;
             this.gvSach.OptionsView.ColumnAutoWidth = false;
             this.gvSach.RowHeight = 25;
             this.gvSach.Click += new System.EventHandler(this.gvSach_Click);
@@ -363,7 +364,7 @@
             // 
             this.cboTheLoai.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboTheLoai.FormattingEnabled = true;
-            this.cboTheLoai.Location = new System.Drawing.Point(537, 77);
+            this.cboTheLoai.Location = new System.Drawing.Point(537, 75);
             this.cboTheLoai.Name = "cboTheLoai";
             this.cboTheLoai.Size = new System.Drawing.Size(231, 24);
             this.cboTheLoai.TabIndex = 53;
@@ -419,7 +420,7 @@
             // txtISBN
             // 
             this.txtISBN.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtISBN.Location = new System.Drawing.Point(152, 78);
+            this.txtISBN.Location = new System.Drawing.Point(152, 75);
             this.txtISBN.Name = "txtISBN";
             this.txtISBN.Size = new System.Drawing.Size(231, 23);
             this.txtISBN.TabIndex = 47;
@@ -477,7 +478,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numSoLuong)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numGia)).EndInit();
             this.ResumeLayout(false);
-
+            
         }
 
         #endregion

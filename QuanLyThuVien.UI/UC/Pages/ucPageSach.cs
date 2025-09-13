@@ -54,11 +54,15 @@ namespace QuanLyThuVien.UI.UC.Pages
             LoadTacGia();
             LoadTheLoai();
             LoadNXB();
-            
+
             _enable(false);
             _reset();
+            Console.WriteLine($"gcSach Design Size: 1200x464");
+            Console.WriteLine($"gcSach Actual Size: {gcSach.Width}x{gcSach.Height}");
+            Console.WriteLine($"Panel1 Size: {splitContainerControl1.Panel1.Width}x{splitContainerControl1.Panel1.Height}");
         }
-        void LoadTacGia()
+
+            void LoadTacGia()
         {
             cboTacGia.DataSource = _tacGiaService.GetAllAuthors();
             cboTacGia.DisplayMember = "TenTacGia";

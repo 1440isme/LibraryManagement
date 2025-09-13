@@ -217,12 +217,14 @@
     <Compile Include="Entities\AuditLog.cs" />
     <Compile Include="Entities\BanSaoSach.cs" />
     <Compile Include="Entities\BaoCaoPhat.cs" />
+    <Compile Include="Entities\ChiTietPhieuMuon.cs" />
     <Compile Include="Entities\DanhSachSachDangMuon.cs" />
     <Compile Include="Entities\MuonSach.cs" />
     <Compile Include="Entities\NhanVien.cs" />
     <Compile Include="Entities\NhaXuatBan.cs" />
     <Compile Include="Entities\PaymentHistory.cs" />
     <Compile Include="Entities\Phat.cs" />
+    <Compile Include="Entities\PhieuMuon.cs" />
     <Compile Include="Entities\QuanLyThuVienContext.cs" />
     <Compile Include="Entities\Reservation.cs" />
     <Compile Include="Entities\Roles.cs" />
@@ -232,6 +234,7 @@
     <Compile Include="Entities\ThanhVien.cs" />
     <Compile Include="Entities\ThanhVienBiKhoa.cs" />
     <Compile Include="Entities\TheLoai.cs" />
+    <Compile Include="Entities\ThongTinThanhVienProc.cs" />
     <Compile Include="Entities\TopSachMuon.cs" />
     <Compile Include="Entities\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
