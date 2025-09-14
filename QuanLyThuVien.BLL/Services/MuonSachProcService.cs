@@ -18,7 +18,7 @@ namespace QuanLyThuVien.BLL.Services
             _connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVienConnectionString"].ConnectionString;
         }
 
-        public int ExecuteMuonSachProc(int maThanhVien, int userId, DateTime ngayTraDuKien, List<int> listMaBanSao, int? maPhieuMuon = null)
+        public int ExecuteMuonSachProc(int maThanhVien, int userId, DateTime ngayTraDuKien, List<int> listMaBanSao, string ghichu, int? maPhieuMuon = null)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -37,6 +37,7 @@ namespace QuanLyThuVien.BLL.Services
                     command.Parameters.Add("@MaThanhVien", SqlDbType.Int).Value = maThanhVien;
                     command.Parameters.Add("@UserID", SqlDbType.Int).Value = userId;
                     command.Parameters.Add("@NgayTraDuKien", SqlDbType.Date).Value = ngayTraDuKien;
+                    command.Parameters.Add("@GhiChu", SqlDbType.NVarChar, 200).Value = ghichu ?? (object)DBNull.Value;
 
                     var tableParam = command.Parameters.AddWithValue("@ListBanSao", listBanSaoTable);
                     tableParam.SqlDbType = SqlDbType.Structured;

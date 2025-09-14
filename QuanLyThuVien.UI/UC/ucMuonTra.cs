@@ -25,14 +25,16 @@ namespace QuanLyThuVien.UI.UC
         private ThongTinThanhVienService _thongTinThanhVienService;
         private BanSaoSachService _banSaoSachService;
         private ChiTietPhieuMuonService _chiTietPhieuMuonService;
+        private TraSachProcService _traSachProcService;
+
+        private int _currentPhieuMuonId = 0;
 
         public ucMuonTra()
         {
             InitializeComponent();              
         }
         bool _them;
-        string _barcode;
-        string _tenSach;
+     
         GridHitInfo downHitInfo = null;
         private DataTable _selectedBooksTable;
         private DataTable _availableBooksTable; 
@@ -41,11 +43,25 @@ namespace QuanLyThuVien.UI.UC
         private void InitializeSelectedBooksTable()
         {
             _selectedBooksTable = new DataTable();
+            
+            _selectedBooksTable.Columns.Add("MaChiTiet", typeof(int));
+            _selectedBooksTable.Columns.Add("MaPhieuMuon", typeof(int));
+            _selectedBooksTable.Columns.Add("MaThanhVien", typeof(int));
+            _selectedBooksTable.Columns.Add("TenThanhVien", typeof(string));
+            _selectedBooksTable.Columns.Add("SoPhieuDangMuon", typeof(int));
+            _selectedBooksTable.Columns.Add("SoSachDangMuon", typeof(int));
+            _selectedBooksTable.Columns.Add("TongNoPhat", typeof(decimal));
             _selectedBooksTable.Columns.Add("Barcode", typeof(string));
             _selectedBooksTable.Columns.Add("TenSach", typeof(string));
             _selectedBooksTable.Columns.Add("TinhTrang", typeof(string));
             _selectedBooksTable.Columns.Add("MaBanSao", typeof(int));
-            
+            _selectedBooksTable.Columns.Add("NgayTraDuKien", typeof(DateTime));
+            _selectedBooksTable.Columns.Add("NgayTraThucTe", typeof(DateTime));
+            _selectedBooksTable.Columns.Add("TrangThai", typeof(string));
+            _selectedBooksTable.Columns.Add("GhiChu", typeof(string));
+            _selectedBooksTable.Columns.Add("NgayMuon", typeof(DateTime));
+            _selectedBooksTable.Columns.Add("TraButtonCol", typeof(string));
+
             gcChiTietMuon.DataSource = _selectedBooksTable;
         }
 
@@ -62,7 +78,6 @@ namespace QuanLyThuVien.UI.UC
 
         private void ucMuonTra_Load(object sender, EventArgs e)
         {
-        
             var dbContext = new QuanLyThuVienContext();
             var repo = new GenericRepository<PhieuMuon>(dbContext);
             _phieuMuonService = new PhieuMuonService(repo);
@@ -77,13 +92,15 @@ namespace QuanLyThuVien.UI.UC
             var ctMuonRepo = new GenericRepository<ChiTietPhieuMuon>(dbContext);
             _chiTietPhieuMuonService = new ChiTietPhieuMuonService(ctMuonRepo);
             
+            _traSachProcService = new TraSachProcService(); 
+            
             InitializeSelectedBooksTable();
             InitializeAvailableBooksTable();
             
             loadDanhSachMuon();
             loadBanSaoChuaMuon();                
             loadThanhVien();
-
+            AddTraButtonColumn();
 
             _reset();
             showHideControl(true);
@@ -91,6 +108,56 @@ namespace QuanLyThuVien.UI.UC
             
             gcSach.AllowDrop = true;
             gcChiTietMuon.AllowDrop = true;
+            gvChiTietMuon.OptionsSelection.MultiSelect = true;
+            gvChiTietMuon.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.RowSelect;
+
+            gvChiTietMuon.CellValueChanged += gvChiTietMuon_CellValueChanged;
+            gvChiTietMuon.ValidateRow += gvChiTietMuon_ValidateRow;
+
+
+            btnTra.Click += btnTra_Click;
+        }
+        private void AddTraButtonColumn()
+        {
+            var existingCol = gvChiTietMuon.Columns["TraButtonCol"];
+            if (existingCol != null)
+            {
+                gvChiTietMuon.Columns.Remove(existingCol);
+            }
+            if (gvChiTietMuon.Columns["TraButtonCol"] == null)
+            {
+                var traButtonCol = gvChiTietMuon.Columns.AddField("TraButtonCol");
+                traButtonCol.Caption = "TRẢ";
+                traButtonCol.AppearanceHeader.Font = new Font(traButtonCol.AppearanceHeader.Font, FontStyle.Bold); 
+                traButtonCol.Visible = true;
+                traButtonCol.AppearanceCell.BackColor = Color.FromArgb(255, 223, 186);
+                traButtonCol.UnboundType = DevExpress.Data.UnboundColumnType.Object;
+                traButtonCol.OptionsColumn.AllowEdit = true;
+                traButtonCol.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
+                traButtonCol.OptionsColumn.AllowMove = false;
+                traButtonCol.Width = 50;
+
+                var buttonEdit = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+                buttonEdit.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+                buttonEdit.Buttons.Clear();
+                buttonEdit.Buttons.Add(new DevExpress.XtraEditors.Controls.EditorButton(
+                    DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "Trả", -1, true, true, false,
+                    DevExpress.XtraEditors.ImageLocation.MiddleCenter, null));
+
+                traButtonCol.ColumnEdit = buttonEdit;
+
+                buttonEdit.ButtonClick += (sender, e) => {
+                    var gridView = gvChiTietMuon;
+                    var currentRowHandle = gridView.FocusedRowHandle;
+                    
+                    if (currentRowHandle >= 0 && !gridView.IsRowSelected(currentRowHandle))
+                    {
+                        gridView.SelectRow(currentRowHandle);
+                    }
+                    
+                    btnTra_Click(sender, EventArgs.Empty);
+                };
+            }
         }
         void loadDanhSachMuon()
         {
@@ -113,7 +180,92 @@ namespace QuanLyThuVien.UI.UC
             
             RefreshAvailableBooks();
         }
+        void loadChiTietMuon(int maPhieuMuon, bool isEditMode = false)
+        {
+            try
+            {
+                _currentPhieuMuonId = maPhieuMuon;
+                
+                var chiTietList = _chiTietPhieuMuonService.GetAllByPhieuMuon(maPhieuMuon);
+                
+                var phieuMuon = _phieuMuonService.GetAllPhieuMuons()
+                    .FirstOrDefault(pm => pm.MaPhieuMuon == maPhieuMuon);
+                
+                _selectedBooksTable.Clear();
+                
+                foreach (var ct in chiTietList)
+                {
+                    if (ct.MaBanSaoNavigation != null && ct.MaSachNavigation != null)
+                    {
+                        var thanhVien = phieuMuon?.MaThanhVienNavigation;
+                        
+                        var newRow = _selectedBooksTable.NewRow();
+                        
+                        newRow["MaChiTiet"] = ct.MaChiTiet;
+                        newRow["MaPhieuMuon"] = ct.MaPhieuMuon;
+                        
+                        newRow["MaThanhVien"] = phieuMuon?.MaThanhVien ?? 0;
+                        newRow["TenThanhVien"] = thanhVien?.TenThanhVien ?? "N/A";
+                        
+                        newRow["Barcode"] = ct.MaBanSaoNavigation.Barcode;
+                        newRow["TenSach"] = ct.MaSachNavigation.TenSach;
+                        newRow["MaBanSao"] = ct.MaBanSao ?? 0;
+                        
+                        newRow["NgayMuon"] = phieuMuon?.NgayMuon ?? DateTime.Now;
+                        newRow["NgayTraDuKien"] = ct.NgayTraDuKien ?? DateTime.Now;
+                        newRow["NgayTraThucTe"] = ct.NgayTraThucTe.HasValue ? (object)ct.NgayTraThucTe.Value : DBNull.Value;
+                        newRow["TrangThai"] = ct.TrangThai ?? "N/A";
+                        newRow["GhiChu"] = ct.GhiChu ?? "";
+                        
+                        _selectedBooksTable.Rows.Add(newRow);
+                    }
+                }
+                
+                _selectedBooksTable.AcceptChanges();
+                gcChiTietMuon.RefreshDataSource();
+                gvChiTietMuon.RefreshData();
 
+                ConfigureEditableColumns(isEditMode);
+                
+                RefreshAvailableBooks();
+                
+                if (phieuMuon != null)
+                {
+                    LoadPhieuMuonInfoToControls(phieuMuon);
+                }
+                
+                Application.DoEvents();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải chi tiết phiếu mượn: {ex.Message}", "Lỗi", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ConfigureEditableColumns(bool isEditMode = false)
+        {
+            gvChiTietMuon.OptionsBehavior.Editable = true;
+            
+            foreach (DevExpress.XtraGrid.Columns.GridColumn col in gvChiTietMuon.Columns)
+            {
+                if (col.FieldName == "TraButtonCol")
+                {
+                    col.OptionsColumn.AllowEdit = true;
+                }
+                else if (isEditMode && (col.FieldName == "NgayTraDuKien" || 
+                                  col.FieldName == "NgayTraThucTe" || 
+                                  col.FieldName == "TrangThai" || 
+                                  col.FieldName == "GhiChu"))
+                {
+                    col.OptionsColumn.AllowEdit = true;
+                }
+                else
+                {
+                    col.OptionsColumn.AllowEdit = false;
+                }
+            }
+        }
         private void RefreshAvailableBooks()
         {
             _availableBooksTable.Clear();
@@ -196,26 +348,38 @@ namespace QuanLyThuVien.UI.UC
             _them = true;
             showHideControl(false);
             _enable(true);
-            _reset();            
+            _reset();
+            
+            gcSach.AllowDrop = true;
+            gcChiTietMuon.AllowDrop = true;
+            
             tabQLSach.SelectedTabPage = pageChiTiet;
         }
 
         private void btnSua_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             var pm = gvDanhSachMuon.GetFocusedRow() as PhieuMuon;
-            if (pm.MaPhieuMuon == 0)
+            if (pm == null || pm.MaPhieuMuon == 0)
             {
                 MessageBox.Show("Vui lòng chọn phiếu mượn để sửa.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            
             if (pm.TrangThai == "Đã trả hết")
             {
-                MessageBox.Show("Phiếu đã hoàn tất không được chỉnh sửa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Phiếu đã hoàn tất không được chỉnh sửa!\nBạn chỉ có thể xem thông tin.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+            
             _them = false;
             _enable(true);
             showHideControl(false);
+            
+            loadChiTietMuon(pm.MaPhieuMuon, isEditMode: true);
+            
+            gcSach.AllowDrop = false;
+            gcChiTietMuon.AllowDrop = false;
+            
             tabQLSach.SelectedTabPage = pageChiTiet;
         }
 
@@ -275,7 +439,7 @@ namespace QuanLyThuVien.UI.UC
 
         private void btnLuu_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (searchThanhVien.EditValue == null )
+            if (searchThanhVien.EditValue == null)
             {
                 MessageBox.Show("Vui lòng chọn thành viên!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -290,14 +454,28 @@ namespace QuanLyThuVien.UI.UC
                 MessageBox.Show("Ngày trả sách không hợp lệ.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            SaveData();
-            _them = false;
-            _enable(false);
-            showHideControl(true);
-            loadDanhSachMuon();
-            loadBanSaoChuaMuon(); 
-            MessageBox.Show("Lưu thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+            
+            try
+            {
+                SaveData();
+                _them = false;
+                _enable(false);
+                showHideControl(true);
+                
+                loadDanhSachMuon();
+                loadBanSaoChuaMuon();
+                
+                if (!_them && gvDanhSachMuon.GetFocusedRow() is PhieuMuon pm)
+                {
+                    loadChiTietMuon(pm.MaPhieuMuon, isEditMode: false);
+                }
+                tabQLSach.SelectedTabPage = pageDanhSachMuon;
+                //MessageBox.Show("Lưu thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi lưu: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnBoQua_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -306,6 +484,10 @@ namespace QuanLyThuVien.UI.UC
             showHideControl(true);
             _enable(false);
             _reset();
+            
+            gcSach.AllowDrop = true;
+            gcChiTietMuon.AllowDrop = true;
+            
             loadDanhSachMuon();
             loadBanSaoChuaMuon(); 
             tabQLSach.SelectedTabPage = pageDanhSachMuon;
@@ -388,13 +570,15 @@ namespace QuanLyThuVien.UI.UC
 
                     int maThanhVien = (int)searchThanhVien.EditValue;
                     int userId = 3;
+                    string ghichu = txtGhiChu.Text.Trim();
                     DateTime ngayTraDuKien = dtNgayTraDuKien.Value;
 
                     int maPhieuMuon = _phieuMuonService.MuonSach(
                         maThanhVien, 
                         userId, 
                         ngayTraDuKien, 
-                        selectedBanSao
+                        selectedBanSao,
+                        ghichu
                     );
 
                     MessageBox.Show($"Tạo phiếu mượn thành công! Mã phiếu: {maPhieuMuon}", 
@@ -402,27 +586,16 @@ namespace QuanLyThuVien.UI.UC
                 }
                 else
                 {
-                    var pm = gvDanhSachMuon.GetFocusedRow() as PhieuMuon;
-                    if (pm != null)
+                    if (_selectedBooksTable.Rows.Count == 0)
                     {
-                        var selectedBanSao = GetSelectedBanSaoList();
-                        if (selectedBanSao != null && selectedBanSao.Count > 0)
-                        {
-                            int userId = 3;
-                            
-                            // Update phiếu mượn với các sách mới
-                            _phieuMuonService.MuonSach(
-                                pm.MaThanhVien,
-                                userId,
-                                dtNgayTraDuKien.Value,
-                                selectedBanSao,
-                                pm.MaPhieuMuon
-                            );
+                        MessageBox.Show("Không có dữ liệu để cập nhật!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }                   
 
-                            MessageBox.Show("Cập nhật phiếu mượn thành công!", 
-                                "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                    }
+                    SaveChangedChiTietPhieuMuon();
+                    
+                    MessageBox.Show("Cập nhật phiếu mượn thành công!", 
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
@@ -431,22 +604,75 @@ namespace QuanLyThuVien.UI.UC
             }
         }
 
+        private void SaveChangedChiTietPhieuMuon()
+        {
+            try
+            {
+                int updatedCount = 0;
+                
+                gvChiTietMuon.PostEditor();
+                gvChiTietMuon.UpdateCurrentRow();
+                
+                
+                foreach (DataRow row in _selectedBooksTable.Rows)
+                {
+                    if (row["MaChiTiet"] != DBNull.Value && Convert.ToInt32(row["MaChiTiet"]) > 0)
+                    {
+                        int maChiTiet = Convert.ToInt32(row["MaChiTiet"]);
+                        
+                        
+                        var chiTiet = _chiTietPhieuMuonService.GetById(maChiTiet);
+                        if (chiTiet != null)
+                        {
+                            var oldNgayTraDuKien = chiTiet.NgayTraDuKien;
+                            var newNgayTraDuKien = Convert.ToDateTime(row["NgayTraDuKien"]);
+                            
+                            
+                            if (oldNgayTraDuKien != newNgayTraDuKien || 
+                                (chiTiet.NgayTraThucTe?.ToString() != (row["NgayTraThucTe"] == DBNull.Value ? null : row["NgayTraThucTe"].ToString())) ||
+                                chiTiet.TrangThai != row["TrangThai"]?.ToString() ||
+                                chiTiet.GhiChu != row["GhiChu"]?.ToString())
+                            {
+                                chiTiet.NgayTraDuKien = newNgayTraDuKien;
+                                chiTiet.NgayTraThucTe = row["NgayTraThucTe"] == DBNull.Value ? 
+                                    (DateTime?)null : Convert.ToDateTime(row["NgayTraThucTe"]);
+                                chiTiet.TrangThai = row["TrangThai"]?.ToString();
+                                chiTiet.GhiChu = row["GhiChu"]?.ToString();
+                                
+                                _chiTietPhieuMuonService.UpdateChiTietPhieuMuon(chiTiet);
+                                updatedCount++;
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Lỗi khi lưu chi tiết phiếu mượn: {ex.Message}");
+            }
+        }
+
         private List<int> GetSelectedBanSaoList()
         {
             var selectedBanSao = new List<int>();
             
-            foreach (DataRow row in _selectedBooksTable.Rows)
+            if (_them)
             {
-                if (int.TryParse(row["MaBanSao"].ToString(), out int maBanSao))
+                foreach (DataRow row in _selectedBooksTable.Rows)
                 {
-                    selectedBanSao.Add(maBanSao);
+                    if (int.TryParse(row["MaBanSao"].ToString(), out int maBanSao))
+                    {
+                        selectedBanSao.Add(maBanSao);
+                    }
                 }
             }
             
             return selectedBanSao;
         }
-
-       
 
         private void gvChiTietMuon_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
         {
@@ -597,7 +823,8 @@ namespace QuanLyThuVien.UI.UC
                             if (!string.IsNullOrEmpty(barcode))
                             {
                                 bool alreadyExists = false;
-                                foreach (DataRow row in _selectedBooksTable.Rows)
+                                foreach (DataRow row in _selectedBooksTable.Rows
+                                )
                                 {
                                     if (row["Barcode"].ToString() == barcode)
                                     {
@@ -687,7 +914,6 @@ namespace QuanLyThuVien.UI.UC
                                 }
 
                                 gcChiTietMuon.RefreshDataSource();
-                                
                                 AddBackToAvailableBooks(barcode);
                             }
                         }
@@ -729,6 +955,272 @@ namespace QuanLyThuVien.UI.UC
             }
 
             gcSach.RefreshDataSource();
+        }
+
+        private void gvDanhSachMuon_RowCellStyle(object sender, RowCellStyleEventArgs e)
+        {
+            if (e.Column.FieldName == "TrangThai")
+            {
+                string status = Convert.ToString(gvDanhSachMuon.GetRowCellValue(e.RowHandle, "TrangThai"));
+                if (status == "Đã trả hết")
+                    e.Appearance.BackColor = Color.LightGreen;
+                else e.Appearance.BackColor = Color.MistyRose;
+            }
+        }
+
+        private void gvDanhSachMuon_DoubleClick(object sender, EventArgs e)
+        {
+            if (gvDanhSachMuon.RowCount > 0)
+            {
+                int maphieumuon = Convert.ToInt32(gvDanhSachMuon.GetFocusedRowCellValue("MaPhieuMuon"));
+                
+                loadChiTietMuon(maphieumuon, isEditMode: false);
+                
+                gcSach.AllowDrop = false;
+                gcChiTietMuon.AllowDrop = false;
+                
+                _enable(false);
+                
+                tabQLSach.SelectedTabPage = pageChiTiet;
+            }
+        }
+
+        private void LoadPhieuMuonInfoToControls(PhieuMuon phieuMuon)
+        {
+            try
+            {
+                searchThanhVien.EditValue = phieuMuon.MaThanhVien;
+                dtNgayMuon.Value = phieuMuon.NgayMuon;
+                dtNgayTraDuKien.Value = phieuMuon.NgayTraDuKien ?? DateTime.Now.AddDays(7);
+                txtGhiChu.Text = phieuMuon.GhiChu ?? "";
+                
+                if (phieuMuon.MaThanhVienNavigation != null)
+                {
+                    var ttThanhVienList = _thongTinThanhVienService.GetThongTinThanhVien(phieuMuon.MaThanhVien);
+                    if (ttThanhVienList != null && ttThanhVienList.Count > 0)
+                    {
+                        var ttThanhVien = ttThanhVienList.First();
+                        txtSoPhieuDangMuon.Text = ttThanhVien.SoPhieuDangMuon.ToString();
+                        txtSoSachDangMuon.Text = ttThanhVien.SoSachDangMuon.ToString();
+                        txtTongNoPhat.Text = ttThanhVien.TongNoPhat.ToString("N0") + " VNĐ";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải thông tin phiếu mượn: {ex.Message}", "Lỗi", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void gvChiTietMuon_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+           
+                if (!gvChiTietMuon.OptionsBehavior.Editable) return;
+                                
+                var rowHandle = e.RowHandle;
+                var maChiTiet = gvChiTietMuon.GetRowCellValue(rowHandle, "MaChiTiet");
+                       
+        }
+
+        private void gvChiTietMuon_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
+        {
+            
+                var gridView = sender as GridView;
+                
+
+                var ngayTraDuKien = gridView.GetRowCellValue(e.RowHandle, "NgayTraDuKien");
+                var ngayMuon = gridView.GetRowCellValue(e.RowHandle, "NgayMuon");
+                
+                if (ngayTraDuKien != null && ngayMuon != null)
+                {
+                    var duKien = Convert.ToDateTime(ngayTraDuKien);
+                    var muon = Convert.ToDateTime(ngayMuon);
+                    
+                    if (duKien < muon)
+                    {
+                        e.Valid = false;
+                        e.ErrorText = "Ngày trả dự kiến không thể nhỏ hơn ngày mượn.";
+                        return;
+                    }
+                }
+                
+                var ngayTraThucTe = gridView.GetRowCellValue(e.RowHandle, "NgayTraThucTe");
+                if (ngayTraThucTe != null && ngayTraThucTe != DBNull.Value)
+                {
+                    var thucTe = Convert.ToDateTime(ngayTraThucTe);
+                    var muon = Convert.ToDateTime(ngayMuon);
+                    
+                    if (thucTe < muon)
+                    {
+                        e.Valid = false;
+                        e.ErrorText = "Ngày trả thực tế không thể nhỏ hơn ngày mượn.";
+                        return;
+                    }
+                }
+                
+                     
+        }
+
+        private void btnTra_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var selectedRows = GetSelectedUnreturnedBooks();
+
+                if (selectedRows == null || selectedRows.Count == 0)
+                {
+                    MessageBox.Show("Vui lòng chọn ít nhất một sách chưa trả để thực hiện trả sách!", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Hiển thị thông tin các sách sẽ được trả
+                var bookNames = selectedRows.Select(row => row["TenSach"].ToString()).ToList();
+                var confirmMessage = $"Bạn đang trả {selectedRows.Count} cuốn sách:\n" +
+                           string.Join("\n• ", bookNames.Take(3));
+        
+                if (bookNames.Count > 3)
+                {
+                    confirmMessage += $"\n• ... và {bookNames.Count - 3} cuốn khác";
+                }
+        
+                confirmMessage += "\n\nBạn có chắc chắn muốn tiếp tục?";
+
+                var confirmResult = MessageBox.Show(confirmMessage, "Xác nhận trả sách", 
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            
+                if (confirmResult != DialogResult.Yes)
+                    return;
+
+                using (var form = new frmTraSach())
+                {
+                    form.StartPosition = FormStartPosition.CenterParent;
+                    form.Text = $"Trả {selectedRows.Count} cuốn sách";
+
+                    var result = form.ShowDialog(this.ParentForm);
+
+                    if (result == DialogResult.OK)
+                    {
+                        try
+                        {
+                            var listMaBanSao = selectedRows.Select(row => Convert.ToInt32(row["MaBanSao"])).ToList();
+                            int userId = 3;
+
+                            _traSachProcService.ExecuteTraNhieuSachProc(
+                                listMaBanSao,
+                                userId,
+                                form.TinhTrangSach,
+                                form.GhiChu
+                            );
+
+                            MessageBox.Show($"Trả sách thành công cho {selectedRows.Count} cuốn sách!", "Thông báo",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            RefreshDataAfterReturn();
+                            tabQLSach.SelectedTabPage = pageDanhSachMuon;
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Lỗi khi trả sách: {ex.Message}", "Lỗi",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi mở form trả sách: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private List<DataRow> GetSelectedUnreturnedBooks()
+        {
+            var selectedRows = new List<DataRow>();
+            
+            var selectedRowHandles = gvChiTietMuon.GetSelectedRows();
+            
+            if (selectedRowHandles.Length == 0)
+            {
+                var focusedRowHandle = gvChiTietMuon.FocusedRowHandle;
+                if (focusedRowHandle >= 0)
+                {
+                    selectedRowHandles = new int[] { focusedRowHandle };
+                }
+            }
+
+            foreach (var rowHandle in selectedRowHandles)
+            {
+                if (rowHandle >= 0)
+                {
+                    var row = gvChiTietMuon.GetDataRow(rowHandle);
+                    if (row != null)
+                    {
+                        var ngayTraThucTe = row["NgayTraThucTe"];
+                        var trangThai = row["TrangThai"]?.ToString();
+                        
+                        if (ngayTraThucTe == DBNull.Value && trangThai != "Đã trả")
+                        {
+                            selectedRows.Add(row);
+                        }
+                    }
+                }
+            }
+
+            return selectedRows;
+        }
+
+        private void RefreshDataAfterReturn()
+        {
+            try
+            {
+                int currentPhieuMuonId = _currentPhieuMuonId;
+
+                loadDanhSachMuon();
+                loadBanSaoChuaMuon();
+
+                if (currentPhieuMuonId > 0)
+                {
+                    gcDanhSachMuon.RefreshDataSource();
+                    gvDanhSachMuon.RefreshData();
+                    Application.DoEvents();
+
+                    _selectedBooksTable.Clear();
+
+                    bool found = false;
+                    for (int i = 0; i < gvDanhSachMuon.RowCount; i++)
+                    {
+                        var phieuMuon = gvDanhSachMuon.GetRow(i) as PhieuMuon;
+                        if (phieuMuon != null && phieuMuon.MaPhieuMuon == currentPhieuMuonId)
+                        {
+                            gvDanhSachMuon.FocusedRowHandle = i;
+                            gvDanhSachMuon.SelectRow(i);
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    var chiTietList = _chiTietPhieuMuonService.GetAllByPhieuMuon(currentPhieuMuonId);
+                    loadChiTietMuon(currentPhieuMuonId, isEditMode: false);
+                }
+
+                if (searchThanhVien.EditValue != null)
+                {
+                    searchThanhVien_EditValueChanged(searchThanhVien, EventArgs.Empty);
+                }
+
+                gcDanhSachMuon.RefreshDataSource();
+                gcChiTietMuon.RefreshDataSource();
+                gcSach.RefreshDataSource();
+
+                Application.DoEvents();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi làm mới dữ liệu: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

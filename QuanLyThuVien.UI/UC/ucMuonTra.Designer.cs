@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar1 = new DevExpress.XtraBars.Bar();
             this.btnThem = new DevExpress.XtraBars.BarButtonItem();
@@ -42,7 +47,6 @@
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.tabQLSach = new DevExpress.XtraTab.XtraTabControl();
             this.pageDanhSachMuon = new DevExpress.XtraTab.XtraTabPage();
-            this.pageChiTiet = new DevExpress.XtraTab.XtraTabPage();
             this.gcDanhSachMuon = new DevExpress.XtraGrid.GridControl();
             this.gvDanhSachMuon = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.MaPhieuMuon = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -54,6 +58,7 @@
             this.GhiChu = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Tra = new DevExpress.XtraGrid.Columns.GridColumn();
             this.GiaHan = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.pageChiTiet = new DevExpress.XtraTab.XtraTabPage();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.txtGhiChu = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -87,13 +92,14 @@
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnTra = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabQLSach)).BeginInit();
             this.tabQLSach.SuspendLayout();
             this.pageDanhSachMuon.SuspendLayout();
-            this.pageChiTiet.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcDanhSachMuon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvDanhSachMuon)).BeginInit();
+            this.pageChiTiet.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).BeginInit();
             this.splitContainerControl1.Panel1.SuspendLayout();
@@ -112,6 +118,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvSach)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcChiTietMuon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvChiTietMuon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnTra)).BeginInit();
             this.SuspendLayout();
             // 
             // barManager1
@@ -242,15 +249,6 @@
             this.pageDanhSachMuon.Size = new System.Drawing.Size(1278, 652);
             this.pageDanhSachMuon.Text = "DANH SÁCH MƯỢN";
             // 
-            // pageChiTiet
-            // 
-            this.pageChiTiet.Appearance.Header.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold);
-            this.pageChiTiet.Appearance.Header.Options.UseFont = true;
-            this.pageChiTiet.Controls.Add(this.splitContainerControl1);
-            this.pageChiTiet.Name = "pageChiTiet";
-            this.pageChiTiet.Size = new System.Drawing.Size(1278, 652);
-            this.pageChiTiet.Text = "CHI TIẾT";
-            // 
             // gcDanhSachMuon
             // 
             this.gcDanhSachMuon.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -279,7 +277,9 @@
             this.gvDanhSachMuon.OptionsBehavior.Editable = false;
             this.gvDanhSachMuon.OptionsView.ColumnAutoWidth = false;
             this.gvDanhSachMuon.RowHeight = 25;
+            this.gvDanhSachMuon.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gvDanhSachMuon_RowCellStyle);
             this.gvDanhSachMuon.CustomUnboundColumnData += new DevExpress.XtraGrid.Views.Base.CustomColumnDataEventHandler(this.gvDanhSachMuon_CustomUnboundColumnData);
+            this.gvDanhSachMuon.DoubleClick += new System.EventHandler(this.gvDanhSachMuon_DoubleClick);
             // 
             // MaPhieuMuon
             // 
@@ -300,14 +300,19 @@
             this.TenThanhVien.Name = "TenThanhVien";
             this.TenThanhVien.UnboundDataType = typeof(string);
             this.TenThanhVien.Visible = true;
-            this.TenThanhVien.VisibleIndex = 1;
+            this.TenThanhVien.VisibleIndex = 2;
             this.TenThanhVien.Width = 200;
             // 
             // MaThanhVien
             // 
-            this.MaThanhVien.Caption = "gridColumn1";
+            this.MaThanhVien.AppearanceHeader.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold);
+            this.MaThanhVien.AppearanceHeader.Options.UseFont = true;
+            this.MaThanhVien.Caption = "MÃ THÀNH VIÊN";
             this.MaThanhVien.FieldName = "MaThanhVien";
             this.MaThanhVien.Name = "MaThanhVien";
+            this.MaThanhVien.Visible = true;
+            this.MaThanhVien.VisibleIndex = 1;
+            this.MaThanhVien.Width = 120;
             // 
             // NgayMuon
             // 
@@ -317,7 +322,7 @@
             this.NgayMuon.FieldName = "NgayMuon";
             this.NgayMuon.Name = "NgayMuon";
             this.NgayMuon.Visible = true;
-            this.NgayMuon.VisibleIndex = 2;
+            this.NgayMuon.VisibleIndex = 3;
             this.NgayMuon.Width = 100;
             // 
             // NgayTraDuKien
@@ -328,7 +333,7 @@
             this.NgayTraDuKien.FieldName = "NgayTraDuKien";
             this.NgayTraDuKien.Name = "NgayTraDuKien";
             this.NgayTraDuKien.Visible = true;
-            this.NgayTraDuKien.VisibleIndex = 3;
+            this.NgayTraDuKien.VisibleIndex = 4;
             this.NgayTraDuKien.Width = 100;
             // 
             // TrangThai
@@ -339,7 +344,7 @@
             this.TrangThai.FieldName = "TrangThai";
             this.TrangThai.Name = "TrangThai";
             this.TrangThai.Visible = true;
-            this.TrangThai.VisibleIndex = 4;
+            this.TrangThai.VisibleIndex = 5;
             this.TrangThai.Width = 100;
             // 
             // GhiChu
@@ -350,22 +355,31 @@
             this.GhiChu.FieldName = "GhiChu";
             this.GhiChu.Name = "GhiChu";
             this.GhiChu.Visible = true;
-            this.GhiChu.VisibleIndex = 5;
+            this.GhiChu.VisibleIndex = 6;
             this.GhiChu.Width = 150;
             // 
             // Tra
             // 
             this.Tra.Name = "Tra";
             this.Tra.Visible = true;
-            this.Tra.VisibleIndex = 6;
+            this.Tra.VisibleIndex = 7;
             this.Tra.Width = 100;
             // 
             // GiaHan
             // 
             this.GiaHan.Name = "GiaHan";
             this.GiaHan.Visible = true;
-            this.GiaHan.VisibleIndex = 7;
+            this.GiaHan.VisibleIndex = 8;
             this.GiaHan.Width = 100;
+            // 
+            // pageChiTiet
+            // 
+            this.pageChiTiet.Appearance.Header.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold);
+            this.pageChiTiet.Appearance.Header.Options.UseFont = true;
+            this.pageChiTiet.Controls.Add(this.splitContainerControl1);
+            this.pageChiTiet.Name = "pageChiTiet";
+            this.pageChiTiet.Size = new System.Drawing.Size(1278, 652);
+            this.pageChiTiet.Text = "CHI TIẾT";
             // 
             // splitContainerControl1
             // 
@@ -601,6 +615,7 @@
             this.gvSach.OptionsFind.AlwaysVisible = true;
             this.gvSach.OptionsFind.FindNullPrompt = "Nhập từ khoá để tìm";
             this.gvSach.OptionsView.ShowGroupPanel = false;
+            this.gvSach.RowHeight = 30;
             this.gvSach.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gvSach_MouseDown);
             this.gvSach.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gvSach_MouseMove);
             // 
@@ -610,6 +625,8 @@
             this.gcChiTietMuon.Location = new System.Drawing.Point(0, 0);
             this.gcChiTietMuon.MainView = this.gvChiTietMuon;
             this.gcChiTietMuon.Name = "gcChiTietMuon";
+            this.gcChiTietMuon.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.btnTra});
             this.gcChiTietMuon.Size = new System.Drawing.Size(970, 544);
             this.gcChiTietMuon.TabIndex = 0;
             this.gcChiTietMuon.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -633,12 +650,16 @@
             this.gvChiTietMuon.GridControl = this.gcChiTietMuon;
             this.gvChiTietMuon.Name = "gvChiTietMuon";
             this.gvChiTietMuon.OptionsBehavior.Editable = false;
+            this.gvChiTietMuon.OptionsSelection.MultiSelect = true;
+            this.gvChiTietMuon.RowHeight = 30;
             this.gvChiTietMuon.CustomUnboundColumnData += new DevExpress.XtraGrid.Views.Base.CustomColumnDataEventHandler(this.gvChiTietMuon_CustomUnboundColumnData);
             this.gvChiTietMuon.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gvChiTietMuon_MouseDown);
             this.gvChiTietMuon.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gvChiTietMuon_MouseMove);
             // 
             // MaChiTiet
             // 
+            this.MaChiTiet.AppearanceCell.Font = new System.Drawing.Font("SF Pro Display", 12F);
+            this.MaChiTiet.AppearanceCell.Options.UseFont = true;
             this.MaChiTiet.Caption = "gridColumn1";
             this.MaChiTiet.FieldName = "MaChiTiet";
             this.MaChiTiet.Name = "MaChiTiet";
@@ -670,6 +691,7 @@
             this.TenSach.Name = "TenSach";
             this.TenSach.Visible = true;
             this.TenSach.VisibleIndex = 1;
+            this.TenSach.Width = 141;
             // 
             // Barcode
             // 
@@ -680,6 +702,7 @@
             this.Barcode.Name = "Barcode";
             this.Barcode.Visible = true;
             this.Barcode.VisibleIndex = 0;
+            this.Barcode.Width = 141;
             // 
             // NgayTraThucTe
             // 
@@ -690,6 +713,7 @@
             this.NgayTraThucTe.Name = "NgayTraThucTe";
             this.NgayTraThucTe.Visible = true;
             this.NgayTraThucTe.VisibleIndex = 3;
+            this.NgayTraThucTe.Width = 141;
             // 
             // gridColumn2
             // 
@@ -700,6 +724,7 @@
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 2;
+            this.gridColumn2.Width = 141;
             // 
             // gridColumn3
             // 
@@ -710,6 +735,7 @@
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 4;
+            this.gridColumn3.Width = 141;
             // 
             // gridColumn4
             // 
@@ -720,6 +746,22 @@
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 5;
+            this.gridColumn4.Width = 141;
+            // 
+            // btnTra
+            // 
+            this.btnTra.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.btnTra.Appearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnTra.Appearance.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnTra.Appearance.Options.UseBackColor = true;
+            this.btnTra.Appearance.Options.UseBorderColor = true;
+            this.btnTra.Appearance.Options.UseFont = true;
+            this.btnTra.AutoHeight = false;
+            this.btnTra.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "Trả", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.btnTra.Name = "btnTra";
+            this.btnTra.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnTra.Click += new System.EventHandler(this.btnTra_Click);
             // 
             // ucMuonTra
             // 
@@ -737,9 +779,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.tabQLSach)).EndInit();
             this.tabQLSach.ResumeLayout(false);
             this.pageDanhSachMuon.ResumeLayout(false);
-            this.pageChiTiet.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gcDanhSachMuon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvDanhSachMuon)).EndInit();
+            this.pageChiTiet.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).EndInit();
             this.splitContainerControl1.Panel1.ResumeLayout(false);
             this.splitContainerControl1.Panel1.PerformLayout();
@@ -759,6 +801,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvSach)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcChiTietMuon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvChiTietMuon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnTra)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -824,5 +867,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnTra;
     }
 }

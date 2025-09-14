@@ -35,9 +35,9 @@ namespace QuanLyThuVien.BLL.Services
             _repository.Delete(maPhieuMuon);
             _repository.Save();
         }
-        public int MuonSach(int maThanhVien, int userId, DateTime ngayTraDuKien, List<int> listMaBanSao, int? maPhieuMuon = null)
+        public int MuonSach(int maThanhVien, int userId, DateTime ngayTraDuKien, List<int> listMaBanSao, string ghichu, int? maPhieuMuon = null)
         {
-            return _muonSachProcService.ExecuteMuonSachProc(maThanhVien, userId, ngayTraDuKien, listMaBanSao, maPhieuMuon);
+            return _muonSachProcService.ExecuteMuonSachProc(maThanhVien, userId, ngayTraDuKien, listMaBanSao,ghichu, maPhieuMuon);
         }
     }
 }
