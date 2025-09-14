@@ -36,6 +36,7 @@
             this.mnSach = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.mnThanhVien = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.mnMuonTra = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.mnPhat = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.mnDatTruoc = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.mnTKBC = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.btnHeThong = new DevExpress.XtraBars.Navigation.AccordionControlElement();
@@ -82,6 +83,7 @@
             this.mnSach,
             this.mnThanhVien,
             this.mnMuonTra,
+            this.mnPhat,
             this.mnDatTruoc,
             this.mnTKBC});
             this.btnDanhMuc.Expanded = true;
@@ -112,8 +114,15 @@
             // 
             this.mnMuonTra.Name = "mnMuonTra";
             this.mnMuonTra.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
-            this.mnMuonTra.Text = "Quản lý Mượn/Trả - Gia hạn";
+            this.mnMuonTra.Text = "Quản lý Mượn/Trả";
             this.mnMuonTra.Click += new System.EventHandler(this.mnMuonTra_Click);
+            // 
+            // mnPhat
+            // 
+            this.mnPhat.Name = "mnPhat";
+            this.mnPhat.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.mnPhat.Text = "Quản lý Phạt - Lịch sử thanh toán";
+            this.mnPhat.Click += new System.EventHandler(this.mnPhat_Click);
             // 
             // mnDatTruoc
             // 
@@ -228,5 +237,6 @@
         private DevExpress.XtraBars.BarStaticItem lblTieuDe;
         private DevExpress.XtraBars.Navigation.AccordionControlElement mnDatTruoc;
         private DevExpress.XtraBars.Navigation.AccordionControlElement mnLog;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement mnPhat;
     }
 }

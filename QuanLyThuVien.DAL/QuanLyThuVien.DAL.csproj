@@ -79,6 +79,10 @@
     <Compile Include="Entities\ThongTinThanhVienProc.cs" />
     <Compile Include="Entities\TopSachMuon.cs" />
     <Compile Include="Entities\Users.cs" />
+    <Compile Include="Entities\VwPhieuMuonChiTiet.cs" />
+    <Compile Include="Entities\VwTinhTrangSach.cs" />
+    <Compile Include="Entities\VwTongTienPhat.cs" />
+    <Compile Include="Entities\VwTopBooks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Repositories\IGenericRepository.cs" />

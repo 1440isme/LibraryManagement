@@ -28,6 +28,7 @@ namespace QuanLyThuVien.UI
         ucSach _ucSach;
         ucThanhVien _ucThanhVien;
         ucMuonTra _ucMuonTra;
+        ucPhat _ucPhat;
 
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -126,6 +127,20 @@ namespace QuanLyThuVien.UI
             else
                 _ucMuonTra.BringToFront();
             lblTieuDe.Caption = mnMuonTra.Text;
+        }
+
+        private void mnPhat_Click(object sender, EventArgs e)
+        {
+            if (_ucPhat == null)
+            {
+                _ucPhat = new ucPhat();
+                _ucPhat.Dock = DockStyle.Fill;
+                mainContainer.Controls.Add(_ucPhat);
+                _ucPhat.BringToFront();
+            }
+            else
+                _ucPhat.BringToFront();
+            lblTieuDe.Caption = mnPhat.Text;
         }
     }
 }

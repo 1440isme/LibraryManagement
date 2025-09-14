@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -42,6 +39,10 @@ namespace QuanLyThuVien.DAL.Entities
         public virtual DbSet<TheLoai> TheLoai { get; set; }
         public virtual DbSet<TopSachMuon> TopSachMuon { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<VwPhieuMuonChiTiet> VwPhieuMuonChiTiet { get; set; }
+        public virtual DbSet<VwTinhTrangSach> VwTinhTrangSach { get; set; }
+        public virtual DbSet<VwTongTienPhat> VwTongTienPhat { get; set; }
+        public virtual DbSet<VwTopBooks> VwTopBooks { get; set; }
         public virtual DbSet<ThongTinThanhVienProc> ThongTinThanhVien { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -556,8 +557,63 @@ namespace QuanLyThuVien.DAL.Entities
                     .HasForeignKey(d => d.RoleId)
                     .HasConstraintName("FK_Users_Roles");
             });
-            modelBuilder.Entity<ThongTinThanhVienProc>().HasNoKey();
 
+            modelBuilder.Entity<VwPhieuMuonChiTiet>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vw_PhieuMuonChiTiet");
+
+                entity.Property(e => e.NgayMuon).HasColumnType("datetime");
+
+                entity.Property(e => e.NgayTraDuKien).HasColumnType("datetime");
+
+                entity.Property(e => e.NgayTraThucTe).HasColumnType("datetime");
+
+                entity.Property(e => e.TenSach)
+                    .IsRequired()
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.TenThanhVien)
+                    .IsRequired()
+                    .HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<VwTinhTrangSach>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vw_TinhTrangSach");
+
+                entity.Property(e => e.TinhTrang)
+                    .IsRequired()
+                    .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<VwTongTienPhat>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vw_TongTienPhat");
+
+                entity.Property(e => e.Amount).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.PaymentDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<VwTopBooks>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vw_TopBooks");
+
+                entity.Property(e => e.NgayMuon).HasColumnType("datetime");
+
+                entity.Property(e => e.TenSach)
+                    .IsRequired()
+                    .HasMaxLength(200);
+            });
+            modelBuilder.Entity<ThongTinThanhVienProc>().HasNoKey();
             OnModelCreatingPartial(modelBuilder);
         }
 

@@ -1222,5 +1222,155 @@ namespace QuanLyThuVien.UI.UC
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void btnTraSach_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            try
+            {
+                var selectedPhieuMuon = gvDanhSachMuon.GetFocusedRow() as PhieuMuon;
+                if (selectedPhieuMuon == null || selectedPhieuMuon.MaPhieuMuon == 0)
+                {
+                    MessageBox.Show("Vui lòng chọn phiếu mượn để trả sách!", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (selectedPhieuMuon.TrangThai == "Đã trả hết")
+                {
+                    MessageBox.Show("Phiếu mượn này đã được trả hết!", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                var allUnreturnedBooks = GetAllUnreturnedBooksFromPhieuMuon(selectedPhieuMuon.MaPhieuMuon);
+
+                if (allUnreturnedBooks == null || allUnreturnedBooks.Count == 0)
+                {
+                    MessageBox.Show("Không có sách nào chưa trả trong phiếu mượn này!", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                var bookNames = allUnreturnedBooks.Select(row => row["TenSach"].ToString()).ToList();
+                var memberName = selectedPhieuMuon.MaThanhVienNavigation?.TenThanhVien ?? "N/A";
+                
+                var confirmMessage = $"Bạn đang trả TẤT CẢ {allUnreturnedBooks.Count} cuốn sách chưa trả của phiếu mượn {selectedPhieuMuon.MaPhieuMuon}:\n" +
+                               $"Thành viên: {memberName}\n\n" +
+                               $"Các sách sẽ được trả:\n" +
+                               string.Join("\n• ", bookNames.Take(5));
+
+                if (bookNames.Count > 5)
+                {
+                    confirmMessage += $"\n• ... và {bookNames.Count - 5} cuốn khác";
+                }
+
+                confirmMessage += "\n\nBạn có chắc chắn muốn trả TẤT CẢ các sách này?";
+
+                var confirmResult = MessageBox.Show(confirmMessage, "Xác nhận trả tất cả sách", 
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                
+                if (confirmResult != DialogResult.Yes)
+                    return;
+
+                using (var form = new frmTraSach())
+                {
+                    form.StartPosition = FormStartPosition.CenterParent;
+                    form.Text = $"Trả tất cả {allUnreturnedBooks.Count} cuốn sách - Phiếu {selectedPhieuMuon.MaPhieuMuon}";
+
+                    var result = form.ShowDialog(this.ParentForm);
+
+                    if (result == DialogResult.OK)
+                    {
+                        try
+                        {
+                            var listMaBanSao = allUnreturnedBooks.Select(row => Convert.ToInt32(row["MaBanSao"])).ToList();
+                            int userId = 3; // ID của user hiện tại
+
+                            _traSachProcService.ExecuteTraNhieuSachProc(
+                                listMaBanSao,
+                                userId,
+                                form.TinhTrangSach,
+                                form.GhiChu
+                            );
+
+                            MessageBox.Show($"Trả tất cả sách thành công!\n" +
+                                          $"Đã trả {allUnreturnedBooks.Count} cuốn sách của phiếu mượn {selectedPhieuMuon.MaPhieuMuon}!", 
+                                          "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            RefreshDataAfterReturn();
+                            tabQLSach.SelectedTabPage = pageDanhSachMuon;
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Lỗi khi trả sách: {ex.Message}", "Lỗi",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi thực hiện trả tất cả sách: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private List<DataRow> GetAllUnreturnedBooksFromPhieuMuon(int maPhieuMuon)
+        {
+            var unreturnedBooks = new List<DataRow>();
+            
+            try
+            {
+                var chiTietList = _chiTietPhieuMuonService.GetAllByPhieuMuon(maPhieuMuon);
+                var phieuMuon = _phieuMuonService.GetAllPhieuMuons()
+                    .FirstOrDefault(pm => pm.MaPhieuMuon == maPhieuMuon);
+
+                foreach (var chiTiet in chiTietList)
+                {
+                    if (chiTiet.NgayTraThucTe == null && chiTiet.TrangThai != "Đã trả")
+                    {
+                        if (chiTiet.MaBanSaoNavigation != null && chiTiet.MaSachNavigation != null)
+                        {
+                            var tempTable = new DataTable();
+                            tempTable.Columns.Add("MaChiTiet", typeof(int));
+                            tempTable.Columns.Add("MaPhieuMuon", typeof(int));
+                            tempTable.Columns.Add("MaThanhVien", typeof(int));
+                            tempTable.Columns.Add("TenThanhVien", typeof(string));
+                            tempTable.Columns.Add("Barcode", typeof(string));
+                            tempTable.Columns.Add("TenSach", typeof(string));
+                            tempTable.Columns.Add("MaBanSao", typeof(int));
+                            tempTable.Columns.Add("NgayMuon", typeof(DateTime));
+                            tempTable.Columns.Add("NgayTraDuKien", typeof(DateTime));
+                            tempTable.Columns.Add("NgayTraThucTe", typeof(DateTime));
+                            tempTable.Columns.Add("TrangThai", typeof(string));
+                            tempTable.Columns.Add("GhiChu", typeof(string));
+
+                            var newRow = tempTable.NewRow();
+                            newRow["MaChiTiet"] = chiTiet.MaChiTiet;
+                            newRow["MaPhieuMuon"] = chiTiet.MaPhieuMuon;
+                            newRow["MaThanhVien"] = phieuMuon?.MaThanhVien ?? 0;
+                            newRow["TenThanhVien"] = phieuMuon?.MaThanhVienNavigation?.TenThanhVien ?? "N/A";
+                            newRow["Barcode"] = chiTiet.MaBanSaoNavigation.Barcode;
+                            newRow["TenSach"] = chiTiet.MaSachNavigation.TenSach;
+                            newRow["MaBanSao"] = chiTiet.MaBanSao ?? 0;
+                            newRow["NgayMuon"] = phieuMuon?.NgayMuon ?? DateTime.Now;
+                            newRow["NgayTraDuKien"] = chiTiet.NgayTraDuKien ?? DateTime.Now;
+                            newRow["NgayTraThucTe"] = DBNull.Value;
+                            newRow["TrangThai"] = chiTiet.TrangThai ?? "N/A";
+                            newRow["GhiChu"] = chiTiet.GhiChu ?? "";
+
+                            tempTable.Rows.Add(newRow);
+                            unreturnedBooks.Add(newRow);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Lỗi khi lấy danh sách sách chưa trả: {ex.Message}");
+            }
+
+            return unreturnedBooks;
+        }
     }
 }

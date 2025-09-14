@@ -69,6 +69,12 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmThanhToanPhat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmThanhToanPhat.Designer.cs">
+      <DependentUpon>frmThanhToanPhat.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmTraSach.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,11 +127,23 @@
     <Compile Include="UC\Pages\ucPageTheLoai.Designer.cs">
       <DependentUpon>ucPageTheLoai.cs</DependentUpon>
     </Compile>
+    <Compile Include="UC\ucBaoCaoThongKe.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\ucBaoCaoThongKe.Designer.cs">
+      <DependentUpon>ucBaoCaoThongKe.cs</DependentUpon>
+    </Compile>
     <Compile Include="UC\ucMuonTra.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UC\ucMuonTra.Designer.cs">
       <DependentUpon>ucMuonTra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\ucPhat.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\ucPhat.Designer.cs">
+      <DependentUpon>ucPhat.cs</DependentUpon>
     </Compile>
     <Compile Include="UC\ucSach.cs">
       <SubType>UserControl</SubType>
@@ -141,6 +159,9 @@
     </Compile>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmThanhToanPhat.resx">
+      <DependentUpon>frmThanhToanPhat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmTraSach.resx">
       <DependentUpon>frmTraSach.cs</DependentUpon>
@@ -177,8 +198,14 @@
     <EmbeddedResource Include="UC\Pages\ucPageTheLoai.resx">
       <DependentUpon>ucPageTheLoai.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UC\ucBaoCaoThongKe.resx">
+      <DependentUpon>ucBaoCaoThongKe.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UC\ucMuonTra.resx">
       <DependentUpon>ucMuonTra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\ucPhat.resx">
+      <DependentUpon>ucPhat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC\ucSach.resx">
       <DependentUpon>ucSach.cs</DependentUpon>
@@ -265,6 +292,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\del.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\layers4.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

@@ -46,11 +46,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BanSaoSachService.cs" />
     <Compile Include="Services\ChiTietPhieuMuonService.cs" />
+    <Compile Include="Services\LichSuThanhToanService.cs" />
     <Compile Include="Services\MuonSachProcService.cs" />
     <Compile Include="Services\NXBService.cs" />
+    <Compile Include="Services\PhatService.cs" />
     <Compile Include="Services\PhieuMuonService.cs" />
     <Compile Include="Services\SachService.cs" />
     <Compile Include="Services\TacGiaService.cs" />
+    <Compile Include="Services\ThanhToanPhatService.cs" />
     <Compile Include="Services\ThanhVienService.cs" />
     <Compile Include="Services\TheLoaiService.cs" />
     <Compile Include="Services\ThongTinThanhVienService.cs" />
