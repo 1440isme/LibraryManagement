@@ -135,6 +135,7 @@
             this.mnTKBC.Name = "mnTKBC";
             this.mnTKBC.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             this.mnTKBC.Text = "Thống kê - Báo cáo";
+            this.mnTKBC.Click += new System.EventHandler(this.mnTKBC_Click);
             // 
             // btnHeThong
             // 
