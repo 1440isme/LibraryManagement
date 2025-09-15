@@ -59,6 +59,7 @@
     <Compile Include="Entities\BanSaoSach.cs" />
     <Compile Include="Entities\BaoCaoPhat.cs" />
     <Compile Include="Entities\ChiTietPhieuMuon.cs" />
+    <Compile Include="Entities\ChiTietPhieuMuonViewModel.cs" />
     <Compile Include="Entities\DanhSachSachDangMuon.cs" />
     <Compile Include="Entities\MuonSach.cs" />
     <Compile Include="Entities\NhanVien.cs" />

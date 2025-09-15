@@ -40,7 +40,7 @@ namespace QuanLyThuVien.UI.UC.Pages
             var nxbRepo = new GenericRepository<NhaXuatBan>(dbContext);
             _nxbService = new NXBService(nxbRepo);
         }
-        int _right;
+       
         bool _them;
         private void ucPageSach_Load(object sender, EventArgs e)
         {

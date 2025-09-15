@@ -27,7 +27,6 @@ namespace QuanLyThuVien.BLL.Services
             return _repository.GetAll();
         }
 
-        //Lấy bản sao sách theo số sách chưa được mượn (trạng thái bằng = 'Sẵn sàng')
         public IEnumerable<BanSaoSach> GetBaoSaoChuaMuon()
         {
             var repo = _repository as GenericRepository<BanSaoSach>;
@@ -51,6 +50,25 @@ namespace QuanLyThuVien.BLL.Services
 
             _repository.Update(banSao);
             _repository.Save();
+        }
+
+        public List<BanSaoSachViewModel> GetAvailableBooksViewModel()
+        {
+            using (var context = new QuanLyThuVienContext())
+            {
+                var result = (from bs in context.BanSaoSach
+                              join s in context.Sach on bs.MaSach equals s.MaSach
+                              where bs.TinhTrang == "Sẵn sàng"
+                              select new BanSaoSachViewModel
+                              {
+                                  Barcode = bs.Barcode,
+                                  TenSach = s.TenSach,
+                                  TinhTrang = bs.TinhTrang,
+                                  MaBanSao = bs.MaBanSao
+                              }).ToList();
+
+                return result;
+            }
         }
     }
 }

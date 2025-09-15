@@ -64,7 +64,14 @@ namespace QuanLyThuVien.UI.UC
             {
                 if (_isDataLoaded)
                 {
-                    LoadPhatData();
+                    if (this.InvokeRequired)
+                    {
+                        this.Invoke(new Action(() => LoadPhatData()));
+                    }
+                    else
+                    {
+                        LoadPhatData();
+                    }
                 }
             });
         }
@@ -105,8 +112,18 @@ namespace QuanLyThuVien.UI.UC
         {
             try
             {
-                var phatWithInfo = _phatService.GetAllPhatWithDetails().ToList();
-                gcPhat.DataSource = phatWithInfo;
+                using (var freshContext = new QuanLyThuVienContext())
+                {
+                    var freshRepo = new GenericRepository<Phat>(freshContext);
+                    var freshCtMuonRepo = new GenericRepository<ChiTietPhieuMuon>(freshContext);
+                    var freshPhatService = new PhatService(freshRepo, freshCtMuonRepo);
+                    
+                    var phatWithInfo = freshPhatService.GetAllPhatWithDetails().ToList();
+                    gcPhat.DataSource = null; 
+                    gcPhat.DataSource = phatWithInfo;
+                    gcPhat.RefreshDataSource(); 
+                    gvPhat.RefreshData();
+                }
             }
             catch (Exception ex)
             {
@@ -206,8 +223,10 @@ namespace QuanLyThuVien.UI.UC
                 var lsu = e.Row as PaymentHistory;
                 if (lsu != null)
                 {
-                    if (e.Column.FieldName == "TenThanhVien")
+                    if (e.Column.FieldName == "TenThanhVien" && lsu.MaThanhVienNavigation != null)
                         e.Value = lsu.MaThanhVienNavigation.TenThanhVien;
+                    else if (e.Column.FieldName == "TenThanhVien")
+                        e.Value = string.Empty; 
                 }
             }
         }

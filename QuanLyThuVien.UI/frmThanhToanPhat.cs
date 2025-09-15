@@ -63,7 +63,9 @@ namespace QuanLyThuVien.UI
 
                 IsConfirmed = true;
                 this.DialogResult = DialogResult.OK;
+                
                 EventBus.Publish("PhatChanged");
+                
                 MessageBox.Show("Thanh toán thành công!", "Thông báo", 
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 
