@@ -130,6 +130,7 @@
             this.gvSach.OptionsFind.AlwaysVisible = true;
             this.gvSach.OptionsView.ColumnAutoWidth = false;
             this.gvSach.RowHeight = 25;
+            this.gvSach.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gvSach_RowCellStyle);
             this.gvSach.Click += new System.EventHandler(this.gvSach_Click);
             // 
             // MaSach
@@ -478,7 +479,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numSoLuong)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numGia)).EndInit();
             this.ResumeLayout(false);
-            
+
         }
 
         #endregion

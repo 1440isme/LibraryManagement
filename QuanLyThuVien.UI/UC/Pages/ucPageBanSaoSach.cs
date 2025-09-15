@@ -204,5 +204,21 @@ namespace QuanLyThuVien.UI.UC.Pages
         {
             gcBanSaoSach.DataSource = _banSaoSachService.GetAllBanSaoSach();
         }
+
+        private void gvBanSaoSach_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            if (e.Column.FieldName == "TinhTrang")
+            {
+                string status = Convert.ToString(gvBanSaoSach.GetRowCellValue(e.RowHandle, "TinhTrang"));
+                if (status =="Sẵn sàng")
+                    e.Appearance.BackColor = Color.LightGreen;
+                else if (status == "Đang mượn")
+                    e.Appearance.BackColor = Color.LightYellow;
+                else if (status == "Mất")
+                    e.Appearance.BackColor = Color.LightCoral;
+                else
+                    e.Appearance.BackColor = Color.MistyRose;
+            }
+        }
     }
 }

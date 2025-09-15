@@ -30,6 +30,7 @@ namespace QuanLyThuVien.UI
         ucMuonTra _ucMuonTra;
         ucPhat _ucPhat;
         ucBaoCaoThongKe _ucBCTK;
+        ucDashboard _ucDashboard;
 
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -157,6 +158,20 @@ namespace QuanLyThuVien.UI
             else
                 _ucBCTK.BringToFront();
             lblTieuDe.Caption = mnTKBC.Text;
+        }
+
+        private void mnTrangChu_Click(object sender, EventArgs e)
+        {
+            if (_ucDashboard == null)
+            {
+                _ucDashboard = new ucDashboard();
+                _ucDashboard.Dock = DockStyle.Fill;
+                mainContainer.Controls.Add(_ucDashboard);
+                _ucDashboard.BringToFront();
+            }
+            else
+                _ucDashboard.BringToFront();
+            lblTieuDe.Caption = mnTrangChu.Text;
         }
     }
 }

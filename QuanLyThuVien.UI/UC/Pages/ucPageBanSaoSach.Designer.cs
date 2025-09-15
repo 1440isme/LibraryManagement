@@ -111,6 +111,7 @@
             this.gvBanSaoSach.OptionsBehavior.Editable = false;
             this.gvBanSaoSach.OptionsView.ColumnAutoWidth = false;
             this.gvBanSaoSach.RowHeight = 25;
+            this.gvBanSaoSach.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gvBanSaoSach_RowCellStyle);
             this.gvBanSaoSach.CustomUnboundColumnData += new DevExpress.XtraGrid.Views.Base.CustomColumnDataEventHandler(this.gvBanSaoSach_CustomUnboundColumnData);
             this.gvBanSaoSach.Click += new System.EventHandler(this.gvBanSaoSach_Click);
             // 

@@ -132,7 +132,7 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Size = new System.Drawing.Size(1280, 40);
+            this.barDockControlTop.Size = new System.Drawing.Size(1200, 40);
             // 
             // barDockControlBottom
             // 
@@ -140,7 +140,7 @@
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 720);
             this.barDockControlBottom.Manager = this.barManager1;
-            this.barDockControlBottom.Size = new System.Drawing.Size(1280, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1200, 0);
             // 
             // barDockControlLeft
             // 
@@ -154,7 +154,7 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1280, 40);
+            this.barDockControlRight.Location = new System.Drawing.Point(1200, 40);
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 680);
             // 
@@ -164,7 +164,7 @@
             this.tabQLSach.Location = new System.Drawing.Point(0, 40);
             this.tabQLSach.Name = "tabQLSach";
             this.tabQLSach.SelectedTabPage = this.pageSach;
-            this.tabQLSach.Size = new System.Drawing.Size(1280, 680);
+            this.tabQLSach.Size = new System.Drawing.Size(1200, 680);
             this.tabQLSach.TabIndex = 62;
             this.tabQLSach.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.pageSach,
@@ -178,7 +178,7 @@
             this.pageSach.Appearance.Header.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold);
             this.pageSach.Appearance.Header.Options.UseFont = true;
             this.pageSach.Name = "pageSach";
-            this.pageSach.Size = new System.Drawing.Size(1278, 652);
+            this.pageSach.Size = new System.Drawing.Size(1198, 652);
             this.pageSach.Text = "QUẢN LÝ SÁCH";
             // 
             // pageBanSaoSach
@@ -223,7 +223,7 @@
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.Name = "ucSach";
-            this.Size = new System.Drawing.Size(1280, 720);
+            this.Size = new System.Drawing.Size(1200, 720);
             this.Load += new System.EventHandler(this.ucSach_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabQLSach)).EndInit();

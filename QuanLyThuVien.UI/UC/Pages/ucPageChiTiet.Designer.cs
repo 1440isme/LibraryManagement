@@ -341,6 +341,7 @@
             this.gvChiTietMuon.GridControl = this.gcChiTietMuon;
             this.gvChiTietMuon.Name = "gvChiTietMuon";
             this.gvChiTietMuon.OptionsBehavior.Editable = false;
+            this.gvChiTietMuon.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gvChiTietMuon_RowCellStyle);
             this.gvChiTietMuon.CustomUnboundColumnData += new DevExpress.XtraGrid.Views.Base.CustomColumnDataEventHandler(this.gvChiTietMuon_CustomUnboundColumnData);
             // 
             // MaChiTiet

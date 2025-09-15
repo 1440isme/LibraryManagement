@@ -95,6 +95,7 @@
             this.mnTrangChu.Name = "mnTrangChu";
             this.mnTrangChu.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             this.mnTrangChu.Text = "Trang chủ";
+            this.mnTrangChu.Click += new System.EventHandler(this.mnTrangChu_Click);
             // 
             // mnSach
             // 

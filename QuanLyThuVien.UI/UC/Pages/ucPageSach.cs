@@ -306,5 +306,18 @@ namespace QuanLyThuVien.UI.UC.Pages
         {
             gcSach.DataSource = _sachService.GetAllBooks();
         }
+
+        private void gvSach_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            if (e.Column.FieldName == "TrangThai")
+            {
+                bool status = Convert.ToBoolean(gvSach.GetRowCellValue(e.RowHandle, "TrangThai"));
+                if (!status)
+                    e.Appearance.BackColor = Color.LightGreen;
+                else
+                    e.Appearance.BackColor = Color.LightCoral;
+
+            }
+        }
     }
 }

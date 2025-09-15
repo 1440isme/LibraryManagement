@@ -26,7 +26,9 @@ namespace QuanLyThuVien.UI.UC
             initializeComboBoxes();
             lblXemTheo.Visible = false;
             cboType.Visible = false;
-            
+
+            dtTuNgay.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            dtDenNgay.Value = dtTuNgay.Value.AddMonths(1).AddDays(-1);
             loadBaoCao();
         }
 
@@ -76,10 +78,7 @@ namespace QuanLyThuVien.UI.UC
             }
         }
 
-        private void btnXem_Click(object sender, EventArgs e)
-        {
-            loadBaoCao();
-        }
+       
 
         private void loadBaoCao()
         {
@@ -203,7 +202,6 @@ namespace QuanLyThuVien.UI.UC
             var diagram = (XYDiagram)chartControl.Diagram;
             diagram.AxisX.Title.Text = "Tên sách";
             diagram.AxisY.Title.Text = "Số lượt mượn";
-            diagram.AxisX.Label.Angle = -45;
             
             series.View.Color = Color.FromArgb(79, 129, 189);
         }

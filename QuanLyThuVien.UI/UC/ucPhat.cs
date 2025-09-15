@@ -149,5 +149,16 @@ namespace QuanLyThuVien.UI.UC
                 }
             }
         }
+
+        private void gvPhat_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            if (e.Column.FieldName == "TrangThai")
+            {
+                string status = Convert.ToString(gvPhat.GetRowCellValue(e.RowHandle, "TrangThai"));
+                if (status == "Đã thanh toán")
+                    e.Appearance.BackColor = Color.LightGreen;
+                else e.Appearance.BackColor = Color.MistyRose;
+            }
+        }
     }
 }

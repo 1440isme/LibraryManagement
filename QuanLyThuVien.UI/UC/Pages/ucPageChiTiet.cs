@@ -132,5 +132,16 @@ namespace QuanLyThuVien.UI.UC.Pages
                 }
             }
         }
+
+        private void gvChiTietMuon_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            if (e.Column.FieldName == "TrangThai")
+            {
+                string status = Convert.ToString(gvChiTietMuon.GetRowCellValue(e.RowHandle, "TrangThai"));
+                if (status == "Đã trả")
+                    e.Appearance.BackColor = Color.LightGreen;
+                else e.Appearance.BackColor = Color.MistyRose;
+            }
+        }
     }
 }
