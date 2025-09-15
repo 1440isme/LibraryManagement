@@ -145,13 +145,14 @@ namespace QuanLyThuVien.UI.UC.Pages
             {
                 if (gvTacGia.RowCount > 0)
                 {
-                    var sach = gvTacGia.GetFocusedRow() as Sach;
-                    if (sach != null)
+                    var tacGia = gvTacGia.GetFocusedRow() as TacGia; 
+                    if (tacGia != null)
                     {
                         if (MessageBox.Show("Bạn có chắc chắn muốn xóa tác giả này không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
-                            _tacGiaService.DeleteAuthor(sach.MaSach);
+                            _tacGiaService.DeleteAuthor(tacGia.MaTacGia); 
                             gcTacGia.DataSource = _tacGiaService.GetAllAuthors();
+                            EventBus.Publish("TacGiaChanged");
                             MessageBox.Show("Xóa tác giả thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
@@ -182,6 +183,7 @@ namespace QuanLyThuVien.UI.UC.Pages
                     };
                     _tacGiaService.AddAuthor(tacGia);
                     gcTacGia.DataSource = _tacGiaService.GetAllAuthors();
+                    EventBus.Publish("TacGiaChanged"); // Added: Publish event when adding new author
                     MessageBox.Show("Thêm tác giả thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     _enable(false);
                 }
@@ -202,6 +204,7 @@ namespace QuanLyThuVien.UI.UC.Pages
                         
                     }
                     gcTacGia.DataSource = _tacGiaService.GetAllAuthors();
+                    EventBus.Publish("TacGiaChanged");
                     MessageBox.Show("Cập nhật tác giả thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     _enable(false);
                 }

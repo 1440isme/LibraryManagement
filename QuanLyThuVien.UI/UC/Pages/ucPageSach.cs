@@ -47,38 +47,56 @@ namespace QuanLyThuVien.UI.UC.Pages
         bool _them;
         private void ucPageSach_Load(object sender, EventArgs e)
         {
-            //originalFormSize = this.Size;
-            //StoreControlBounds(this);
             var danhSachSach = _sachService.GetAllBooks();
             gcSach.DataSource = danhSachSach;
+            
             LoadTacGia();
             LoadTheLoai();
             LoadNXB();
+            
+            EventBus.Subscribe("TacGiaChanged", LoadTacGia);
+            EventBus.Subscribe("TheLoaiChanged", LoadTheLoai);
+            EventBus.Subscribe("NXBChanged", LoadNXB);
 
             _enable(false);
             _reset();
+            
             Console.WriteLine($"gcSach Design Size: 1200x464");
             Console.WriteLine($"gcSach Actual Size: {gcSach.Width}x{gcSach.Height}");
             Console.WriteLine($"Panel1 Size: {splitContainerControl1.Panel1.Width}x{splitContainerControl1.Panel1.Height}");
         }
 
-            void LoadTacGia()
+        void LoadTacGia()
         {
             cboTacGia.DataSource = _tacGiaService.GetAllAuthors();
             cboTacGia.DisplayMember = "TenTacGia";
-            cboTacGia.ValueMember = "MaTacGia";
+            cboTacGia.ValueMember = "MaTacGia";            
+            if (cboTacGia.Items.Count > 0)
+            {
+                cboTacGia.SelectedIndex = 0;
+            }
         }
         void LoadTheLoai()
         {
             cboTheLoai.DataSource = _theLoaiService.GetAllCategories();
             cboTheLoai.DisplayMember = "TenTheLoai";
             cboTheLoai.ValueMember = "MaTheLoai";
+            
+            if (cboTheLoai.Items.Count > 0)
+            {
+                cboTheLoai.SelectedIndex = 0;
+            }
         }
         void LoadNXB()
         {
             cboNXB.DataSource = _nxbService.GetAllPublishers();
             cboNXB.DisplayMember = "TenNhaXuatBan";
             cboNXB.ValueMember = "MaNhaXuatBan";
+            
+            if (cboNXB.Items.Count > 0)
+            {
+                cboNXB.SelectedIndex = 0;
+            }
         }
         //private void StoreControlBounds(Control parent)
         //{
@@ -163,10 +181,13 @@ namespace QuanLyThuVien.UI.UC.Pages
         void _reset()
         {
             txtTenSach.Text = "";
-            txtISBN.Text = "";
-            cboTacGia.SelectedIndex = 0; 
-            cboNXB.SelectedIndex = 0;
-            cboTheLoai.SelectedIndex = 0;
+            txtISBN.Text = "";            
+            if (cboTacGia.Items.Count > 0)
+                cboTacGia.SelectedIndex = 0;            
+            if (cboNXB.Items.Count > 0)
+                cboNXB.SelectedIndex = 0;            
+            if (cboTheLoai.Items.Count > 0)
+                cboTheLoai.SelectedIndex = 0;            
             numNamXB.Value = 0;
             numGia.Value = 0;
             numSoLuong.Value = 0;

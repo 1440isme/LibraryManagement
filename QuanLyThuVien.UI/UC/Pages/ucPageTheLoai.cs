@@ -84,6 +84,7 @@ namespace QuanLyThuVien.UI.UC.Pages
                         {
                             _theLoaiService.DeleteTheLoai(theLoai.MaTheLoai);
                             gcTheLoai.DataSource = _theLoaiService.GetAllCategories();
+                            EventBus.Publish("TheLoaiChanged");
                             MessageBox.Show("Xóa thể loại thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         }
@@ -115,6 +116,7 @@ namespace QuanLyThuVien.UI.UC.Pages
                     };
                     _theLoaiService.AddTheLoai(theLoai);
                     gcTheLoai.DataSource= _theLoaiService.GetAllCategories();
+                    EventBus.Publish("TheLoaiChanged");
                     MessageBox.Show("Thêm thể loại thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     _enable(false);
                 }
@@ -133,6 +135,7 @@ namespace QuanLyThuVien.UI.UC.Pages
                         _theLoaiService.UpdateTheLoai(theLoai);
                     }
                     gcTheLoai.DataSource = _theLoaiService.GetAllCategories();
+                    EventBus.Publish("TheLoaiChanged");
                     MessageBox.Show("Cập nhật thể loại thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     _enable(false);
                 }

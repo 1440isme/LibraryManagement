@@ -89,6 +89,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventBus.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,18 +122,6 @@
     </Compile>
     <Compile Include="UC\Pages\ucPageBanSaoSach.Designer.cs">
       <DependentUpon>ucPageBanSaoSach.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UC\Pages\ucPageChiTiet.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UC\Pages\ucPageChiTiet.Designer.cs">
-      <DependentUpon>ucPageChiTiet.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UC\Pages\ucPageDanhSach.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UC\Pages\ucPageDanhSach.Designer.cs">
-      <DependentUpon>ucPageDanhSach.cs</DependentUpon>
     </Compile>
     <Compile Include="UC\Pages\ucPageNXB.cs">
       <SubType>UserControl</SubType>
@@ -211,12 +200,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UC\Pages\ucPageBanSaoSach.resx">
       <DependentUpon>ucPageBanSaoSach.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UC\Pages\ucPageChiTiet.resx">
-      <DependentUpon>ucPageChiTiet.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UC\Pages\ucPageDanhSach.resx">
-      <DependentUpon>ucPageDanhSach.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC\Pages\ucPageNXB.resx">
       <DependentUpon>ucPageNXB.cs</DependentUpon>

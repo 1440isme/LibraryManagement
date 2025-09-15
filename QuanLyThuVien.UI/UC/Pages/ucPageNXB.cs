@@ -86,6 +86,7 @@ namespace QuanLyThuVien.UI.UC.Pages
                         {
                             _nxbService.DeletePublisher(nxb.MaNhaXuatBan);
                             gcNXB.DataSource = _nxbService.GetAllPublishers();
+                            EventBus.Publish("NXBChanged");
                             MessageBox.Show("Xóa nhà xuất bản thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
@@ -117,6 +118,7 @@ namespace QuanLyThuVien.UI.UC.Pages
                     };
                     _nxbService.AddPublisher(nxb);
                     gcNXB.DataSource = _nxbService.GetAllPublishers();
+                    EventBus.Publish("NXBChanged");
                     MessageBox.Show("Thêm nhà xuất bản thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     _enable(false);
                 }
@@ -136,6 +138,7 @@ namespace QuanLyThuVien.UI.UC.Pages
                         _nxbService.UpdatePublisher(nxb);
                     }
                     gcNXB.DataSource = _nxbService.GetAllPublishers();
+                    EventBus.Publish("NXBChanged");
                     MessageBox.Show("Cập nhật nhà xuất bản thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     _enable(false);
                 }

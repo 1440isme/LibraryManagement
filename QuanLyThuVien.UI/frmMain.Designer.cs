@@ -62,15 +62,17 @@
             // 
             // accordionControl1
             // 
-            this.accordionControl1.Appearance.Item.Default.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
+            this.accordionControl1.Appearance.Item.Default.Font = new System.Drawing.Font("SF Pro Display", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.accordionControl1.Appearance.Item.Default.Options.UseFont = true;
             this.accordionControl1.Dock = System.Windows.Forms.DockStyle.Left;
             this.accordionControl1.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
             this.btnDanhMuc,
             this.btnHeThong});
+            this.accordionControl1.GroupHeight = 30;
             this.accordionControl1.Location = new System.Drawing.Point(0, 31);
             this.accordionControl1.Margin = new System.Windows.Forms.Padding(4);
             this.accordionControl1.Name = "accordionControl1";
+            this.accordionControl1.OptionsMinimizing.ElementHeight = 30;
             this.accordionControl1.ScrollBarMode = DevExpress.XtraBars.Navigation.ScrollBarMode.Hidden;
             this.accordionControl1.Size = new System.Drawing.Size(303, 868);
             this.accordionControl1.TabIndex = 1;

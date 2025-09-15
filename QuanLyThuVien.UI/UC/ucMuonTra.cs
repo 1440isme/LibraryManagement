@@ -102,6 +102,7 @@ namespace QuanLyThuVien.UI.UC
             loadThanhVien();
             AddTraButtonColumn();
 
+            EventBus.Subscribe("ThanhVienChanged", loadThanhVien);
             _reset();
             showHideControl(true);
             _enable(false);
@@ -161,8 +162,19 @@ namespace QuanLyThuVien.UI.UC
         }
         void loadDanhSachMuon()
         {
-            gcDanhSachMuon.DataSource = _phieuMuonService.GetAllPhieuMuons();
-            gvDanhSachMuon.OptionsBehavior.Editable = false;
+            try
+            {
+                gcDanhSachMuon.DataSource = _phieuMuonService.GetAllPhieuMuons();
+                gvDanhSachMuon.OptionsBehavior.Editable = false;
+
+                gcDanhSachMuon.RefreshDataSource();
+                gvDanhSachMuon.RefreshData();
+                Application.DoEvents();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi load danh sách mượn: {ex.Message}");
+            }
         }
         void loadBanSaoChuaMuon()
         {
@@ -312,17 +324,45 @@ namespace QuanLyThuVien.UI.UC
         }
         void loadThanhVien()
         {
+           
+            var currentSelectedValue = searchThanhVien.EditValue;
+
             var members = _thanhVienService.GetAllMembers()
                 .Select(tv => new
                 {
                     MaThanhVien = tv.MaThanhVien,
                     TenThanhVien = tv.TenThanhVien,
                 })
-                .ToList();
+                .ToList();                     
+
+            searchThanhVien.Properties.DataSource = null;
+            searchThanhVien.RefreshEditValue();
+            Application.DoEvents();
 
             searchThanhVien.Properties.DataSource = members;
             searchThanhVien.Properties.DisplayMember = "TenThanhVien";
             searchThanhVien.Properties.ValueMember = "MaThanhVien";
+
+            searchThanhVien.Properties.PopulateViewColumns();
+            searchThanhVien.RefreshEditValue();
+            Application.DoEvents();
+
+            if (currentSelectedValue != null)
+            {
+                var stillExists = members.Any(m => m.MaThanhVien.Equals(currentSelectedValue));
+                Console.WriteLine($"Selected member still exists: {stillExists}");
+                if (stillExists)
+                {
+                    searchThanhVien.EditValue = currentSelectedValue;
+                }
+                else
+                {
+                    searchThanhVien.EditValue = null;
+                    DeleteInfoTV();
+                }
+            }
+
+           
         }
         void showHideControl(bool t)
         {

@@ -149,6 +149,7 @@ namespace QuanLyThuVien.UI.UC
                         {
                             _thanhVienService.DeleteMember(tvien.MaThanhVien);
                             gcThanhVien.DataSource = _thanhVienService.GetAllMembers();
+                            EventBus.Publish("ThanhVienChanged");
                             MessageBox.Show("Xóa thành viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
@@ -164,6 +165,24 @@ namespace QuanLyThuVien.UI.UC
 
         private void btnLuu_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtMaThanhVien.Text))
+            {
+                MessageBox.Show("Mã thành viên không được để trống.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            
+            if (!int.TryParse(txtMaThanhVien.Text, out int maThanhVien))
+            {
+                MessageBox.Show("Mã thành viên phải là số nguyên.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            
+            if (string.IsNullOrWhiteSpace(txtTenThanhVien.Text))
+            {
+                MessageBox.Show("Tên thành viên không được để trống.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            
             if (cboLoaiThanhVien.SelectedItem == null || cboLoaiThanhVien.SelectedIndex == -1)
             {
                 MessageBox.Show("Vui lòng chọn loại thành viên.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -183,8 +202,19 @@ namespace QuanLyThuVien.UI.UC
                         LoaiThanhVien = cboLoaiThanhVien.SelectedItem.ToString(),
                         NgayDangKy = dtNgayDK.Value
                     };
+                    
+                    //// Debug: In ra thông tin trước khi lưu
+                    //Console.WriteLine($"Debug - MaThanhVien: {tvien.MaThanhVien}");
+                    //Console.WriteLine($"Debug - TenThanhVien: {tvien.TenThanhVien}");
+                    //Console.WriteLine($"Debug - Email: {tvien.Email}");
+                    //Console.WriteLine($"Debug - SoDienThoai: {tvien.SoDienThoai}");
+                    //Console.WriteLine($"Debug - DiaChi: {tvien.DiaChi}");
+                    //Console.WriteLine($"Debug - LoaiThanhVien: {tvien.LoaiThanhVien}");
+                    //Console.WriteLine($"Debug - NgayDangKy: {tvien.NgayDangKy}");
+                    
                     _thanhVienService.AddMember(tvien);
                     gcThanhVien.DataSource = _thanhVienService.GetAllMembers();
+                    EventBus.Publish("ThanhVienChanged");
                     MessageBox.Show("Thêm thành viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     showHideControl(true);
                     _enable(false);
@@ -209,6 +239,7 @@ namespace QuanLyThuVien.UI.UC
                         
                     }
                     gcThanhVien.DataSource = _thanhVienService.GetAllMembers();
+                    EventBus.Publish("ThanhVienChanged");
                     MessageBox.Show("Cập nhật thành viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     showHideControl(true);
                     _enable(false);
@@ -216,11 +247,22 @@ namespace QuanLyThuVien.UI.UC
             }
             catch (Exception ex)
             {
-                string message = SqlErrorTranslator.ToFriendlyMessage(ex);
-                MessageBox.Show(message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
+                string errorDetails = $"Error Message: {ex.Message}\n\n";
+                errorDetails += $"Stack Trace: {ex.StackTrace}\n\n";
+                
+                if (ex.InnerException != null)
+                {
+                    errorDetails += $"Inner Exception: {ex.InnerException.Message}\n\n";
+                    errorDetails += $"Inner Stack Trace: {ex.InnerException.StackTrace}";
+                }
+                
+                MessageBox.Show(errorDetails, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
+                Console.WriteLine("=== ERROR DETAILS ===");
+                Console.WriteLine(errorDetails);
+                Console.WriteLine("=== END ERROR DETAILS ===");
             }
-            
+
         }
 
         private void btnBoQua_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
