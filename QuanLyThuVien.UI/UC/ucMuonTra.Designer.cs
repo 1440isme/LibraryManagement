@@ -46,6 +46,7 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.tabQLSach = new DevExpress.XtraTab.XtraTabControl();
             this.pageDanhSachMuon = new DevExpress.XtraTab.XtraTabPage();
             this.gcDanhSachMuon = new DevExpress.XtraGrid.GridControl();
@@ -63,8 +64,6 @@
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.txtGhiChu = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.dtNgayTraThucTe = new System.Windows.Forms.DateTimePicker();
-            this.label6 = new System.Windows.Forms.Label();
             this.dtNgayTraDuKien = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
             this.dtNgayMuon = new System.Windows.Forms.DateTimePicker();
@@ -94,7 +93,6 @@
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnTra = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabQLSach)).BeginInit();
             this.tabQLSach.SuspendLayout();
@@ -215,7 +213,7 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Size = new System.Drawing.Size(1280, 40);
+            this.barDockControlTop.Size = new System.Drawing.Size(1200, 40);
             // 
             // barDockControlBottom
             // 
@@ -223,7 +221,7 @@
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 720);
             this.barDockControlBottom.Manager = this.barManager1;
-            this.barDockControlBottom.Size = new System.Drawing.Size(1280, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1200, 0);
             // 
             // barDockControlLeft
             // 
@@ -237,9 +235,15 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1280, 40);
+            this.barDockControlRight.Location = new System.Drawing.Point(1200, 40);
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 680);
+            // 
+            // barButtonItem2
+            // 
+            this.barButtonItem2.Caption = "Gia hạn";
+            this.barButtonItem2.Id = 7;
+            this.barButtonItem2.Name = "barButtonItem2";
             // 
             // tabQLSach
             // 
@@ -247,7 +251,7 @@
             this.tabQLSach.Location = new System.Drawing.Point(0, 40);
             this.tabQLSach.Name = "tabQLSach";
             this.tabQLSach.SelectedTabPage = this.pageDanhSachMuon;
-            this.tabQLSach.Size = new System.Drawing.Size(1280, 680);
+            this.tabQLSach.Size = new System.Drawing.Size(1200, 680);
             this.tabQLSach.TabIndex = 63;
             this.tabQLSach.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.pageDanhSachMuon,
@@ -391,7 +395,7 @@
             this.pageChiTiet.Appearance.Header.Options.UseFont = true;
             this.pageChiTiet.Controls.Add(this.splitContainerControl1);
             this.pageChiTiet.Name = "pageChiTiet";
-            this.pageChiTiet.Size = new System.Drawing.Size(1278, 652);
+            this.pageChiTiet.Size = new System.Drawing.Size(1198, 652);
             this.pageChiTiet.Text = "CHI TIẾT";
             // 
             // splitContainerControl1
@@ -405,8 +409,6 @@
             // 
             this.splitContainerControl1.Panel1.Controls.Add(this.txtGhiChu);
             this.splitContainerControl1.Panel1.Controls.Add(this.label7);
-            this.splitContainerControl1.Panel1.Controls.Add(this.dtNgayTraThucTe);
-            this.splitContainerControl1.Panel1.Controls.Add(this.label6);
             this.splitContainerControl1.Panel1.Controls.Add(this.dtNgayTraDuKien);
             this.splitContainerControl1.Panel1.Controls.Add(this.label5);
             this.splitContainerControl1.Panel1.Controls.Add(this.dtNgayMuon);
@@ -425,50 +427,33 @@
             // 
             this.splitContainerControl1.Panel2.Controls.Add(this.splitContainerControl2);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(1278, 652);
+            this.splitContainerControl1.Size = new System.Drawing.Size(1198, 652);
             this.splitContainerControl1.SplitterPosition = 98;
             this.splitContainerControl1.TabIndex = 1;
             // 
             // txtGhiChu
             // 
             this.txtGhiChu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtGhiChu.Location = new System.Drawing.Point(1014, 70);
+            this.txtGhiChu.Location = new System.Drawing.Point(1019, 18);
+            this.txtGhiChu.Multiline = true;
             this.txtGhiChu.Name = "txtGhiChu";
-            this.txtGhiChu.Size = new System.Drawing.Size(148, 23);
+            this.txtGhiChu.Size = new System.Drawing.Size(148, 69);
             this.txtGhiChu.TabIndex = 74;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(909, 73);
+            this.label7.Location = new System.Drawing.Point(942, 20);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(50, 16);
             this.label7.TabIndex = 73;
             this.label7.Text = "Ghi chú";
             // 
-            // dtNgayTraThucTe
-            // 
-            this.dtNgayTraThucTe.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtNgayTraThucTe.Location = new System.Drawing.Point(1014, 24);
-            this.dtNgayTraThucTe.Name = "dtNgayTraThucTe";
-            this.dtNgayTraThucTe.Size = new System.Drawing.Size(148, 23);
-            this.dtNgayTraThucTe.TabIndex = 72;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(909, 27);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(99, 16);
-            this.label6.TabIndex = 71;
-            this.label6.Text = "Ngày trả thực tế";
-            // 
             // dtNgayTraDuKien
             // 
             this.dtNgayTraDuKien.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtNgayTraDuKien.Location = new System.Drawing.Point(733, 70);
+            this.dtNgayTraDuKien.Location = new System.Drawing.Point(738, 64);
             this.dtNgayTraDuKien.Name = "dtNgayTraDuKien";
             this.dtNgayTraDuKien.Size = new System.Drawing.Size(138, 23);
             this.dtNgayTraDuKien.TabIndex = 70;
@@ -477,7 +462,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(625, 73);
+            this.label5.Location = new System.Drawing.Point(630, 67);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(102, 16);
             this.label5.TabIndex = 69;
@@ -486,7 +471,7 @@
             // dtNgayMuon
             // 
             this.dtNgayMuon.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtNgayMuon.Location = new System.Drawing.Point(733, 24);
+            this.dtNgayMuon.Location = new System.Drawing.Point(738, 18);
             this.dtNgayMuon.Name = "dtNgayMuon";
             this.dtNgayMuon.Size = new System.Drawing.Size(138, 23);
             this.dtNgayMuon.TabIndex = 68;
@@ -495,7 +480,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(625, 27);
+            this.label4.Location = new System.Drawing.Point(630, 21);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 16);
             this.label4.TabIndex = 61;
@@ -504,7 +489,7 @@
             // txtTongNoPhat
             // 
             this.txtTongNoPhat.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTongNoPhat.Location = new System.Drawing.Point(131, 70);
+            this.txtTongNoPhat.Location = new System.Drawing.Point(136, 64);
             this.txtTongNoPhat.Name = "txtTongNoPhat";
             this.txtTongNoPhat.ReadOnly = true;
             this.txtTongNoPhat.Size = new System.Drawing.Size(140, 23);
@@ -514,7 +499,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(28, 73);
+            this.label3.Location = new System.Drawing.Point(33, 67);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(82, 16);
             this.label3.TabIndex = 59;
@@ -523,7 +508,7 @@
             // txtSoSachDangMuon
             // 
             this.txtSoSachDangMuon.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSoSachDangMuon.Location = new System.Drawing.Point(450, 70);
+            this.txtSoSachDangMuon.Location = new System.Drawing.Point(455, 64);
             this.txtSoSachDangMuon.Name = "txtSoSachDangMuon";
             this.txtSoSachDangMuon.ReadOnly = true;
             this.txtSoSachDangMuon.Size = new System.Drawing.Size(148, 23);
@@ -533,7 +518,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(319, 73);
+            this.label2.Location = new System.Drawing.Point(324, 67);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(121, 16);
             this.label2.TabIndex = 57;
@@ -542,7 +527,7 @@
             // txtSoPhieuDangMuon
             // 
             this.txtSoPhieuDangMuon.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSoPhieuDangMuon.Location = new System.Drawing.Point(450, 24);
+            this.txtSoPhieuDangMuon.Location = new System.Drawing.Point(455, 18);
             this.txtSoPhieuDangMuon.Name = "txtSoPhieuDangMuon";
             this.txtSoPhieuDangMuon.ReadOnly = true;
             this.txtSoPhieuDangMuon.Size = new System.Drawing.Size(148, 23);
@@ -552,7 +537,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(320, 27);
+            this.label1.Location = new System.Drawing.Point(325, 21);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(126, 16);
             this.label1.TabIndex = 55;
@@ -562,7 +547,7 @@
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("SF Pro Display", 12F, System.Drawing.FontStyle.Bold);
             this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(31, 26);
+            this.labelControl1.Location = new System.Drawing.Point(36, 20);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(82, 19);
             this.labelControl1.TabIndex = 1;
@@ -570,7 +555,7 @@
             // 
             // searchThanhVien
             // 
-            this.searchThanhVien.Location = new System.Drawing.Point(131, 22);
+            this.searchThanhVien.Location = new System.Drawing.Point(136, 16);
             this.searchThanhVien.Name = "searchThanhVien";
             this.searchThanhVien.Properties.Appearance.Font = new System.Drawing.Font("SF Pro Display", 12F);
             this.searchThanhVien.Properties.Appearance.Options.UseFont = true;
@@ -603,7 +588,7 @@
             // 
             this.splitContainerControl2.Panel2.Controls.Add(this.gcChiTietMuon);
             this.splitContainerControl2.Panel2.Text = "Panel2";
-            this.splitContainerControl2.Size = new System.Drawing.Size(1278, 544);
+            this.splitContainerControl2.Size = new System.Drawing.Size(1198, 544);
             this.splitContainerControl2.SplitterPosition = 298;
             this.splitContainerControl2.TabIndex = 0;
             // 
@@ -640,7 +625,7 @@
             this.gcChiTietMuon.Name = "gcChiTietMuon";
             this.gcChiTietMuon.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.btnTra});
-            this.gcChiTietMuon.Size = new System.Drawing.Size(970, 544);
+            this.gcChiTietMuon.Size = new System.Drawing.Size(890, 544);
             this.gcChiTietMuon.TabIndex = 0;
             this.gcChiTietMuon.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvChiTietMuon});
@@ -776,12 +761,6 @@
             this.btnTra.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btnTra.Click += new System.EventHandler(this.btnTra_Click);
             // 
-            // barButtonItem2
-            // 
-            this.barButtonItem2.Caption = "Gia hạn";
-            this.barButtonItem2.Id = 7;
-            this.barButtonItem2.Name = "barButtonItem2";
-            // 
             // ucMuonTra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -792,7 +771,7 @@
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.Name = "ucMuonTra";
-            this.Size = new System.Drawing.Size(1280, 720);
+            this.Size = new System.Drawing.Size(1200, 720);
             this.Load += new System.EventHandler(this.ucMuonTra_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabQLSach)).EndInit();
@@ -856,8 +835,6 @@
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
         private System.Windows.Forms.TextBox txtGhiChu;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.DateTimePicker dtNgayTraThucTe;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DateTimePicker dtNgayTraDuKien;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker dtNgayMuon;

@@ -39,5 +39,17 @@ namespace QuanLyThuVien.BLL.Services
         {
             return _muonSachProcService.ExecuteMuonSachProc(maThanhVien, userId, ngayTraDuKien, listMaBanSao,ghichu, maPhieuMuon);
         }
+
+        public void UpdatePhieuMuon(PhieuMuon phieuMuon)
+        {
+            var existing = _repository.GetById(phieuMuon.MaPhieuMuon);
+            if (existing == null)
+                throw new ArgumentException("Phiếu mượn không tồn tại.");
+            existing.NgayMuon = phieuMuon.NgayMuon;
+            existing.NgayTraDuKien = phieuMuon.NgayTraDuKien;
+            existing.GhiChu = phieuMuon.GhiChu;
+            _repository.Update(existing);
+            _repository.Save();
+        }
     }
 }

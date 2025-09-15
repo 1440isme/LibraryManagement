@@ -232,7 +232,6 @@ namespace QuanLyThuVien.UI.UC
             searchThanhVien.EditValue = null;
             dtNgayMuon.Value = DateTime.Now;
             dtNgayTraDuKien.Value = DateTime.Now.AddDays(7);
-            dtNgayTraThucTe.ResetText();
             txtGhiChu.Text = "";
 
             if (_selectedBooksData != null)
@@ -312,7 +311,6 @@ namespace QuanLyThuVien.UI.UC
             searchThanhVien.Enabled = t;
             dtNgayMuon.Enabled = t;
             dtNgayTraDuKien.Enabled = t;
-            dtNgayTraThucTe.Enabled = t;
             txtGhiChu.Enabled = t;
 
         }
@@ -565,6 +563,20 @@ namespace QuanLyThuVien.UI.UC
                         return;
                     }
 
+                    var pm = gvDanhSachMuon.GetFocusedRow() as PhieuMuon;
+                    if (pm == null || pm.MaPhieuMuon == 0)
+                    {
+                        MessageBox.Show("Phiếu mượn không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    SynchronizeReturnDates(pm);
+
+                    pm.NgayMuon = dtNgayMuon.Value;
+                    pm.NgayTraDuKien = dtNgayTraDuKien.Value;
+                    pm.GhiChu = txtGhiChu.Text.Trim();
+                    _phieuMuonService.UpdatePhieuMuon(pm);
+
                     SaveChangedChiTietPhieuMuon();
 
                     MessageBox.Show("Cập nhật phiếu mượn thành công!",
@@ -576,7 +588,70 @@ namespace QuanLyThuVien.UI.UC
                 MessageBox.Show("Lỗi khi lưu dữ liệu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void SynchronizeReturnDates(PhieuMuon pm)
+        {
+            try
+            {
+                DateTime phieuMuonNgayTraDuKien = dtNgayTraDuKien.Value;
 
+                var maxChildReturnDate = _selectedBooksData
+                    .Where(x => x.NgayTraThucTe == null) 
+                    .Max(x => x.NgayTraDuKien);
+
+                if (phieuMuonNgayTraDuKien < maxChildReturnDate)
+                {
+                    dtNgayTraDuKien.Value = maxChildReturnDate;
+                    phieuMuonNgayTraDuKien = maxChildReturnDate;
+
+                    MessageBox.Show($"Ngày trả dự kiến của phiếu mượn đã được cập nhật thành {maxChildReturnDate:dd/MM/yyyy} " +
+                                  "để phù hợp với ngày trả dự kiến muộn nhất của các sách trong phiếu.",
+                                  "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            
+                else if (phieuMuonNgayTraDuKien > maxChildReturnDate)
+                {
+                    var booksToUpdate = _selectedBooksData
+                        .Where(x => x.NgayTraThucTe == null && x.NgayTraDuKien < phieuMuonNgayTraDuKien)
+                        .ToList();
+
+                    if (booksToUpdate.Any())
+                    {
+                        var bookNames = string.Join(", ", booksToUpdate.Select(x => x.TenSach).Take(3));
+                        if (booksToUpdate.Count > 3)
+                        {
+                            bookNames += $" và {booksToUpdate.Count - 3} sách khác";
+                        }
+
+                        var confirmResult = MessageBox.Show(
+                            $"Ngày trả dự kiến của các sách sau sẽ được cập nhật thành {phieuMuonNgayTraDuKien:dd/MM/yyyy}:\n" +
+                            $"{bookNames}\n\n" +
+                            "Bạn có muốn tiếp tục?",
+                            "Xác nhận cập nhật", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                        if (confirmResult == DialogResult.Yes)
+                        {
+                            foreach (var book in booksToUpdate)
+                            {
+                                book.NgayTraDuKien = phieuMuonNgayTraDuKien;
+                            }
+
+                            gcChiTietMuon.RefreshDataSource();
+                        }
+                        else
+                        {
+                            dtNgayTraDuKien.Value = maxChildReturnDate;
+                            return;
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Lỗi khi đồng bộ ngày trả dự kiến: {ex.Message}");
+            }
+        }
+        
         private void SaveChangedChiTietPhieuMuon()
         {
             try
