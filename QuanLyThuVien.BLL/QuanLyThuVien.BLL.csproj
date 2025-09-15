@@ -50,9 +50,11 @@
     <Compile Include="Services\DashboardService.cs" />
     <Compile Include="Services\LichSuThanhToanService.cs" />
     <Compile Include="Services\MuonSachProcService.cs" />
+    <Compile Include="Services\NguoiDungService.cs" />
     <Compile Include="Services\NXBService.cs" />
     <Compile Include="Services\PhatService.cs" />
     <Compile Include="Services\PhieuMuonService.cs" />
+    <Compile Include="Services\RoleService.cs" />
     <Compile Include="Services\SachService.cs" />
     <Compile Include="Services\TacGiaService.cs" />
     <Compile Include="Services\ThanhToanPhatService.cs" />

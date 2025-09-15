@@ -540,7 +540,8 @@ namespace QuanLyThuVien.UI.UC
                     }
 
                     int maThanhVien = (int)searchThanhVien.EditValue;
-                    int userId = 3;
+
+                    int userId = frmMain.CurrentUser;
                     string ghichu = txtGhiChu.Text.Trim();
                     DateTime ngayTraDuKien = dtNgayTraDuKien.Value;
 
@@ -1160,7 +1161,7 @@ namespace QuanLyThuVien.UI.UC
                         try
                         {
                             var listMaBanSao = selectedRows.Select(x => x.MaBanSao).ToList();
-                            int userId = 3;
+                            int userId = frmMain.CurrentUser; 
 
                             _traSachProcService.ExecuteTraNhieuSachProc(
                                 listMaBanSao,
@@ -1330,7 +1331,7 @@ namespace QuanLyThuVien.UI.UC
                         try
                         {
                             var listMaBanSao = allUnreturnedBooks.Select(x => x.MaBanSao).ToList();
-                            int userId = 3;
+                            int userId = frmMain.CurrentUser;
 
                             _traSachProcService.ExecuteTraNhieuSachProc(
                                 listMaBanSao,

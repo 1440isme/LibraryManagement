@@ -40,12 +40,14 @@
             this.mnDatTruoc = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.mnTKBC = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.btnHeThong = new DevExpress.XtraBars.Navigation.AccordionControlElement();
-            this.mnNV = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.mnUser = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.mnSetup = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.mnLog = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.fluentDesignFormControl1 = new DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl();
             this.lblTieuDe = new DevExpress.XtraBars.BarStaticItem();
             this.fluentFormDefaultManager1 = new DevExpress.XtraBars.FluentDesignSystem.FluentFormDefaultManager(this.components);
+            this.lblUser = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.btnLogout = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             ((System.ComponentModel.ISupportInitialize)(this.accordionControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fluentDesignFormControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fluentFormDefaultManager1)).BeginInit();
@@ -55,7 +57,7 @@
             // 
             this.mainContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainContainer.Location = new System.Drawing.Point(303, 31);
-            this.mainContainer.Margin = new System.Windows.Forms.Padding(4);
+            this.mainContainer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.mainContainer.Name = "mainContainer";
             this.mainContainer.Size = new System.Drawing.Size(1395, 868);
             this.mainContainer.TabIndex = 0;
@@ -67,10 +69,11 @@
             this.accordionControl1.Dock = System.Windows.Forms.DockStyle.Left;
             this.accordionControl1.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
             this.btnDanhMuc,
-            this.btnHeThong});
+            this.btnHeThong,
+            this.lblUser});
             this.accordionControl1.GroupHeight = 30;
             this.accordionControl1.Location = new System.Drawing.Point(0, 31);
-            this.accordionControl1.Margin = new System.Windows.Forms.Padding(4);
+            this.accordionControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.accordionControl1.Name = "accordionControl1";
             this.accordionControl1.OptionsMinimizing.ElementHeight = 30;
             this.accordionControl1.ScrollBarMode = DevExpress.XtraBars.Navigation.ScrollBarMode.Hidden;
@@ -143,18 +146,19 @@
             // btnHeThong
             // 
             this.btnHeThong.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
-            this.mnNV,
+            this.mnUser,
             this.mnSetup,
             this.mnLog});
             this.btnHeThong.Expanded = true;
             this.btnHeThong.Name = "btnHeThong";
             this.btnHeThong.Text = "HỆ THỐNG";
             // 
-            // mnNV
+            // mnUser
             // 
-            this.mnNV.Name = "mnNV";
-            this.mnNV.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
-            this.mnNV.Text = "Quản lý Nhân viên";
+            this.mnUser.Name = "mnUser";
+            this.mnUser.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.mnUser.Text = "Quản lý người dùng";
+            this.mnUser.Click += new System.EventHandler(this.mnUser_Click);
             // 
             // mnSetup
             // 
@@ -175,7 +179,7 @@
             this.lblTieuDe});
             this.fluentDesignFormControl1.Location = new System.Drawing.Point(0, 0);
             this.fluentDesignFormControl1.Manager = this.fluentFormDefaultManager1;
-            this.fluentDesignFormControl1.Margin = new System.Windows.Forms.Padding(4);
+            this.fluentDesignFormControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.fluentDesignFormControl1.Name = "fluentDesignFormControl1";
             this.fluentDesignFormControl1.Size = new System.Drawing.Size(1698, 31);
             this.fluentDesignFormControl1.TabIndex = 2;
@@ -201,6 +205,21 @@
             this.lblTieuDe});
             this.fluentFormDefaultManager1.MaxItemId = 1;
             // 
+            // lblUser
+            // 
+            this.lblUser.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
+            this.btnLogout});
+            this.lblUser.Expanded = true;
+            this.lblUser.Name = "lblUser";
+            this.lblUser.Text = "User";
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.btnLogout.Text = "Đăng xuất";
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -211,11 +230,11 @@
             this.Controls.Add(this.accordionControl1);
             this.Controls.Add(this.fluentDesignFormControl1);
             this.FluentDesignFormControl = this.fluentDesignFormControl1;
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmMain";
             this.NavigationControl = this.accordionControl1;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmMain";
+            this.Text = "PHẦN MỀM QUẢN LÝ THƯ VIỆN TRƯỜNG";
             this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.accordionControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fluentDesignFormControl1)).EndInit();
@@ -237,10 +256,12 @@
         private DevExpress.XtraBars.Navigation.AccordionControlElement mnMuonTra;
         private DevExpress.XtraBars.Navigation.AccordionControlElement mnTKBC;
         private DevExpress.XtraBars.Navigation.AccordionControlElement mnSetup;
-        private DevExpress.XtraBars.Navigation.AccordionControlElement mnNV;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement mnUser;
         private DevExpress.XtraBars.BarStaticItem lblTieuDe;
         private DevExpress.XtraBars.Navigation.AccordionControlElement mnDatTruoc;
         private DevExpress.XtraBars.Navigation.AccordionControlElement mnLog;
         private DevExpress.XtraBars.Navigation.AccordionControlElement mnPhat;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement lblUser;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement btnLogout;
     }
 }

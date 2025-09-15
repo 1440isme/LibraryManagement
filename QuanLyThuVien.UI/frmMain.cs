@@ -11,6 +11,7 @@ using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Windows.Forms;
+using QuanLyThuVien.DAL.Entities;
 
 namespace QuanLyThuVien.UI
 {
@@ -20,15 +21,30 @@ namespace QuanLyThuVien.UI
         {
             InitializeComponent();
         }
-        
+        public frmMain(Users user) : this()
+        {
+            this._user = user;
+            if (user.RoleId == 2) 
+            {
+                btnHeThong.Visible = false; 
+            }
+            lblUser.Text = $"{user.FullName}";
+            CurrentUser = user.UserId; 
+            mnTrangChu_Click(this, EventArgs.Empty);
+        }
+        Users _user;
+
         ucSach _ucSach;
         ucThanhVien _ucThanhVien;
         ucMuonTra _ucMuonTra;
         ucPhat _ucPhat;
         ucBaoCaoThongKe _ucBCTK;
         ucDashboard _ucDashboard;
-        
+        ucNguoiDung _ucNguoiDung;
+
         private IActivatable _currentActiveControl;
+
+        public static int CurrentUser { get; private set; }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
@@ -127,6 +143,23 @@ namespace QuanLyThuVien.UI
             
             ActivateUserControl(_ucDashboard);
             lblTieuDe.Caption = mnTrangChu.Text;
+        }
+
+        private void mnUser_Click(object sender, EventArgs e)
+        {
+            if (_ucNguoiDung == null)
+            {
+                _ucNguoiDung = new ucNguoiDung();
+                _ucNguoiDung.Dock = DockStyle.Fill;
+                mainContainer.Controls.Add(_ucNguoiDung);
+            }
+            ActivateUserControl(_ucNguoiDung);
+            lblTieuDe.Caption = mnUser.Text;
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

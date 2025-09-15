@@ -21,7 +21,7 @@ namespace QuanLyThuVien.UI
             WindowsFormsSettings.DefaultFont = new Font("SF Pro Display", 12, FontStyle.Regular);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain());
+            Application.Run(new frmLogin());
         }
     }
 }
