@@ -14,35 +14,100 @@ using System.Windows.Forms;
 
 namespace QuanLyThuVien.UI.UI
 {
-    public partial class ucSach : UserControl
+    public partial class ucSach : UserControl, IActivatable
     {
-        //private Size originalFormSize;
-        //private Dictionary<Control, Rectangle> controlBounds = new Dictionary<Control, Rectangle>();
         private ucPageSach _pageSach;
         private ucPageBanSaoSach _pageBanSaoSach;
+        private ucPageTacGia _pageTacGia;
+        private ucPageNXB _pageNXB;
+        private ucPageTheLoai _pageTheLoai;
+        
+        private bool _isDataLoaded = false;
+        private bool _isInitialized = false;
 
+        public bool IsDataLoaded => _isDataLoaded;
 
         public ucSach()
         {
             InitializeComponent();
-            _pageSach = new ucPageSach();
-            _pageBanSaoSach = new ucPageBanSaoSach();
-
-
-            //this.SetStyle(ControlStyles.OptimizedDoubleBuffer |
-            //      ControlStyles.AllPaintingInWmPaint |
-            //      ControlStyles.UserPaint, true);
-            //this.UpdateStyles();
-            pageSach.Controls.Add(_pageSach);
-            pageBanSaoSach.Controls.Add(_pageBanSaoSach);
-            pageTacGia.Controls.Add(new ucPageTacGia());
-            pageNXB.Controls.Add(new ucPageNXB());
-            pageTheLoai.Controls.Add(new ucPageTheLoai());
-            _pageSach.DataChanged += (s, e) => _pageBanSaoSach.RefreshData();
         }
 
+        public void OnActivated()
+        {
+            if (!_isInitialized)
+            {
+                InitializeControls();
+                _isInitialized = true;
+            }
+
+            if (!_isDataLoaded)
+            {
+                LoadData();
+            }
+        }
+
+        public void OnDeactivated()
+        {
             
-        
+        }
+
+        private void InitializeControls()
+        {
+            _pageSach = new ucPageSach();
+            _pageBanSaoSach = new ucPageBanSaoSach();
+            _pageTacGia = new ucPageTacGia();
+            _pageNXB = new ucPageNXB();
+            _pageTheLoai = new ucPageTheLoai();
+
+            pageSach.Controls.Add(_pageSach);
+            pageBanSaoSach.Controls.Add(_pageBanSaoSach);
+            pageTacGia.Controls.Add(_pageTacGia);
+            pageNXB.Controls.Add(_pageNXB);
+            pageTheLoai.Controls.Add(_pageTheLoai);
+
+            _pageSach.DataChanged += (s, e) => _pageBanSaoSach.RefreshData();
+            tabQLSach.SelectedPageChanged += TabQLSach_SelectedPageChanged;
+
+            showHideControl(true);
+        }
+
+        private void LoadData()
+        {
+            try
+            {
+                LoadActiveTabData();
+                _isDataLoaded = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải dữ liệu sách: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void TabQLSach_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
+        {
+            if (_isDataLoaded)
+            {
+                LoadActiveTabData();
+            }
+        }
+
+        private void LoadActiveTabData()
+        {
+            try
+            {
+                var activeControl = GetActiveCrudPage();
+                if (activeControl != null)
+                {
+                    activeControl.RefreshData();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải dữ liệu tab: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private ICrudOperations GetActiveCrudPage()
         {
             if (tabQLSach.SelectedTabPage.Controls.Count > 0)
@@ -50,14 +115,9 @@ namespace QuanLyThuVien.UI.UI
             return null;
         }
 
-
-        
         private void ucSach_Load(object sender, EventArgs e)
         {
-            //originalFormSize = this.Size;
-            //StoreControlBounds(this);
-            showHideControl(true);
-
+            
         }
 
         void showHideControl(bool t)
@@ -67,77 +127,7 @@ namespace QuanLyThuVien.UI.UI
             btnXoa.Enabled = t;
             btnLuu.Enabled = !t;
             btnBoQua.Enabled = !t;
-
         }
-        //private void StoreControlBounds(Control parent)
-        //{
-        //    foreach (Control ctrl in parent.Controls)
-        //    {
-        //        if (!controlBounds.ContainsKey(ctrl))
-        //        {
-        //            controlBounds[ctrl] = ctrl.Bounds;
-        //        }
-        //        if (ctrl.HasChildren)
-        //        {
-        //            StoreControlBounds(ctrl);
-        //        }
-        //    }
-        //}
-
-        //private void ucSach_Resize(object sender, EventArgs e)
-        //{
-        //    if (originalFormSize.Width == 0 || originalFormSize.Height == 0)
-        //        return;
-
-        //    float xRatio = (float)this.Width / originalFormSize.Width;
-        //    float yRatio = (float)this.Height / originalFormSize.Height;
-
-        //    this.SuspendLayout();
-        //    ResizeControls(this, xRatio, yRatio);
-        //    this.ResumeLayout();
-        //}
-        //private void ResizeControls(Control parent, float xRatio, float yRatio)
-        //{
-        //    parent.SuspendLayout();
-        //    foreach (Control ctrl in parent.Controls)
-        //    {
-        //        if (controlBounds.TryGetValue(ctrl, out Rectangle originalBounds))
-        //        {
-        //            int newX = (int)(originalBounds.X * xRatio);
-        //            int newY = (int)(originalBounds.Y * yRatio);
-        //            int newWidth = (int)(originalBounds.Width * xRatio);
-        //            int newHeight = (int)(originalBounds.Height * yRatio);
-
-        //            // Chỉ set Bounds nếu thực sự thay đổi
-        //            if (ctrl.Bounds != new Rectangle(newX, newY, newWidth, newHeight))
-        //                ctrl.Bounds = new Rectangle(newX, newY, newWidth, newHeight);
-        //        }
-        //        if (ctrl.HasChildren)
-        //        {
-        //            ResizeControls(ctrl, xRatio, yRatio);
-        //        }
-        //    }
-        //    parent.ResumeLayout();
-        //}
-        private void GvSach_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
-        {
-            if (e.IsGetData)
-            {
-                var sach = e.Row as Sach;
-                if (sach != null)
-                {
-
-                    if (e.Column.FieldName == "TenTacGia")
-                        e.Value = sach.MaTacGiaNavigation?.TenTacGia ?? "";
-                    else if (e.Column.FieldName == "TenTheLoai")
-                        e.Value = sach.MaTheLoaiNavigation?.TenTheLoai ?? "";
-                    else if (e.Column.FieldName == "TenNhaXuatBan")
-                        e.Value = sach.MaNhaXuatBanNavigation?.TenNhaXuatBan ?? "";
-                }
-            }
-        }
-
-        
 
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
@@ -147,7 +137,6 @@ namespace QuanLyThuVien.UI.UI
 
         private void btnSua_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-
             showHideControl(false);
             GetActiveCrudPage()?.Edit();
         }
@@ -168,7 +157,5 @@ namespace QuanLyThuVien.UI.UI
             showHideControl(true);
             GetActiveCrudPage()?.Cancel();
         }
-
-        
     }
 }

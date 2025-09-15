@@ -53,16 +53,6 @@ namespace QuanLyThuVien.UI
                     return;
                 }
 
-                //var confirmResult = MessageBox.Show(
-                //    $"Bạn có chắc chắn muốn thanh toán phạt mã {_maPhat}?\n" +
-                //    $"Phương thức: {cboPTTToan.SelectedItem}",
-                //    "Xác nhận thanh toán", 
-                //    MessageBoxButtons.YesNo, 
-                //    MessageBoxIcon.Question);
-
-                //if (confirmResult != DialogResult.Yes)
-                //    return;
-
                 btnXacNhan.Enabled = false;
                 btnHuy.Enabled = false;
 
@@ -73,7 +63,7 @@ namespace QuanLyThuVien.UI
 
                 IsConfirmed = true;
                 this.DialogResult = DialogResult.OK;
-
+                EventBus.Publish("PhatChanged");
                 MessageBox.Show("Thanh toán thành công!", "Thông báo", 
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 

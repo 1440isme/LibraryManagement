@@ -159,7 +159,14 @@ namespace QuanLyThuVien.UI.UC.Pages
 
         public void RefreshData()
         {
-            throw new NotImplementedException();
+            try
+            {
+                gcNXB.DataSource = _nxbService.GetAllPublishers();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải dữ liệu nhà xuất bản: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         

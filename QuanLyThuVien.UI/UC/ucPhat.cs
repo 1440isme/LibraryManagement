@@ -1,5 +1,6 @@
 ﻿using QuanLyThuVien.BLL.Services;
 using QuanLyThuVien.DAL.Entities;
+using QuanLyThuVien.UI.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,31 +13,94 @@ using System.Windows.Forms;
 
 namespace QuanLyThuVien.UI.UC
 {
-    public partial class ucPhat : UserControl
+    public partial class ucPhat : UserControl, IActivatable
     {
         private PhatService _phatService;
         private LichSuThanhToanService _lichSuThanhToanService;
+        private bool _isDataLoaded = false;
+        private bool _isInitialized = false;
+
+        public bool IsDataLoaded => _isDataLoaded;
 
         public ucPhat()
         {
             InitializeComponent();
         }
 
-        private void ucPhat_Load(object sender, EventArgs e)
+        public void OnActivated()
+        {
+            if (!_isInitialized)
+            {
+                InitializeServices();
+                _isInitialized = true;
+            }
+
+            if (!_isDataLoaded)
+            {
+                LoadData();
+            }
+            else
+            {
+                RefreshData();
+            }
+        }
+
+        public void OnDeactivated()
+        {
+            
+        }
+
+        private void InitializeServices()
         {
             var dbContext = new QuanLyThuVienContext();
             var repo = new GenericRepository<Phat>(dbContext);
             var ctMuonRepo = new GenericRepository<ChiTietPhieuMuon>(dbContext);
-
             var thanhToanRepo = new GenericRepository<PaymentHistory>(dbContext);
-            _lichSuThanhToanService = new LichSuThanhToanService(thanhToanRepo);
 
             _phatService = new PhatService(repo, ctMuonRepo);
+            _lichSuThanhToanService = new LichSuThanhToanService(thanhToanRepo);
 
-            LoadPhatData();
-            gcHistory.DataSource = _lichSuThanhToanService.GetAllPaymentHistories();
+            EventBus.Subscribe("PhatChanged", () =>
+            {
+                if (_isDataLoaded)
+                {
+                    LoadPhatData();
+                }
+            });
         }
-       
+
+        private void LoadData()
+        {
+            try
+            {
+                LoadPhatData();
+                gcHistory.DataSource = _lichSuThanhToanService.GetAllPaymentHistories();
+                _isDataLoaded = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải dữ liệu: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void RefreshData()
+        {
+            try
+            {
+                LoadPhatData();
+                gcHistory.DataSource = _lichSuThanhToanService.GetAllPaymentHistories();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi làm mới dữ liệu: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ucPhat_Load(object sender, EventArgs e)
+        {
+            
+        }
+
         private void LoadPhatData()
         {
             try
@@ -125,8 +189,6 @@ namespace QuanLyThuVien.UI.UC
                     if (dialogResult == DialogResult.OK && frmThanhToan.IsConfirmed)
                     {
                         LoadPhatData();
-                        
-                        
                     }
                 }
             }

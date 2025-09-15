@@ -134,9 +134,14 @@
             // 
             // MaPhat
             // 
-            this.MaPhat.Caption = "gridColumn1";
+            this.MaPhat.AppearanceHeader.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold);
+            this.MaPhat.AppearanceHeader.Options.UseFont = true;
+            this.MaPhat.Caption = "MÃ PHẠT";
             this.MaPhat.FieldName = "MaPhat";
             this.MaPhat.Name = "MaPhat";
+            this.MaPhat.OptionsColumn.AllowEdit = false;
+            this.MaPhat.Visible = true;
+            this.MaPhat.VisibleIndex = 0;
             // 
             // MaMuonSach
             // 
@@ -150,9 +155,10 @@
             this.Barcode.Caption = "BARCODE";
             this.Barcode.FieldName = "Barcode";
             this.Barcode.Name = "Barcode";
+            this.Barcode.OptionsColumn.AllowEdit = false;
             this.Barcode.UnboundDataType = typeof(string);
             this.Barcode.Visible = true;
-            this.Barcode.VisibleIndex = 0;
+            this.Barcode.VisibleIndex = 1;
             // 
             // TenSach
             // 
@@ -161,9 +167,10 @@
             this.TenSach.Caption = "SÁCH";
             this.TenSach.FieldName = "TenSach";
             this.TenSach.Name = "TenSach";
+            this.TenSach.OptionsColumn.AllowEdit = false;
             this.TenSach.UnboundDataType = typeof(string);
             this.TenSach.Visible = true;
-            this.TenSach.VisibleIndex = 1;
+            this.TenSach.VisibleIndex = 2;
             // 
             // MaThanhVien
             // 
@@ -172,9 +179,10 @@
             this.MaThanhVien.Caption = "MÃ THÀNH VIÊN";
             this.MaThanhVien.FieldName = "MaThanhVien";
             this.MaThanhVien.Name = "MaThanhVien";
+            this.MaThanhVien.OptionsColumn.AllowEdit = false;
             this.MaThanhVien.UnboundDataType = typeof(int);
             this.MaThanhVien.Visible = true;
-            this.MaThanhVien.VisibleIndex = 2;
+            this.MaThanhVien.VisibleIndex = 3;
             // 
             // TenThanhVien
             // 
@@ -183,9 +191,10 @@
             this.TenThanhVien.Caption = "TÊN THÀNH VIÊN";
             this.TenThanhVien.FieldName = "TenThanhVien";
             this.TenThanhVien.Name = "TenThanhVien";
+            this.TenThanhVien.OptionsColumn.AllowEdit = false;
             this.TenThanhVien.UnboundDataType = typeof(string);
             this.TenThanhVien.Visible = true;
-            this.TenThanhVien.VisibleIndex = 3;
+            this.TenThanhVien.VisibleIndex = 4;
             // 
             // SoTien
             // 
@@ -194,8 +203,9 @@
             this.SoTien.Caption = "SỐ TIỀN";
             this.SoTien.FieldName = "SoTien";
             this.SoTien.Name = "SoTien";
+            this.SoTien.OptionsColumn.AllowEdit = false;
             this.SoTien.Visible = true;
-            this.SoTien.VisibleIndex = 4;
+            this.SoTien.VisibleIndex = 5;
             // 
             // LyDo
             // 
@@ -204,8 +214,9 @@
             this.LyDo.Caption = "LÝ DO";
             this.LyDo.FieldName = "LyDo";
             this.LyDo.Name = "LyDo";
+            this.LyDo.OptionsColumn.AllowEdit = false;
             this.LyDo.Visible = true;
-            this.LyDo.VisibleIndex = 5;
+            this.LyDo.VisibleIndex = 6;
             // 
             // NgayPhat
             // 
@@ -215,7 +226,7 @@
             this.NgayPhat.FieldName = "NgayPhat";
             this.NgayPhat.Name = "NgayPhat";
             this.NgayPhat.Visible = true;
-            this.NgayPhat.VisibleIndex = 6;
+            this.NgayPhat.VisibleIndex = 7;
             // 
             // TrangThai
             // 
@@ -224,8 +235,9 @@
             this.TrangThai.Caption = "TRẠNG THÁI";
             this.TrangThai.FieldName = "TrangThai";
             this.TrangThai.Name = "TrangThai";
+            this.TrangThai.OptionsColumn.AllowEdit = false;
             this.TrangThai.Visible = true;
-            this.TrangThai.VisibleIndex = 7;
+            this.TrangThai.VisibleIndex = 8;
             // 
             // ThanhToanButtonCol
             // 
@@ -237,7 +249,7 @@
             this.ThanhToanButtonCol.ColumnEdit = this.btnThanhToan;
             this.ThanhToanButtonCol.Name = "ThanhToanButtonCol";
             this.ThanhToanButtonCol.Visible = true;
-            this.ThanhToanButtonCol.VisibleIndex = 8;
+            this.ThanhToanButtonCol.VisibleIndex = 9;
             // 
             // btnThanhToan
             // 
@@ -283,6 +295,7 @@
             this.Note});
             this.gvHistory.GridControl = this.gcHistory;
             this.gvHistory.Name = "gvHistory";
+            this.gvHistory.OptionsBehavior.Editable = false;
             this.gvHistory.RowHeight = 30;
             this.gvHistory.CustomUnboundColumnData += new DevExpress.XtraGrid.Views.Base.CustomColumnDataEventHandler(this.gvHistory_CustomUnboundColumnData);
             // 

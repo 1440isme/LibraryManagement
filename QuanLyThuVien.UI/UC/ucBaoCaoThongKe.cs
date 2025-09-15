@@ -1,5 +1,6 @@
 ﻿using Microsoft.IdentityModel.Protocols;
 using QuanLyThuVien.BLL.Services;
+using QuanLyThuVien.UI.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,14 +15,42 @@ using DevExpress.XtraCharts;
 
 namespace QuanLyThuVien.UI.UC
 {
-    public partial class ucBaoCaoThongKe : UserControl
+    public partial class ucBaoCaoThongKe : UserControl, IActivatable
     {
+        private bool _isDataLoaded = false;
+        private bool _isInitialized = false;
+
+        public bool IsDataLoaded => _isDataLoaded;
+
         public ucBaoCaoThongKe()
         {
             InitializeComponent();
         }
 
-        private void ucBaoCaoThongKe_Load(object sender, EventArgs e)
+        public void OnActivated()
+        {
+            if (!_isInitialized)
+            {
+                InitializeControls();
+                _isInitialized = true;
+            }
+
+            if (!_isDataLoaded)
+            {
+                LoadData();
+            }
+            else
+            {
+                RefreshData();
+            }
+        }
+
+        public void OnDeactivated()
+        {
+           
+        }
+
+        private void InitializeControls()
         {
             initializeComboBoxes();
             lblXemTheo.Visible = false;
@@ -29,7 +58,36 @@ namespace QuanLyThuVien.UI.UC
 
             dtTuNgay.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             dtDenNgay.Value = dtTuNgay.Value.AddMonths(1).AddDays(-1);
-            loadBaoCao();
+        }
+
+        private void LoadData()
+        {
+            try
+            {
+                loadBaoCao();
+                _isDataLoaded = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải dữ liệu báo cáo: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void RefreshData()
+        {
+            try
+            {
+                loadBaoCao();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi làm mới dữ liệu báo cáo: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ucBaoCaoThongKe_Load(object sender, EventArgs e)
+        {
+            
         }
 
         private void initializeComboBoxes()
@@ -77,8 +135,6 @@ namespace QuanLyThuVien.UI.UC
                 loadBaoCao();
             }
         }
-
-       
 
         private void loadBaoCao()
         {

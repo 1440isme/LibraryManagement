@@ -156,7 +156,14 @@ namespace QuanLyThuVien.UI.UC.Pages
 
         public void RefreshData()
         {
-            throw new NotImplementedException();
+            try
+            {
+                gcTheLoai.DataSource = _theLoaiService.GetAllCategories();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải dữ liệu thể loại: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

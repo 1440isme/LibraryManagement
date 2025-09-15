@@ -2,6 +2,7 @@
 using DevExpress.XtraCharts;
 using Microsoft.IdentityModel.Protocols;
 using QuanLyThuVien.BLL.Services;
+using QuanLyThuVien.UI.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,21 +16,76 @@ using System.Windows.Forms;
 
 namespace QuanLyThuVien.UI.UC
 {
-    public partial class ucDashboard : UserControl
+    public partial class ucDashboard : UserControl, IActivatable
     {
         private DashboardService service;
+        private bool _isDataLoaded = false;
+        private bool _isInitialized = false;
+
+        public bool IsDataLoaded => _isDataLoaded;
 
         public ucDashboard()
         {
             InitializeComponent();
-            service = new DashboardService();
+        }
+
+        public void OnActivated()
+        {
+            if (!_isInitialized)
+            {
+                InitializeControls();
+                _isInitialized = true;
+            }
+
+            if (!_isDataLoaded)
+            {
+                LoadData();
+            }
+            else
+            {
+                RefreshData();
+            }
+        }
+
+        public void OnDeactivated()
+        {
             
+        }
+
+        private void InitializeControls()
+        {
+            service = new DashboardService();
             tabLineChart.SelectedPageChanged += TabLineChart_SelectedPageChanged;
+        }
+
+        private void LoadData()
+        {
+            try
+            {
+                loadDashboard();
+                _isDataLoaded = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải dữ liệu dashboard: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void RefreshData()
+        {
+            try
+            {
+                loadDashboard();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi làm mới dữ liệu dashboard: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ucDashboard_Load(object sender, EventArgs e)
         {
-            loadDashboard();
+            
         }
 
         private void loadDashboard()
@@ -208,14 +264,18 @@ namespace QuanLyThuVien.UI.UC
                     return timeValue;
             }
         }
+
         private void loadPieChart()
         {
             DataTable dt = service.GetBookStatus();
             CreateBookStatusChart(dt);
         }
+
         private void CreateBookStatusChart(DataTable data)
         {
             if (data.Rows.Count == 0) return;
+
+            chartPie.Series.Clear();
 
             var series = new Series("Tình trạng sách", ViewType.Pie);
 
@@ -237,7 +297,6 @@ namespace QuanLyThuVien.UI.UC
 
             series.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
             series.Label.TextPattern = "{A}: {V} ({VP:P1})";
-
         }
     }
 }

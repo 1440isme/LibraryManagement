@@ -17,18 +17,13 @@ namespace QuanLyThuVien.UI.UC.Pages
 {
     public partial class ucPageTacGia : UserControl, ICrudOperations
     {
-        //private Size originalFormSize;
-        //private Dictionary<Control, Rectangle> controlBounds = new Dictionary<Control, Rectangle>();
-
+       
         private TacGiaService _tacGiaService;
 
         public ucPageTacGia()
         {
             InitializeComponent();
-            //this.SetStyle(ControlStyles.OptimizedDoubleBuffer |
-            //      ControlStyles.AllPaintingInWmPaint |
-            //      ControlStyles.UserPaint, true);
-            //this.UpdateStyles();
+        
             var dbContext = new QuanLyThuVienContext();
             var tacGiaRepo = new GenericRepository<TacGia>(dbContext);
             _tacGiaService = new TacGiaService(tacGiaRepo);
@@ -37,68 +32,13 @@ namespace QuanLyThuVien.UI.UC.Pages
         bool _them;
 
         private void ucPageTacGia_Load(object sender, EventArgs e)
-        {
-            //originalFormSize = this.Size;
-            //StoreControlBounds(this);
-
-            
-            gcTacGia.DataSource = _tacGiaService.GetAllAuthors().ToList();
-                  
+        {            
+            gcTacGia.DataSource = _tacGiaService.GetAllAuthors().ToList();                 
 
             _enable(false);
             _reset();
         }
-        //private void StoreControlBounds(Control parent)
-        //{
-        //    foreach (Control ctrl in parent.Controls)
-        //    {
-        //        if (!controlBounds.ContainsKey(ctrl))
-        //        {
-        //            controlBounds[ctrl] = ctrl.Bounds;
-        //        }
-        //        if (ctrl.HasChildren)
-        //        {
-        //            StoreControlBounds(ctrl);
-        //        }
-        //    }
-        //}
-        //private void ucPageTacGia_Resize(object sender, EventArgs e)
-        //{
-
-        //    if (originalFormSize.Width == 0 || originalFormSize.Height == 0)
-        //        return;
-
-        //    float xRatio = (float)this.Width / originalFormSize.Width;
-        //    float yRatio = (float)this.Height / originalFormSize.Height;
-
-        //    this.SuspendLayout();
-        //    ResizeControls(this, xRatio, yRatio);
-        //    this.ResumeLayout();
-        //}
-        //private void ResizeControls(Control parent, float xRatio, float yRatio)
-        //{
-        //    parent.SuspendLayout();
-        //    foreach (Control ctrl in parent.Controls)
-        //    {
-        //        if (controlBounds.TryGetValue(ctrl, out Rectangle originalBounds))
-        //        {
-        //            int newX = (int)(originalBounds.X * xRatio);
-        //            int newY = (int)(originalBounds.Y * yRatio);
-        //            int newWidth = (int)(originalBounds.Width * xRatio);
-        //            int newHeight = (int)(originalBounds.Height * yRatio);
-
-        //            // Chỉ set Bounds nếu thực sự thay đổi
-        //            if (ctrl.Bounds != new Rectangle(newX, newY, newWidth, newHeight))
-        //                ctrl.Bounds = new Rectangle(newX, newY, newWidth, newHeight);
-        //        }
-        //        if (ctrl.HasChildren)
-        //        {
-        //            ResizeControls(ctrl, xRatio, yRatio);
-        //        }
-        //    }
-        //    parent.ResumeLayout();
-        //}
-
+   
         void _enable(bool t)
         {
             txtTenTacGia.Enabled = t;
@@ -183,7 +123,7 @@ namespace QuanLyThuVien.UI.UC.Pages
                     };
                     _tacGiaService.AddAuthor(tacGia);
                     gcTacGia.DataSource = _tacGiaService.GetAllAuthors();
-                    EventBus.Publish("TacGiaChanged"); // Added: Publish event when adding new author
+                    EventBus.Publish("TacGiaChanged"); 
                     MessageBox.Show("Thêm tác giả thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     _enable(false);
                 }
@@ -225,7 +165,14 @@ namespace QuanLyThuVien.UI.UC.Pages
 
         public void RefreshData()
         {
-            throw new NotImplementedException();
+            try
+            {
+                gcTacGia.DataSource = _tacGiaService.GetAllAuthors();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải dữ liệu tác giả: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -108,6 +108,7 @@
     <Compile Include="frmTraSach.Designer.cs">
       <DependentUpon>frmTraSach.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IActivatable.cs" />
     <Compile Include="Interfaces\ICrudOperations.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

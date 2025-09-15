@@ -1,6 +1,7 @@
 ﻿using QuanLyThuVien.BLL.Services;
 using QuanLyThuVien.DAL.Entities;
 using QuanLyThuVien.UI.UI;
+using QuanLyThuVien.UI.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,83 +14,86 @@ using System.Windows.Forms;
 
 namespace QuanLyThuVien.UI.UC
 {
-    public partial class ucThanhVien : UserControl
+    public partial class ucThanhVien : UserControl, IActivatable
     {
-        //private Size originalFormSize;
-        //private Dictionary<Control, Rectangle> controlBounds = new Dictionary<Control, Rectangle>();
         private ThanhVienService _thanhVienService;
+        private bool _isDataLoaded = false;
+        private bool _isInitialized = false;
+        
+        public bool IsDataLoaded => _isDataLoaded;
+
         public ucThanhVien()
         {
             InitializeComponent();
-            //this.SetStyle(ControlStyles.OptimizedDoubleBuffer |
-            //      ControlStyles.AllPaintingInWmPaint |
-            //      ControlStyles.UserPaint, true);
-            //this.UpdateStyles();
+        }
+
+        bool _them;
+
+        public void OnActivated()
+        {
+            if (!_isInitialized)
+            {
+                InitializeControls();
+                _isInitialized = true;
+            }
+
+            if (!_isDataLoaded)
+            {
+                LoadData();
+            }
+            else
+            {
+                RefreshData();
+            }
+        }
+
+        public void OnDeactivated()
+        {
+
+        }
+
+        private void InitializeControls()
+        {
             var dbContext = new QuanLyThuVienContext();
             var TVRepo = new GenericRepository<ThanhVien>(dbContext);
             _thanhVienService = new ThanhVienService(TVRepo);
-        }
-        bool _them;
-        private void ucThanhVien_Load(object sender, EventArgs e)
-        {
-            //originalFormSize = this.Size;
-            //StoreControlBounds(this);
-            gcThanhVien.DataSource = _thanhVienService.GetAllMembers();
 
             showHideControl(true);
             _enable(false);
             _reset();
         }
-        //private void StoreControlBounds(Control parent)
-        //{
-        //    foreach (Control ctrl in parent.Controls)
-        //    {
-        //        if (!controlBounds.ContainsKey(ctrl))
-        //        {
-        //            controlBounds[ctrl] = ctrl.Bounds;
-        //        }
-        //        if (ctrl.HasChildren)
-        //        {
-        //            StoreControlBounds(ctrl);
-        //        }
-        //    }
-        //}
 
-        //private void ucThanhVien_Resize(object sender, EventArgs e)
-        //{
-        //    if (originalFormSize.Width == 0 || originalFormSize.Height == 0)
-        //        return;
+        private void LoadData()
+        {
+            try
+            {
+                gcThanhVien.DataSource = _thanhVienService.GetAllMembers();
+                _isDataLoaded = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải dữ liệu: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
-        //    float xRatio = (float)this.Width / originalFormSize.Width;
-        //    float yRatio = (float)this.Height / originalFormSize.Height;
+        private void RefreshData()
+        {
+            if (!btnLuu.Enabled) 
+            {
+                try
+                {
+                    gcThanhVien.DataSource = _thanhVienService.GetAllMembers();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Lỗi khi làm mới dữ liệu: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
 
-        //    this.SuspendLayout();
-        //    ResizeControls(this, xRatio, yRatio);
-        //    this.ResumeLayout();
-        //}
-        //private void ResizeControls(Control parent, float xRatio, float yRatio)
-        //{
-        //    parent.SuspendLayout();
-        //    foreach (Control ctrl in parent.Controls)
-        //    {
-        //        if (controlBounds.TryGetValue(ctrl, out Rectangle originalBounds))
-        //        {
-        //            int newX = (int)(originalBounds.X * xRatio);
-        //            int newY = (int)(originalBounds.Y * yRatio);
-        //            int newWidth = (int)(originalBounds.Width * xRatio);
-        //            int newHeight = (int)(originalBounds.Height * yRatio);
-
-        //            // Chỉ set Bounds nếu thực sự thay đổi
-        //            if (ctrl.Bounds != new Rectangle(newX, newY, newWidth, newHeight))
-        //                ctrl.Bounds = new Rectangle(newX, newY, newWidth, newHeight);
-        //        }
-        //        if (ctrl.HasChildren)
-        //        {
-        //            ResizeControls(ctrl, xRatio, yRatio);
-        //        }
-        //    }
-        //    parent.ResumeLayout();
-        //}
+        private void ucThanhVien_Load(object sender, EventArgs e)
+        {
+        }
 
         void showHideControl(bool t)
         {
@@ -98,8 +102,8 @@ namespace QuanLyThuVien.UI.UC
             btnXoa.Enabled = t;
             btnLuu.Enabled = !t;
             btnBoQua.Enabled = !t;
-
         }
+
         void _enable(bool t)
         {
             txtMaThanhVien.Enabled = t;
@@ -110,6 +114,7 @@ namespace QuanLyThuVien.UI.UC
             cboLoaiThanhVien.Enabled = t;
             dtNgayDK.Enabled = t;
         }
+
         void _reset()
         {
             txtMaThanhVien.Text = "";
@@ -159,7 +164,6 @@ namespace QuanLyThuVien.UI.UC
             {
                 string message = SqlErrorTranslator.ToFriendlyMessage(ex);
                 MessageBox.Show(message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
             }
         }
 
@@ -203,15 +207,6 @@ namespace QuanLyThuVien.UI.UC
                         NgayDangKy = dtNgayDK.Value
                     };
                     
-                    //// Debug: In ra thông tin trước khi lưu
-                    //Console.WriteLine($"Debug - MaThanhVien: {tvien.MaThanhVien}");
-                    //Console.WriteLine($"Debug - TenThanhVien: {tvien.TenThanhVien}");
-                    //Console.WriteLine($"Debug - Email: {tvien.Email}");
-                    //Console.WriteLine($"Debug - SoDienThoai: {tvien.SoDienThoai}");
-                    //Console.WriteLine($"Debug - DiaChi: {tvien.DiaChi}");
-                    //Console.WriteLine($"Debug - LoaiThanhVien: {tvien.LoaiThanhVien}");
-                    //Console.WriteLine($"Debug - NgayDangKy: {tvien.NgayDangKy}");
-                    
                     _thanhVienService.AddMember(tvien);
                     gcThanhVien.DataSource = _thanhVienService.GetAllMembers();
                     EventBus.Publish("ThanhVienChanged");
@@ -236,7 +231,6 @@ namespace QuanLyThuVien.UI.UC
                         tvien.LoaiThanhVien = cboLoaiThanhVien.SelectedItem.ToString();
                         tvien.NgayDangKy = dtNgayDK.Value;
                         _thanhVienService.UpdateMember(tvien);
-                        
                     }
                     gcThanhVien.DataSource = _thanhVienService.GetAllMembers();
                     EventBus.Publish("ThanhVienChanged");
@@ -257,12 +251,7 @@ namespace QuanLyThuVien.UI.UC
                 }
                 
                 MessageBox.Show(errorDetails, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                
-                Console.WriteLine("=== ERROR DETAILS ===");
-                Console.WriteLine(errorDetails);
-                Console.WriteLine("=== END ERROR DETAILS ===");
             }
-
         }
 
         private void btnBoQua_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -290,5 +279,4 @@ namespace QuanLyThuVien.UI.UC
             }
         }
     }
-
 }

@@ -15,8 +15,7 @@ namespace QuanLyThuVien.UI.UC.Pages
 {
     public partial class ucPageSach : UserControl, ICrudOperations
     {
-        //private Size originalFormSize;
-        //private Dictionary<Control, Rectangle> controlBounds = new Dictionary<Control, Rectangle>();
+       
         private SachService _sachService;
         private TheLoaiService _theLoaiService;
         private NXBService _nxbService;
@@ -25,9 +24,7 @@ namespace QuanLyThuVien.UI.UC.Pages
         public ucPageSach()
         {
             InitializeComponent();
-            //this.SetStyle(ControlStyles.OptimizedDoubleBuffer |
-            //      ControlStyles.AllPaintingInWmPaint |
-            //      ControlStyles.UserPaint, true);
+       
             gvSach.CustomUnboundColumnData += GvSach_CustomUnboundColumnData;
             this.UpdateStyles();
             var dbContext = new QuanLyThuVienContext();
@@ -98,55 +95,7 @@ namespace QuanLyThuVien.UI.UC.Pages
                 cboNXB.SelectedIndex = 0;
             }
         }
-        //private void StoreControlBounds(Control parent)
-        //{
-        //    foreach (Control ctrl in parent.Controls)
-        //    {
-        //        if (!controlBounds.ContainsKey(ctrl))
-        //        {
-        //            controlBounds[ctrl] = ctrl.Bounds;
-        //        }
-        //        if (ctrl.HasChildren)
-        //        {
-        //            StoreControlBounds(ctrl);
-        //        }
-        //    }
-        //}
-
-        //private void ucPageSach_Resize(object sender, EventArgs e)
-        //{
-        //    if (originalFormSize.Width == 0 || originalFormSize.Height == 0)
-        //        return;
-
-        //    float xRatio = (float)this.Width / originalFormSize.Width;
-        //    float yRatio = (float)this.Height / originalFormSize.Height;
-
-        //    this.SuspendLayout();
-        //    ResizeControls(this, xRatio, yRatio);
-        //    this.ResumeLayout();
-        //}
-        //private void ResizeControls(Control parent, float xRatio, float yRatio)
-        //{
-        //    parent.SuspendLayout();
-        //    foreach (Control ctrl in parent.Controls)
-        //    {
-        //        if (controlBounds.TryGetValue(ctrl, out Rectangle originalBounds))
-        //        {
-        //            int newX = (int)(originalBounds.X * xRatio);
-        //            int newY = (int)(originalBounds.Y * yRatio);
-        //            int newWidth = (int)(originalBounds.Width * xRatio);
-        //            int newHeight = (int)(originalBounds.Height * yRatio);
-
-        //            if (ctrl.Bounds != new Rectangle(newX, newY, newWidth, newHeight))
-        //                ctrl.Bounds = new Rectangle(newX, newY, newWidth, newHeight);
-        //        }
-        //        if (ctrl.HasChildren)
-        //        {
-        //            ResizeControls(ctrl, xRatio, yRatio);
-        //        }
-        //    }
-        //    parent.ResumeLayout();
-        //}
+        
         private void GvSach_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
         {
             if (e.IsGetData)

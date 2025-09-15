@@ -15,15 +15,12 @@ namespace QuanLyThuVien.UI.UC.Pages
 {
     public partial class ucPageBanSaoSach : UserControl, ICrudOperations
     {
-        //private Size originalFormSize;
-        //private Dictionary<Control, Rectangle> controlBounds = new Dictionary<Control, Rectangle>();
+ 
         private BanSaoSachService _banSaoSachService;
         public ucPageBanSaoSach()
         {
             InitializeComponent();
-            //this.SetStyle(ControlStyles.OptimizedDoubleBuffer |
-            //      ControlStyles.AllPaintingInWmPaint |
-            //      ControlStyles.UserPaint, true);
+         
             var dbContext = new QuanLyThuVienContext();
             var banSSRepo = new GenericRepository<BanSaoSach>(dbContext);
             _banSaoSachService = new BanSaoSachService(banSSRepo);
@@ -32,8 +29,7 @@ namespace QuanLyThuVien.UI.UC.Pages
 
         private void ucPageBanSaoSach_Load(object sender, EventArgs e)
         {
-            //originalFormSize = this.Size;
-            //StoreControlBounds(this);
+            
             gcBanSaoSach.DataSource = _banSaoSachService.GetAllBanSaoSach();
             
 
@@ -44,55 +40,7 @@ namespace QuanLyThuVien.UI.UC.Pages
             dtNgayNhap.Enabled = false; 
             _reset();
         }
-        //private void StoreControlBounds(Control parent)
-        //{
-        //    foreach (Control ctrl in parent.Controls)
-        //    {
-        //        if (!controlBounds.ContainsKey(ctrl))
-        //        {
-        //            controlBounds[ctrl] = ctrl.Bounds;
-        //        }
-        //        if (ctrl.HasChildren)
-        //        {
-        //            StoreControlBounds(ctrl);
-        //        }
-        //    }
-        //}
-
-        //private void ucPageBanSaoSach_Resize(object sender, EventArgs e)
-        //{
-        //    if (originalFormSize.Width == 0 || originalFormSize.Height == 0)
-        //        return;
-
-        //    float xRatio = (float)this.Width / originalFormSize.Width;
-        //    float yRatio = (float)this.Height / originalFormSize.Height;
-
-        //    this.SuspendLayout();
-        //    ResizeControls(this, xRatio, yRatio);
-        //    this.ResumeLayout();
-        //}
-        //private void ResizeControls(Control parent, float xRatio, float yRatio)
-        //{
-        //    parent.SuspendLayout();
-        //    foreach (Control ctrl in parent.Controls)
-        //    {
-        //        if (controlBounds.TryGetValue(ctrl, out Rectangle originalBounds))
-        //        {
-        //            int newX = (int)(originalBounds.X * xRatio);
-        //            int newY = (int)(originalBounds.Y * yRatio);
-        //            int newWidth = (int)(originalBounds.Width * xRatio);
-        //            int newHeight = (int)(originalBounds.Height * yRatio);
-
-        //            if (ctrl.Bounds != new Rectangle(newX, newY, newWidth, newHeight))
-        //                ctrl.Bounds = new Rectangle(newX, newY, newWidth, newHeight);
-        //        }
-        //        if (ctrl.HasChildren)
-        //        {
-        //            ResizeControls(ctrl, xRatio, yRatio);
-        //        }
-        //    }
-        //    parent.ResumeLayout();
-        //}
+       
         void _enable(bool t)
         {
             
