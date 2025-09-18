@@ -162,8 +162,8 @@ namespace QuanLyThuVien.UI.UC
             }
             catch (Exception ex)
             {
-                string message = SqlErrorTranslator.ToFriendlyMessage(ex);
-                MessageBox.Show(message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Lỗi khi xoá thành viên: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
         }
 
@@ -196,18 +196,8 @@ namespace QuanLyThuVien.UI.UC
             {
                 if (_them)
                 {
-                    var tvien = new ThanhVien
-                    {
-                        MaThanhVien = int.Parse(txtMaThanhVien.Text),
-                        TenThanhVien = txtTenThanhVien.Text,
-                        Email = txtEmail.Text,
-                        SoDienThoai = txtSDT.Text,
-                        DiaChi = txtDiaChi.Text,
-                        LoaiThanhVien = cboLoaiThanhVien.SelectedItem.ToString(),
-                        NgayDangKy = dtNgayDK.Value
-                    };
-                    
-                    _thanhVienService.AddMember(tvien);
+                                        
+                    _thanhVienService.AddMember(int.Parse(txtMaThanhVien.Text), txtTenThanhVien.Text, txtEmail.Text, txtSDT.Text, txtDiaChi.Text, cboLoaiThanhVien.SelectedItem.ToString(), dtNgayDK.Value);
                     gcThanhVien.DataSource = _thanhVienService.GetAllMembers();
                     EventBus.Publish("ThanhVienChanged");
                     MessageBox.Show("Thêm thành viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -224,13 +214,8 @@ namespace QuanLyThuVien.UI.UC
                     }
                     if (tvien != null)
                     {
-                        tvien.TenThanhVien = txtTenThanhVien.Text;
-                        tvien.Email = txtEmail.Text;
-                        tvien.SoDienThoai = txtSDT.Text;
-                        tvien.DiaChi = txtDiaChi.Text;
-                        tvien.LoaiThanhVien = cboLoaiThanhVien.SelectedItem.ToString();
-                        tvien.NgayDangKy = dtNgayDK.Value;
-                        _thanhVienService.UpdateMember(tvien);
+                        
+                        _thanhVienService.UpdateMember(tvien.MaThanhVien, txtTenThanhVien.Text, txtEmail.Text, txtSDT.Text, txtDiaChi.Text, cboLoaiThanhVien.SelectedItem.ToString(), dtNgayDK.Value);
                     }
                     gcThanhVien.DataSource = _thanhVienService.GetAllMembers();
                     EventBus.Publish("ThanhVienChanged");
@@ -241,16 +226,8 @@ namespace QuanLyThuVien.UI.UC
             }
             catch (Exception ex)
             {
-                string errorDetails = $"Error Message: {ex.Message}\n\n";
-                errorDetails += $"Stack Trace: {ex.StackTrace}\n\n";
-                
-                if (ex.InnerException != null)
-                {
-                    errorDetails += $"Inner Exception: {ex.InnerException.Message}\n\n";
-                    errorDetails += $"Inner Stack Trace: {ex.InnerException.StackTrace}";
-                }
-                
-                MessageBox.Show(errorDetails, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi khi lưu thành viên: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
         }
 

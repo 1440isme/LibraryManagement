@@ -109,12 +109,8 @@ namespace QuanLyThuVien.UI.UC.Pages
             {
                 if (_them)
                 {
-                    var theLoai = new TheLoai
-                    {
-                        TenTheLoai = txtTenTheLoai.Text,
-                        MoTa = txtMoTa.Text
-                    };
-                    _theLoaiService.AddTheLoai(theLoai);
+                    
+                    _theLoaiService.AddTheLoai(txtTenTheLoai.Text, txtMoTa.Text);
                     gcTheLoai.DataSource= _theLoaiService.GetAllCategories();
                     EventBus.Publish("TheLoaiChanged");
                     MessageBox.Show("Thêm thể loại thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -129,12 +125,11 @@ namespace QuanLyThuVien.UI.UC.Pages
                         return;
                     }
                     if (theLoai != null)
-                    {
-                        theLoai.TenTheLoai = txtTenTheLoai.Text;
-                        theLoai.MoTa = txtMoTa.Text;
-                        _theLoaiService.UpdateTheLoai(theLoai);
+                    {                       
+                        _theLoaiService.UpdateTheLoai(theLoai.MaTheLoai, txtTenTheLoai.Text, txtMoTa.Text);
+                        gcTheLoai.DataSource = _theLoaiService.GetAllCategories();
                     }
-                    gcTheLoai.DataSource = _theLoaiService.GetAllCategories();
+                    
                     EventBus.Publish("TheLoaiChanged");
                     MessageBox.Show("Cập nhật thể loại thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     _enable(false);
@@ -142,8 +137,7 @@ namespace QuanLyThuVien.UI.UC.Pages
             }
             catch (Exception ex)
             {
-                string message = SqlErrorTranslator.ToFriendlyMessage(ex);
-                MessageBox.Show(message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Lỗi khi lưu thể loại: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
         }

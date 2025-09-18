@@ -73,5 +73,17 @@ namespace QuanLyThuVien.BLL.Services
                 return dt;
             }
         }
+        public DataTable GetSachQuaHan()
+        {
+            using (var conn = new SqlConnection(_connectionString))
+            using (var cmd = new SqlCommand("SELECT * FROM SachQuaHan", conn))
+            {
+                var adapter = new SqlDataAdapter(cmd);
+                var dt = new DataTable();
+                adapter.Fill(dt);
+                return dt;
+            }
+
+        }
     }
 }

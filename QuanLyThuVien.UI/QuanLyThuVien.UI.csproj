@@ -90,6 +90,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EventBus.cs" />
+    <Compile Include="frmGuiMail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGuiMail.Designer.cs">
+      <DependentUpon>frmGuiMail.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -196,6 +202,9 @@
     <Compile Include="UC\ucThanhVien.Designer.cs">
       <DependentUpon>ucThanhVien.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="frmGuiMail.resx">
+      <DependentUpon>frmGuiMail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -338,6 +347,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\books.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\glyph_mail.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

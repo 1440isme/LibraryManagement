@@ -2,6 +2,9 @@
 using QuanLyThuVien.DAL.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,62 +14,112 @@ namespace QuanLyThuVien.BLL.Services
     public class ThanhVienService
     {
         private readonly IGenericRepository<ThanhVien> _repository;
+        private readonly string _connectionString;
 
         public ThanhVienService(IGenericRepository<ThanhVien> repository)
         {
             _repository = repository;
+            _connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVienConnectionString"].ConnectionString;
         }
+        
         public IEnumerable<ThanhVien> GetAllMembers()
         {
-            return _repository.GetAll();
+            using (var newContext = new QuanLyThuVienContext())
+            {
+                return newContext.ThanhVien.ToList();
+            }
         }
 
-        public void AddMember(ThanhVien member)
+        public void AddMember(int maThanhVien, string tenThanhVien, string email, string soDienThoai = null, 
+                             string diaChi = null, string loaiThanhVien = "SinhVien", DateTime? ngayDangKy = null)
         {
-            if (member == null)
-                throw new ArgumentNullException(nameof(member), "Thành viên không được để null");
-            if (member.MaThanhVien <= 0)
-                throw new ArgumentException("Mã thành viên phải lớn hơn 0", nameof(member.MaThanhVien));
-            if (string.IsNullOrWhiteSpace(member.TenThanhVien))
-                throw new ArgumentException("Tên thành viên không được để trống", nameof(member.TenThanhVien));
-            if (string.IsNullOrWhiteSpace(member.Email))
-                throw new ArgumentException("Email không được để trống", nameof(member.Email));
-            if (string.IsNullOrWhiteSpace(member.LoaiThanhVien))
-                throw new ArgumentException("Loại thành viên không được để trống", nameof(member.LoaiThanhVien));
-          
-            _repository.Insert(member);
-            _repository.Save();
-        }
-        public void UpdateMember(ThanhVien member)
-        {
-            if (member == null)
-                throw new ArgumentNullException(nameof(member), "Thành viên không được để null");
-            if (string.IsNullOrWhiteSpace(member.TenThanhVien))
-                throw new ArgumentException("Tên thành viên không được để trống", nameof(member.TenThanhVien));
-            if (string.IsNullOrWhiteSpace(member.Email))
-                throw new ArgumentException("Email không được để trống", nameof(member.Email));
-            if (string.IsNullOrWhiteSpace(member.LoaiThanhVien))
-                throw new ArgumentException("Loại thành viên không được để trống", nameof(member.LoaiThanhVien));
+            if (maThanhVien <= 0)
+                throw new ArgumentException("Mã thành viên phải lớn hơn 0", nameof(maThanhVien));
+            if (string.IsNullOrWhiteSpace(tenThanhVien))
+                throw new ArgumentException("Tên thành viên không được để trống", nameof(tenThanhVien));
+            if (string.IsNullOrWhiteSpace(email))
+                throw new ArgumentException("Email không được để trống", nameof(email));
+            if (string.IsNullOrWhiteSpace(loaiThanhVien))
+                throw new ArgumentException("Loại thành viên không được để trống", nameof(loaiThanhVien));
 
-            var exist = _repository.GetById(member.MaThanhVien);
-            if (exist == null)
-                throw new ArgumentException("Thành viên không tồn tại", nameof(member.MaThanhVien));
-            exist.TenThanhVien = member.TenThanhVien;
-            exist.Email = member.Email;
-            exist.SoDienThoai = member.SoDienThoai;
-            exist.DiaChi = member.DiaChi;
-            exist.LoaiThanhVien = member.LoaiThanhVien;
-            exist.NgayDangKy = member.NgayDangKy;
-            _repository.Update(member);
-            _repository.Save();
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                using (var command = new SqlCommand("[dbo].[ThemThanhVien]", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandTimeout = 60;
+
+                    command.Parameters.Add("@MaThanhVien", SqlDbType.Int).Value = maThanhVien;
+                    command.Parameters.Add("@TenThanhVien", SqlDbType.NVarChar, 100).Value = tenThanhVien;
+                    command.Parameters.Add("@Email", SqlDbType.NVarChar, 100).Value = email;
+                    command.Parameters.Add("@SoDienThoai", SqlDbType.NVarChar, 20).Value = 
+                        string.IsNullOrWhiteSpace(soDienThoai) ? (object)DBNull.Value : soDienThoai;
+                    command.Parameters.Add("@DiaChi", SqlDbType.NVarChar, 200).Value = 
+                        string.IsNullOrWhiteSpace(diaChi) ? (object)DBNull.Value : diaChi;
+                    command.Parameters.Add("@LoaiThanhVien", SqlDbType.NVarChar, 20).Value = loaiThanhVien;
+                    command.Parameters.Add("@NgayDangKy", SqlDbType.Date).Value = 
+                        ngayDangKy.HasValue ? (object)ngayDangKy.Value : DBNull.Value;
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
         }
+        
+        public void UpdateMember(int maThanhVien, string tenThanhVien, string email, string soDienThoai = null, 
+                                string diaChi = null, string loaiThanhVien = "SinhVien", DateTime? ngayDangKy = null)
+        {
+            if (maThanhVien <= 0)
+                throw new ArgumentException("Mã thành viên không hợp lệ", nameof(maThanhVien));
+            if (string.IsNullOrWhiteSpace(tenThanhVien))
+                throw new ArgumentException("Tên thành viên không được để trống", nameof(tenThanhVien));
+            if (string.IsNullOrWhiteSpace(email))
+                throw new ArgumentException("Email không được để trống", nameof(email));
+            if (string.IsNullOrWhiteSpace(loaiThanhVien))
+                throw new ArgumentException("Loại thành viên không được để trống", nameof(loaiThanhVien));
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                using (var command = new SqlCommand("[dbo].[SuaThanhVien]", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandTimeout = 60;
+
+                    command.Parameters.Add("@MaThanhVien", SqlDbType.Int).Value = maThanhVien;
+                    command.Parameters.Add("@TenThanhVien", SqlDbType.NVarChar, 100).Value = tenThanhVien;
+                    command.Parameters.Add("@Email", SqlDbType.NVarChar, 100).Value = email;
+                    command.Parameters.Add("@SoDienThoai", SqlDbType.NVarChar, 20).Value = 
+                        string.IsNullOrWhiteSpace(soDienThoai) ? (object)DBNull.Value : soDienThoai;
+                    command.Parameters.Add("@DiaChi", SqlDbType.NVarChar, 200).Value = 
+                        string.IsNullOrWhiteSpace(diaChi) ? (object)DBNull.Value : diaChi;
+                    command.Parameters.Add("@LoaiThanhVien", SqlDbType.NVarChar, 20).Value = loaiThanhVien;
+                    command.Parameters.Add("@NgayDangKy", SqlDbType.Date).Value = 
+                        ngayDangKy ?? DateTime.Now;
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+        
         public void DeleteMember(int maThanhVien)
         {
-            var exist = _repository.GetById(maThanhVien);
-            if (exist == null)
-                throw new ArgumentException("Thành viên không tồn tại", nameof(maThanhVien));
-            _repository.Delete(maThanhVien);
-            _repository.Save();
+            if (maThanhVien <= 0)
+                throw new ArgumentException("Mã thành viên không hợp lệ", nameof(maThanhVien));
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                using (var command = new SqlCommand("[dbo].[XoaThanhVien]", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandTimeout = 60;
+
+                    command.Parameters.Add("@MaThanhVien", SqlDbType.Int).Value = maThanhVien;
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

@@ -110,13 +110,8 @@ namespace QuanLyThuVien.UI.UC.Pages
             {
                 if (_them)
                 {
-                    var nxb = new NhaXuatBan
-                    {
-                        TenNhaXuatBan = txtTenNXB.Text,
-                        DiaChi = txtDiaChi.Text,
-                        SoDienThoai = txtSDT.Text
-                    };
-                    _nxbService.AddPublisher(nxb);
+                    
+                    _nxbService.AddPublisher(txtTenNXB.Text, txtDiaChi.Text, txtSDT.Text);
                     gcNXB.DataSource = _nxbService.GetAllPublishers();
                     EventBus.Publish("NXBChanged");
                     MessageBox.Show("Thêm nhà xuất bản thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -132,10 +127,8 @@ namespace QuanLyThuVien.UI.UC.Pages
                     }
                     if (nxb != null)
                     {
-                        nxb.TenNhaXuatBan = txtTenNXB.Text;
-                        nxb.DiaChi = txtDiaChi.Text;
-                        nxb.SoDienThoai = txtSDT.Text;
-                        _nxbService.UpdatePublisher(nxb);
+                       
+                        _nxbService.UpdatePublisher(nxb.MaNhaXuatBan,txtTenNXB.Text, txtDiaChi.Text, txtSDT.Text);
                     }
                     gcNXB.DataSource = _nxbService.GetAllPublishers();
                     EventBus.Publish("NXBChanged");
@@ -145,8 +138,7 @@ namespace QuanLyThuVien.UI.UC.Pages
             }
             catch (Exception ex)
             {
-                string message = SqlErrorTranslator.ToFriendlyMessage(ex);
-                MessageBox.Show(message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Lỗi khi lưu nhà xuất bản: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
         }

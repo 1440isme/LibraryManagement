@@ -11,13 +11,18 @@ namespace QuanLyThuVien.BLL.Services
     public class RoleService
     {
         private readonly IGenericRepository<Roles> _repository;
+        
         public RoleService(IGenericRepository<Roles> repository)
         {
             _repository = repository;
         }
+        
         public IEnumerable<Roles> GetAllRoles()
         {
-            return _repository.GetAll();
+            using (var newContext = new QuanLyThuVienContext())
+            {
+                return newContext.Roles.ToList();
+            }
         }
     }
 }

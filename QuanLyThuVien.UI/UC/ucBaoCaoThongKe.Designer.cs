@@ -89,7 +89,7 @@
             // 
             this.cboType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboType.FormattingEnabled = true;
-            this.cboType.Location = new System.Drawing.Point(433, 31);
+            this.cboType.Location = new System.Drawing.Point(483, 31);
             this.cboType.Name = "cboType";
             this.cboType.Size = new System.Drawing.Size(165, 24);
             this.cboType.TabIndex = 73;
@@ -99,7 +99,7 @@
             // 
             this.lblXemTheo.AutoSize = true;
             this.lblXemTheo.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblXemTheo.Location = new System.Drawing.Point(364, 35);
+            this.lblXemTheo.Location = new System.Drawing.Point(414, 35);
             this.lblXemTheo.Name = "lblXemTheo";
             this.lblXemTheo.Size = new System.Drawing.Size(62, 16);
             this.lblXemTheo.TabIndex = 72;
@@ -108,7 +108,7 @@
             // dtDenNgay
             // 
             this.dtDenNgay.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtDenNgay.Location = new System.Drawing.Point(957, 32);
+            this.dtDenNgay.Location = new System.Drawing.Point(1007, 32);
             this.dtDenNgay.Name = "dtDenNgay";
             this.dtDenNgay.Size = new System.Drawing.Size(117, 23);
             this.dtDenNgay.TabIndex = 71;
@@ -117,7 +117,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(875, 35);
+            this.label1.Location = new System.Drawing.Point(925, 35);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 16);
             this.label1.TabIndex = 70;
@@ -126,7 +126,7 @@
             // dtTuNgay
             // 
             this.dtTuNgay.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtTuNgay.Location = new System.Drawing.Point(717, 32);
+            this.dtTuNgay.Location = new System.Drawing.Point(767, 32);
             this.dtTuNgay.Name = "dtTuNgay";
             this.dtTuNgay.Size = new System.Drawing.Size(117, 23);
             this.dtTuNgay.TabIndex = 69;
@@ -135,7 +135,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(635, 35);
+            this.label6.Location = new System.Drawing.Point(685, 35);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(54, 16);
             this.label6.TabIndex = 68;
@@ -145,9 +145,9 @@
             // 
             this.cboLoaiBaoCao.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboLoaiBaoCao.FormattingEnabled = true;
-            this.cboLoaiBaoCao.Location = new System.Drawing.Point(154, 31);
+            this.cboLoaiBaoCao.Location = new System.Drawing.Point(160, 31);
             this.cboLoaiBaoCao.Name = "cboLoaiBaoCao";
-            this.cboLoaiBaoCao.Size = new System.Drawing.Size(186, 24);
+            this.cboLoaiBaoCao.Size = new System.Drawing.Size(230, 24);
             this.cboLoaiBaoCao.TabIndex = 55;
             this.cboLoaiBaoCao.SelectedIndexChanged += new System.EventHandler(this.cboLoaiBaoCao_SelectedIndexChanged);
             // 
@@ -155,7 +155,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(69, 35);
+            this.label5.Location = new System.Drawing.Point(74, 35);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(80, 16);
             this.label5.TabIndex = 54;
@@ -177,7 +177,7 @@
             this.splitContainerControl2.Panel2.Controls.Add(this.gcBang);
             this.splitContainerControl2.Panel2.Text = "Panel2";
             this.splitContainerControl2.Size = new System.Drawing.Size(1200, 624);
-            this.splitContainerControl2.SplitterPosition = 769;
+            this.splitContainerControl2.SplitterPosition = 721;
             this.splitContainerControl2.TabIndex = 0;
             // 
             // chartControl
@@ -186,7 +186,7 @@
             this.chartControl.Location = new System.Drawing.Point(0, 0);
             this.chartControl.Name = "chartControl";
             this.chartControl.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
-            this.chartControl.Size = new System.Drawing.Size(769, 624);
+            this.chartControl.Size = new System.Drawing.Size(721, 624);
             this.chartControl.TabIndex = 0;
             // 
             // gcBang
@@ -195,7 +195,7 @@
             this.gcBang.Location = new System.Drawing.Point(0, 0);
             this.gcBang.MainView = this.gvBang;
             this.gcBang.Name = "gcBang";
-            this.gcBang.Size = new System.Drawing.Size(421, 624);
+            this.gcBang.Size = new System.Drawing.Size(469, 624);
             this.gcBang.TabIndex = 0;
             this.gcBang.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvBang});

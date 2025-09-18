@@ -97,7 +97,7 @@ namespace QuanLyThuVien.UI.UC
             lblTongThanhVien.Text = ds.Tables[3].Rows[0]["TongThanhVien"].ToString();
 
             LoadTrendChart("DAY");
-            gcQuaHan.DataSource = service.GetOverdue(DateTime.Now);
+            gcQuaHan.DataSource = service.GetSachQuaHan();
             loadPieChart();
         }
 

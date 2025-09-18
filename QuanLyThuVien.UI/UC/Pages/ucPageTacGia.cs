@@ -115,13 +115,8 @@ namespace QuanLyThuVien.UI.UC.Pages
             {
                 if (_them)
                 {
-                    var tacGia = new TacGia
-                    {
-                        TenTacGia = txtTenTacGia.Text,
-                        QuocTich = txtQuocTich.Text,
-                        NamSinh = int.Parse(txtNamSinh.Text)
-                    };
-                    _tacGiaService.AddAuthor(tacGia);
+                    
+                    _tacGiaService.AddAuthor(txtTenTacGia.Text, txtQuocTich.Text, int.Parse(txtNamSinh.Text));
                     gcTacGia.DataSource = _tacGiaService.GetAllAuthors();
                     EventBus.Publish("TacGiaChanged"); 
                     MessageBox.Show("Thêm tác giả thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -137,11 +132,9 @@ namespace QuanLyThuVien.UI.UC.Pages
                     }
                     if (tacGia != null)
                     {
-                        tacGia.TenTacGia = txtTenTacGia.Text;
-                        tacGia.QuocTich = txtQuocTich.Text;
-                        tacGia.NamSinh = int.Parse(txtNamSinh.Text);
-                        _tacGiaService.UpdateAuthor(tacGia);
-                        
+                       
+                        _tacGiaService.UpdateAuthor(tacGia.MaTacGia, txtTenTacGia.Text, txtQuocTich.Text, int.Parse(txtNamSinh.Text));
+
                     }
                     gcTacGia.DataSource = _tacGiaService.GetAllAuthors();
                     EventBus.Publish("TacGiaChanged");
@@ -151,9 +144,7 @@ namespace QuanLyThuVien.UI.UC.Pages
             }
             catch (Exception ex)
             {
-                string message = SqlErrorTranslator.ToFriendlyMessage(ex);
-                MessageBox.Show(message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
+                MessageBox.Show("Lỗi khi lưu tác giả: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

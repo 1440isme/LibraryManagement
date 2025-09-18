@@ -12,17 +12,23 @@ using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Windows.Forms;
 using QuanLyThuVien.DAL.Entities;
+using System.Configuration;
+using System.Data.SqlClient;
 
 namespace QuanLyThuVien.UI
 {
     public partial class frmMain : DevExpress.XtraBars.FluentDesignSystem.FluentDesignForm
     {
+        private readonly string _connectionString;
+
         public frmMain()
         {
             InitializeComponent();
         }
         public frmMain(Users user) : this()
         {
+            _connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVienConnectionString"].ConnectionString;
+            UpdateOverdueStatus();
             this._user = user;
             if (user.RoleId == 2) 
             {
@@ -50,7 +56,27 @@ namespace QuanLyThuVien.UI
         {
             
         }
-
+        private void UpdateOverdueStatus()
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("dbo.UpdateOverdueStatusProc", conn))
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.ExecuteNonQuery();
+                    }
+                    Console.WriteLine("Cập nhật trạng thái quá hạn thành công: " + DateTime.Now);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi khi chạy UpdateOverdueStatusProc: " + ex.Message);
+                MessageBox.Show("Không thể cập nhật trạng thái quá hạn: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void ActivateUserControl(UserControl control)
         {
             if (_currentActiveControl != null)

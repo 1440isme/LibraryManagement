@@ -399,7 +399,7 @@ namespace QuanLyThuVien.UI.UC
             this.splitContainerControl3.Panel2.Controls.Add(this.chartPie);
             this.splitContainerControl3.Panel2.Text = "Panel2";
             this.splitContainerControl3.Size = new System.Drawing.Size(1200, 292);
-            this.splitContainerControl3.SplitterPosition = 552;
+            this.splitContainerControl3.SplitterPosition = 658;
             this.splitContainerControl3.TabIndex = 0;
             // 
             // gcQuaHan
@@ -408,7 +408,7 @@ namespace QuanLyThuVien.UI.UC
             this.gcQuaHan.Location = new System.Drawing.Point(0, 0);
             this.gcQuaHan.MainView = this.gvQuaHan;
             this.gcQuaHan.Name = "gcQuaHan";
-            this.gcQuaHan.Size = new System.Drawing.Size(552, 292);
+            this.gcQuaHan.Size = new System.Drawing.Size(658, 292);
             this.gcQuaHan.TabIndex = 0;
             this.gcQuaHan.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvQuaHan});
@@ -422,7 +422,7 @@ namespace QuanLyThuVien.UI.UC
             this.gvQuaHan.OptionsView.ShowGroupPanel = false;
             this.gvQuaHan.OptionsView.ShowViewCaption = true;
             this.gvQuaHan.RowHeight = 30;
-            this.gvQuaHan.ViewCaption = "DANH SÁCH TOP 10 QUÁ HẠN";
+            this.gvQuaHan.ViewCaption = "DANH SÁCH SÁCH QUÁ HẠN";
             this.gvQuaHan.ViewCaptionHeight = 30;
             // 
             // chartPie
@@ -431,7 +431,7 @@ namespace QuanLyThuVien.UI.UC
             this.chartPie.Location = new System.Drawing.Point(0, 0);
             this.chartPie.Name = "chartPie";
             this.chartPie.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
-            this.chartPie.Size = new System.Drawing.Size(638, 292);
+            this.chartPie.Size = new System.Drawing.Size(532, 292);
             this.chartPie.TabIndex = 0;
             // 
             // ucDashboard

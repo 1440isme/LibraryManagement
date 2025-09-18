@@ -28,7 +28,7 @@ namespace QuanLyThuVien.BLL.Services
                 var errors = new StringBuilder();
                 var successCount = 0;
 
-                connection.InfoMessage += (s, e) => { /* e.Message available if you add PRINTs inside proc */ };
+                connection.InfoMessage += (s, e) => {  };
 
                 connection.Open();
 

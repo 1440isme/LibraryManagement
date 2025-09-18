@@ -2,6 +2,9 @@
 using QuanLyThuVien.DAL.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,46 +14,92 @@ namespace QuanLyThuVien.BLL.Services
     public class TacGiaService
     {
         private readonly IGenericRepository<TacGia> _repository;
+        private readonly string _connectionString;
+        
         public TacGiaService(IGenericRepository<TacGia> repository)
         {
             _repository = repository;
+            _connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVienConnectionString"].ConnectionString;
         }
+        
         public IEnumerable<TacGia> GetAllAuthors()
         {
-            return _repository.GetAll();
+            using (var newContext = new QuanLyThuVienContext())
+            {
+                return newContext.TacGia.ToList();
+            }
         }
+        
         public void DeleteAuthor(int maTacGia)
         {
-            _repository.Delete(maTacGia);
-            _repository.Save();
-        }
-        public void AddAuthor(TacGia tacGia)
-        {
-            if (tacGia == null)
-                throw new ArgumentNullException(nameof(tacGia), "Tác giả không được để null.");
-            if (string.IsNullOrWhiteSpace(tacGia.TenTacGia))
-                throw new ArgumentException("Tên tác giả không được để trống.", nameof(tacGia.TenTacGia));
-           
-            _repository.Insert(tacGia);
-            _repository.Save();
-        }
-        public void UpdateAuthor(TacGia tacGia)
-        {
-            if (tacGia == null)
-                throw new ArgumentNullException(nameof(tacGia), "Tác giả không được để null.");
-            if (string.IsNullOrWhiteSpace(tacGia.TenTacGia))
-                throw new ArgumentException("Tên tác giả không được để trống.", nameof(tacGia.TenTacGia));
-            
+            if (maTacGia <= 0)
+                throw new ArgumentException("Mã tác giả không hợp lệ.", nameof(maTacGia));
 
-            var existing = _repository.GetById(tacGia.MaTacGia);
-            if (existing == null)
-                throw new InvalidOperationException("Không tìm thấy tác giả để cập nhật.");
-            existing.TenTacGia = tacGia.TenTacGia;
-            existing.QuocTich = tacGia.QuocTich;
-            existing.NamSinh = tacGia.NamSinh;
-            _repository.Update(tacGia);
-            _repository.Save();
-        }
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                using (var command = new SqlCommand("[dbo].[XoaTacGia]", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandTimeout = 60;
 
+                    command.Parameters.Add("@MaTacGia", SqlDbType.Int).Value = maTacGia;
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+        
+        public void AddAuthor(string tenTacGia, string quocTich = null, int? namSinh = null)
+        {
+            if (string.IsNullOrWhiteSpace(tenTacGia))
+                throw new ArgumentException("Tên tác giả không được để trống.", nameof(tenTacGia));
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                using (var command = new SqlCommand("[dbo].[ThemTacGia]", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandTimeout = 60;
+
+                    command.Parameters.Add("@TenTacGia", SqlDbType.NVarChar, 100).Value = tenTacGia;
+                    command.Parameters.Add("@QuocTich", SqlDbType.NVarChar, 50).Value = 
+                        string.IsNullOrWhiteSpace(quocTich) ? (object)DBNull.Value : quocTich;
+                    command.Parameters.Add("@NamSinh", SqlDbType.Int).Value = 
+                        namSinh.HasValue ? (object)namSinh.Value : DBNull.Value;
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+        
+        public void UpdateAuthor(int maTacGia, string tenTacGia, string quocTich = null, int? namSinh = null)
+        {
+            if (maTacGia <= 0)
+                throw new ArgumentException("Mã tác giả không hợp lệ.", nameof(maTacGia));
+                
+            if (string.IsNullOrWhiteSpace(tenTacGia))
+                throw new ArgumentException("Tên tác giả không được để trống.", nameof(tenTacGia));
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                using (var command = new SqlCommand("[dbo].[SuaTacGia]", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandTimeout = 60;
+
+                    command.Parameters.Add("@MaTacGia", SqlDbType.Int).Value = maTacGia;
+                    command.Parameters.Add("@TenTacGia", SqlDbType.NVarChar, 100).Value = tenTacGia;
+                    command.Parameters.Add("@QuocTich", SqlDbType.NVarChar, 50).Value = 
+                        string.IsNullOrWhiteSpace(quocTich) ? (object)DBNull.Value : quocTich;
+                    command.Parameters.Add("@NamSinh", SqlDbType.Int).Value = 
+                        namSinh.HasValue ? (object)namSinh.Value : DBNull.Value;
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

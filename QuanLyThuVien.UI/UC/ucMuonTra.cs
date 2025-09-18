@@ -114,7 +114,17 @@ namespace QuanLyThuVien.UI.UC
                     gcDanhSachMuon.DataSource = freshService.GetAllPhieuMuons().ToList();
                 }
 
-                gvDanhSachMuon.OptionsBehavior.Editable = false;
+                gvDanhSachMuon.OptionsBehavior.Editable = true;
+                foreach (DevExpress.XtraGrid.Columns.GridColumn col in gvDanhSachMuon.Columns)
+                {
+                    col.OptionsColumn.AllowEdit = false;
+                }
+
+                var mailColumn = gvDanhSachMuon.Columns["Mail"];
+                if (mailColumn != null)
+                {
+                    mailColumn.OptionsColumn.AllowEdit = true;
+                }
                 gcDanhSachMuon.RefreshDataSource();
                 gvDanhSachMuon.RefreshData();
                 Application.DoEvents();
@@ -192,6 +202,7 @@ namespace QuanLyThuVien.UI.UC
                 {
                     col.OptionsColumn.AllowEdit = true;
                 }
+              
                 else if (isEditMode && (col.FieldName == "NgayTraDuKien" ||
                                   col.FieldName == "NgayTraThucTe" ||
                                   col.FieldName == "TrangThai" ||
@@ -1500,6 +1511,46 @@ namespace QuanLyThuVien.UI.UC
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi khi làm mới dữ liệu mượn trả: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnMail_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void btnMail_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            try
+            {
+                var pm = gvDanhSachMuon.GetFocusedRow() as PhieuMuon;
+
+                if (pm == null)
+                {
+                    MessageBox.Show("Vui lòng chọn ít nhất một thanh viên  để thực hiện gửi mail!", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (pm.TrangThai == "Đã trả hết")
+                {
+                    MessageBox.Show("Phiếu mượn này đã được trả hết!", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+
+                using (var form = new frmGuiMail(pm.MaThanhVien))
+                {
+                    form.StartPosition = FormStartPosition.CenterParent;
+
+                    var result = form.ShowDialog(this.ParentForm);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi mở form gửi mail: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

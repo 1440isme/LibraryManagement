@@ -212,19 +212,9 @@ namespace QuanLyThuVien.UI.UC.Pages
             {
                 if (_them)
                 {
-                    var sach = new Sach
-                    {
-                        TenSach = txtTenSach.Text,
-                        ISBN = txtISBN.Text,
-                        MaTacGia = Convert.ToInt32(cboTacGia.SelectedValue),
-                        MaNhaXuatBan = Convert.ToInt32(cboNXB.SelectedValue),
-                        MaTheLoai = Convert.ToInt32(cboTheLoai.SelectedValue),
-                        NamXuatBan = (int)numNamXB.Value,
-                        Gia = numGia.Value,
-                        SoLuong = (int)numSoLuong.Value,
-                        TrangThai = chkTrangThai.Checked
-                    };
-                    _sachService.AddBook(sach);
+                    
+                    _sachService.AddBook(txtTenSach.Text, txtISBN.Text, Convert.ToInt32(cboTacGia.SelectedValue), Convert.ToInt32(cboNXB.SelectedValue), Convert.ToInt32(cboTheLoai.SelectedValue),
+                        (int)numNamXB.Value, numGia.Value, (int)numSoLuong.Value, chkTrangThai.Checked);
                     gcSach.DataSource = _sachService.GetAllBooks();
                     MessageBox.Show("Thêm sách thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     _enable(false);
@@ -240,16 +230,9 @@ namespace QuanLyThuVien.UI.UC.Pages
                     }
                     if (sach != null)
                     {
-                        sach.TenSach = txtTenSach.Text;
-                        sach.ISBN = txtISBN.Text;
-                        sach.MaTacGia = (int)cboTacGia.SelectedValue;
-                        sach.MaNhaXuatBan = (int)cboNXB.SelectedValue;
-                        sach.MaTheLoai = (int)cboTheLoai.SelectedValue;
-                        sach.NamXuatBan = (int)numNamXB.Value;
-                        sach.Gia = numGia.Value;
-                        sach.SoLuong = (int)numSoLuong.Value;
-                        sach.TrangThai = chkTrangThai.Checked;
-                        _sachService.UpdateBook(sach);
+                        
+                        _sachService.UpdateBook(sach.MaSach, txtTenSach.Text, txtISBN.Text, Convert.ToInt32(cboTacGia.SelectedValue), Convert.ToInt32(cboNXB.SelectedValue), Convert.ToInt32(cboTheLoai.SelectedValue),
+                        (int)numNamXB.Value, numGia.Value, (int)numSoLuong.Value, chkTrangThai.Checked);
                     }
                     gcSach.DataSource = _sachService.GetAllBooks();                    
                     MessageBox.Show("Sửa sách thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -259,8 +242,8 @@ namespace QuanLyThuVien.UI.UC.Pages
             }
             catch (Exception ex)
             {
-                string message = SqlErrorTranslator.ToFriendlyMessage(ex);
-                MessageBox.Show(message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Lỗi khi lưu sách: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
 
             }
         }

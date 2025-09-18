@@ -19,6 +19,8 @@ namespace QuanLyThuVien.UI.UC
         private RoleService _roleService;
         private bool _isDataLoaded = false;
         private bool _isInitialized = false;
+        private List<Users> _usersList; 
+        
         public bool IsDataLoaded => _isDataLoaded;
         public ucNguoiDung()
         {
@@ -44,11 +46,10 @@ namespace QuanLyThuVien.UI.UC
             }
         }
 
-       
-
         public void OnDeactivated()
         {
         }
+        
         private void InitializeControls()
         {
             var dbContext = new QuanLyThuVienContext();
@@ -61,6 +62,7 @@ namespace QuanLyThuVien.UI.UC
             _enable(false);
             _reset();
         }
+        
         private void LoadData()
         {
             try
@@ -68,7 +70,10 @@ namespace QuanLyThuVien.UI.UC
                 cboRole.DataSource = _roleService.GetAllRoles();
                 cboRole.DisplayMember = "RoleName";
                 cboRole.ValueMember = "RoleID";
-                gcUser.DataSource = _nguoiDungService.GetAllUsers();
+                
+                _usersList = _nguoiDungService.GetAllUsers().ToList();
+                gcUser.DataSource = _usersList;
+                
                 _isDataLoaded = true;
             }
             catch (Exception ex)
@@ -76,13 +81,15 @@ namespace QuanLyThuVien.UI.UC
                 MessageBox.Show($"Lỗi khi tải dữ liệu: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        
         private void RefreshData()
         {
             if (!btnLuu.Enabled)
             {
                 try
                 {
-                    gcUser.DataSource = _nguoiDungService.GetAllUsers();
+                    _usersList = _nguoiDungService.GetAllUsers().ToList();
+                    gcUser.DataSource = _usersList;
                 }
                 catch (Exception ex)
                 {
@@ -91,7 +98,6 @@ namespace QuanLyThuVien.UI.UC
             }
         }
 
-      
         void showHideControl(bool t)
         {
             btnThem.Enabled = t;
@@ -148,7 +154,10 @@ namespace QuanLyThuVien.UI.UC
                         if (MessageBox.Show("Bạn có chắc chắn muốn xóa thành viên này không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
                             _nguoiDungService.DeleteUser(user.UserId);
-                            gcUser.DataSource = _nguoiDungService.GetAllUsers();
+                            
+                            _usersList = _nguoiDungService.GetAllUsers().ToList();
+                            gcUser.DataSource = _usersList;
+                            
                             MessageBox.Show("Xóa người dùng thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
@@ -156,16 +165,7 @@ namespace QuanLyThuVien.UI.UC
             }
             catch (Exception ex)
             {
-                string errorDetails = $"Error Message: {ex.Message}\n\n";
-                errorDetails += $"Stack Trace: {ex.StackTrace}\n\n";
-
-                if (ex.InnerException != null)
-                {
-                    errorDetails += $"Inner Exception: {ex.InnerException.Message}\n\n";
-                    errorDetails += $"Inner Stack Trace: {ex.InnerException.StackTrace}";
-                }
-
-                MessageBox.Show(errorDetails, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi khi xoá người dùng: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -190,17 +190,11 @@ namespace QuanLyThuVien.UI.UC
             {
                 if (_them)
                 {
-                    var user = new Users
-                    {
-                        UserName = txtUsername.Text.Trim(),
-                        FullName = txtFullname.Text.Trim(),
-                        PasswordHash = txtPassword.Text.Trim(),
-                        Email = txtEmail.Text.Trim(),
-                        RoleId = cboRole.SelectedItem != null ? (int)cboRole.SelectedValue : (int?)null,
-                        IsActive = chkHoatDong.Checked
-                    };
-                    _nguoiDungService.AddUser(user);
-                    gcUser.DataSource = _nguoiDungService.GetAllUsers();
+                    _nguoiDungService.AddUser(txtUsername.Text.Trim(), txtFullname.Text.Trim(), txtPassword.Text.Trim(), txtEmail.Text.Trim(), cboRole.SelectedItem != null ? (int)cboRole.SelectedValue : (int?)null, chkHoatDong.Checked);
+                    
+                    _usersList = _nguoiDungService.GetAllUsers().ToList();
+                    gcUser.DataSource = _usersList;
+                    
                     MessageBox.Show("Thêm người dùng thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     showHideControl(true);
                     _enable(false);
@@ -214,15 +208,11 @@ namespace QuanLyThuVien.UI.UC
                         return;
                     }
                     
-                    user.UserName = txtUsername.Text.Trim();
-                    user.FullName = txtFullname.Text.Trim();
-                    user.PasswordHash = txtPassword.Text.Trim();
-                    user.Email = txtEmail.Text.Trim();
-                    user.RoleId = cboRole.SelectedItem != null ? (int)cboRole.SelectedValue : (int?)null;
-                    user.IsActive = chkHoatDong.Checked;
-                    _nguoiDungService.UpdateUser(user);
+                    _nguoiDungService.UpdateUser(user.UserId, txtUsername.Text.Trim(), txtFullname.Text.Trim(), txtPassword.Text.Trim(), txtEmail.Text.Trim(), cboRole.SelectedItem != null ? (int)cboRole.SelectedValue : (int?)null, chkHoatDong.Checked);
+
+                    _usersList = _nguoiDungService.GetAllUsers().ToList();
+                    gcUser.DataSource = _usersList;
                     
-                    gcUser.DataSource = _nguoiDungService.GetAllUsers();
                     MessageBox.Show("Cập nhật người dùng thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     showHideControl(true);
                     _enable(false);
@@ -230,16 +220,7 @@ namespace QuanLyThuVien.UI.UC
             }
             catch (Exception ex)
             {
-                string errorDetails = $"Error Message: {ex.Message}\n\n";
-                errorDetails += $"Stack Trace: {ex.StackTrace}\n\n";
-
-                if (ex.InnerException != null)
-                {
-                    errorDetails += $"Inner Exception: {ex.InnerException.Message}\n\n";
-                    errorDetails += $"Inner Stack Trace: {ex.InnerException.StackTrace}";
-                }
-
-                MessageBox.Show(errorDetails, "Chi tiết lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi khi lưu người dùng: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -263,7 +244,6 @@ namespace QuanLyThuVien.UI.UC
                     txtEmail.Text = user.Email;
                     cboRole.SelectedValue = user.RoleId;
                     chkHoatDong.Checked = user.IsActive ?? false;
-
                 }
             }
         }
@@ -282,15 +262,32 @@ namespace QuanLyThuVien.UI.UC
 
         private void gvUser_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
         {
-            if (e.IsGetData)
+            if (e.IsGetData && e.Column.FieldName == "RoleName")
             {
-                var user = e.Row as Users;
-                if (user != null)
+                // Debug: kiểm tra dữ liệu
+                if (e.ListSourceRowIndex >= 0 && e.ListSourceRowIndex < _usersList.Count)
                 {
-
-                    if (e.Column.FieldName == "RoleName")
-                        e.Value =  user.Role?.RoleName ?? "Chưa phân quyền";
-
+                    var user = _usersList[e.ListSourceRowIndex];
+                    
+                    // Debug output
+                    System.Diagnostics.Debug.WriteLine($"User: {user.UserName}, RoleId: {user.RoleId}, Role: {user.Role?.RoleName ?? "NULL"}");
+                    
+                    e.Value = user.Role?.RoleName ?? "Chưa phân quyền";
+                }
+                else
+                {
+                    var user = e.Row as Users;
+                    if (user != null)
+                    {
+                        // Debug output
+                        System.Diagnostics.Debug.WriteLine($"Fallback - User: {user.UserName}, RoleId: {user.RoleId}, Role: {user.Role?.RoleName ?? "NULL"}");
+                        
+                        e.Value = user.Role?.RoleName ?? "Chưa phân quyền";
+                    }
+                    else
+                    {
+                        e.Value = "Chưa phân quyền";
+                    }
                 }
             }
         }

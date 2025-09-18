@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar1 = new DevExpress.XtraBars.Bar();
             this.btnThem = new DevExpress.XtraBars.BarButtonItem();
@@ -58,8 +58,6 @@
             this.NgayTraDuKien = new DevExpress.XtraGrid.Columns.GridColumn();
             this.TrangThai = new DevExpress.XtraGrid.Columns.GridColumn();
             this.GhiChu = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.Tra = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.GiaHan = new DevExpress.XtraGrid.Columns.GridColumn();
             this.pageChiTiet = new DevExpress.XtraTab.XtraTabPage();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.txtGhiChu = new System.Windows.Forms.TextBox();
@@ -93,6 +91,7 @@
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnTra = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.btnMail = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabQLSach)).BeginInit();
             this.tabQLSach.SuspendLayout();
@@ -137,8 +136,9 @@
             this.btnLuu,
             this.btnBoQua,
             this.btnTraSach,
-            this.barButtonItem2});
-            this.barManager1.MaxItemId = 8;
+            this.barButtonItem2,
+            this.btnMail});
+            this.barManager1.MaxItemId = 9;
             // 
             // bar1
             // 
@@ -153,7 +153,8 @@
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnXoa, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnLuu, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnBoQua, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnTraSach, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnTraSach, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnMail)});
             this.bar1.OptionsBar.AllowQuickCustomization = false;
             this.bar1.OptionsBar.MinHeight = 40;
             this.bar1.Text = "Tools";
@@ -263,7 +264,7 @@
             this.pageDanhSachMuon.Appearance.Header.Options.UseFont = true;
             this.pageDanhSachMuon.Controls.Add(this.gcDanhSachMuon);
             this.pageDanhSachMuon.Name = "pageDanhSachMuon";
-            this.pageDanhSachMuon.Size = new System.Drawing.Size(1278, 652);
+            this.pageDanhSachMuon.Size = new System.Drawing.Size(1198, 652);
             this.pageDanhSachMuon.Text = "DANH SÁCH MƯỢN";
             // 
             // gcDanhSachMuon
@@ -272,7 +273,7 @@
             this.gcDanhSachMuon.Location = new System.Drawing.Point(0, 0);
             this.gcDanhSachMuon.MainView = this.gvDanhSachMuon;
             this.gcDanhSachMuon.Name = "gcDanhSachMuon";
-            this.gcDanhSachMuon.Size = new System.Drawing.Size(1278, 652);
+            this.gcDanhSachMuon.Size = new System.Drawing.Size(1198, 652);
             this.gcDanhSachMuon.TabIndex = 6;
             this.gcDanhSachMuon.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvDanhSachMuon});
@@ -286,9 +287,7 @@
             this.NgayMuon,
             this.NgayTraDuKien,
             this.TrangThai,
-            this.GhiChu,
-            this.Tra,
-            this.GiaHan});
+            this.GhiChu});
             this.gvDanhSachMuon.GridControl = this.gcDanhSachMuon;
             this.gvDanhSachMuon.Name = "gvDanhSachMuon";
             this.gvDanhSachMuon.OptionsBehavior.Editable = false;
@@ -374,20 +373,6 @@
             this.GhiChu.Visible = true;
             this.GhiChu.VisibleIndex = 6;
             this.GhiChu.Width = 150;
-            // 
-            // Tra
-            // 
-            this.Tra.Name = "Tra";
-            this.Tra.Visible = true;
-            this.Tra.VisibleIndex = 7;
-            this.Tra.Width = 100;
-            // 
-            // GiaHan
-            // 
-            this.GiaHan.Name = "GiaHan";
-            this.GiaHan.Visible = true;
-            this.GiaHan.VisibleIndex = 8;
-            this.GiaHan.Width = 100;
             // 
             // pageChiTiet
             // 
@@ -756,10 +741,17 @@
             this.btnTra.Appearance.Options.UseFont = true;
             this.btnTra.AutoHeight = false;
             this.btnTra.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "Trả", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "Trả", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnTra.Name = "btnTra";
             this.btnTra.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btnTra.Click += new System.EventHandler(this.btnTra_Click);
+            // 
+            // btnMail
+            // 
+            this.btnMail.Caption = "Gửi Mail";
+            this.btnMail.Id = 8;
+            this.btnMail.Name = "btnMail";
+            this.btnMail.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnMail_ItemClick);
             // 
             // ucMuonTra
             // 
@@ -830,8 +822,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn NgayTraDuKien;
         private DevExpress.XtraGrid.Columns.GridColumn TrangThai;
         private DevExpress.XtraGrid.Columns.GridColumn GhiChu;
-        private DevExpress.XtraGrid.Columns.GridColumn Tra;
-        private DevExpress.XtraGrid.Columns.GridColumn GiaHan;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
         private System.Windows.Forms.TextBox txtGhiChu;
         private System.Windows.Forms.Label label7;
@@ -866,5 +856,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnTra;
         private DevExpress.XtraBars.BarButtonItem btnTraSach;
         private DevExpress.XtraBars.BarButtonItem barButtonItem2;
+        private DevExpress.XtraBars.BarButtonItem btnMail;
     }
 }
