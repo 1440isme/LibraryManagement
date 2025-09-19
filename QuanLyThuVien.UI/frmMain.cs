@@ -47,6 +47,7 @@ namespace QuanLyThuVien.UI
         ucBaoCaoThongKe _ucBCTK;
         ucDashboard _ucDashboard;
         ucNguoiDung _ucNguoiDung;
+        ucHeThong _ucHeThong;
 
         private IActivatable _currentActiveControl;
 
@@ -186,6 +187,18 @@ namespace QuanLyThuVien.UI
         private void btnLogout_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void mnSetup_Click(object sender, EventArgs e)
+        {
+            if (_ucHeThong == null)
+            {
+                _ucHeThong = new ucHeThong();
+                _ucHeThong.Dock = DockStyle.Fill;
+                mainContainer.Controls.Add(_ucHeThong);
+            }
+            ActivateUserControl(_ucHeThong);
+            lblTieuDe.Caption = mnSetup.Text;
         }
     }
 }

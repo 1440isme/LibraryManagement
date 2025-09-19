@@ -88,7 +88,6 @@ namespace QuanLyThuVien.UI
         {
             try
             {
-                // Kiểm tra có sách quá hạn không
                 if (txtTongSoSach.Text == "0")
                 {
                     MessageBox.Show("Thành viên này không có sách quá hạn để gửi nhắc nhở!", 
@@ -96,7 +95,6 @@ namespace QuanLyThuVien.UI
                     return;
                 }
 
-                // Lấy email của thành viên
                 string email = GetMemberEmail();
                 if (string.IsNullOrEmpty(email))
                 {
@@ -112,7 +110,6 @@ namespace QuanLyThuVien.UI
                     return;
                 }
 
-                // Xác nhận gửi email
                 var confirmResult = MessageBox.Show(
                     $"Bạn có chắc chắn muốn gửi email nhắc nhở đến địa chỉ: {email}?",
                     "Xác nhận gửi email", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -120,7 +117,6 @@ namespace QuanLyThuVien.UI
                 if (confirmResult != DialogResult.Yes)
                     return;
 
-                // Gửi email
                 SendReminderEmail(email);
                 
                 MessageBox.Show("Email nhắc nhở đã được gửi thành công!", 
@@ -158,7 +154,6 @@ namespace QuanLyThuVien.UI
 
         private void SendReminderEmail(string toEmail)
         {
-            // Đọc cấu hình email từ App.config
             string smtpHost = ConfigurationManager.AppSettings["SmtpHost"] ?? "smtp.gmail.com";
             int smtpPort = int.Parse(ConfigurationManager.AppSettings["SmtpPort"] ?? "587");
             string fromEmail = ConfigurationManager.AppSettings["FromEmail"] ?? "your-email@gmail.com";

@@ -264,24 +264,17 @@ namespace QuanLyThuVien.UI.UC
         {
             if (e.IsGetData && e.Column.FieldName == "RoleName")
             {
-                // Debug: kiểm tra dữ liệu
                 if (e.ListSourceRowIndex >= 0 && e.ListSourceRowIndex < _usersList.Count)
                 {
-                    var user = _usersList[e.ListSourceRowIndex];
-                    
-                    // Debug output
-                    System.Diagnostics.Debug.WriteLine($"User: {user.UserName}, RoleId: {user.RoleId}, Role: {user.Role?.RoleName ?? "NULL"}");
-                    
+                    var user = _usersList[e.ListSourceRowIndex];                   
+                   
                     e.Value = user.Role?.RoleName ?? "Chưa phân quyền";
                 }
                 else
                 {
                     var user = e.Row as Users;
                     if (user != null)
-                    {
-                        // Debug output
-                        System.Diagnostics.Debug.WriteLine($"Fallback - User: {user.UserName}, RoleId: {user.RoleId}, Role: {user.Role?.RoleName ?? "NULL"}");
-                        
+                    {                        
                         e.Value = user.Role?.RoleName ?? "Chưa phân quyền";
                     }
                     else

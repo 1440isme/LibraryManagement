@@ -203,6 +203,16 @@ namespace QuanLyThuVien.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
         /// </summary>
+        internal static DevExpress.Utils.Svg.SvgImage glyph_mail1 {
+            get {
+                object obj = ResourceManager.GetObject("glyph_mail1", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
+        /// </summary>
         internal static DevExpress.Utils.Svg.SvgImage layers4 {
             get {
                 object obj = ResourceManager.GetObject("layers4", resourceCulture);

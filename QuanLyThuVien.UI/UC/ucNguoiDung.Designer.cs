@@ -51,6 +51,7 @@
             this.RoleId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.IsActive = new DevExpress.XtraGrid.Columns.GridColumn();
             this.CreatedAt = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.RoleName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.chkHoatDong = new System.Windows.Forms.CheckBox();
             this.txtUsername = new System.Windows.Forms.TextBox();
@@ -63,7 +64,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtFullname = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.RoleName = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).BeginInit();
@@ -313,6 +313,17 @@
             this.CreatedAt.Visible = true;
             this.CreatedAt.VisibleIndex = 6;
             // 
+            // RoleName
+            // 
+            this.RoleName.AppearanceHeader.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold);
+            this.RoleName.AppearanceHeader.Options.UseFont = true;
+            this.RoleName.Caption = "VAI TRÒ";
+            this.RoleName.FieldName = "RoleName";
+            this.RoleName.Name = "RoleName";
+            this.RoleName.UnboundDataType = typeof(string);
+            this.RoleName.Visible = true;
+            this.RoleName.VisibleIndex = 7;
+            // 
             // panelControl1
             // 
             this.panelControl1.Controls.Add(this.chkHoatDong);
@@ -349,7 +360,7 @@
             this.txtUsername.Location = new System.Drawing.Point(152, 30);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(231, 23);
-            this.txtUsername.TabIndex = 71;
+            this.txtUsername.TabIndex = 1;
             // 
             // label7
             // 
@@ -368,7 +379,7 @@
             this.txtPassword.Location = new System.Drawing.Point(897, 30);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(231, 23);
-            this.txtPassword.TabIndex = 68;
+            this.txtPassword.TabIndex = 3;
             // 
             // cboRole
             // 
@@ -380,7 +391,7 @@
             this.cboRole.Location = new System.Drawing.Point(546, 83);
             this.cboRole.Name = "cboRole";
             this.cboRole.Size = new System.Drawing.Size(231, 24);
-            this.cboRole.TabIndex = 53;
+            this.cboRole.TabIndex = 5;
             // 
             // label5
             // 
@@ -408,7 +419,7 @@
             this.txtEmail.Location = new System.Drawing.Point(152, 84);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(231, 23);
-            this.txtEmail.TabIndex = 47;
+            this.txtEmail.TabIndex = 4;
             // 
             // label2
             // 
@@ -426,7 +437,7 @@
             this.txtFullname.Location = new System.Drawing.Point(546, 30);
             this.txtFullname.Name = "txtFullname";
             this.txtFullname.Size = new System.Drawing.Size(231, 23);
-            this.txtFullname.TabIndex = 45;
+            this.txtFullname.TabIndex = 2;
             // 
             // label1
             // 
@@ -438,17 +449,6 @@
             this.label1.Size = new System.Drawing.Size(44, 16);
             this.label1.TabIndex = 44;
             this.label1.Text = "Họ tên";
-            // 
-            // RoleName
-            // 
-            this.RoleName.AppearanceHeader.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold);
-            this.RoleName.AppearanceHeader.Options.UseFont = true;
-            this.RoleName.Caption = "VAI TRÒ";
-            this.RoleName.FieldName = "RoleName";
-            this.RoleName.Name = "RoleName";
-            this.RoleName.UnboundDataType = typeof(string);
-            this.RoleName.Visible = true;
-            this.RoleName.VisibleIndex = 7;
             // 
             // ucNguoiDung
             // 

@@ -172,6 +172,12 @@
     <Compile Include="UC\ucDashboard.Designer.cs">
       <DependentUpon>ucDashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="UC\ucHeThong.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\ucHeThong.Designer.cs">
+      <DependentUpon>ucHeThong.cs</DependentUpon>
+    </Compile>
     <Compile Include="UC\ucMuonTra.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -243,6 +249,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UC\ucDashboard.resx">
       <DependentUpon>ucDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\ucHeThong.resx">
+      <DependentUpon>ucHeThong.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC\ucMuonTra.resx">
       <DependentUpon>ucMuonTra.cs</DependentUpon>
@@ -350,6 +359,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\glyph_mail.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\glyph_mail1.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

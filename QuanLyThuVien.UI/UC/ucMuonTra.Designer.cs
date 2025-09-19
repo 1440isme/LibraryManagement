@@ -42,6 +42,7 @@
             this.btnLuu = new DevExpress.XtraBars.BarButtonItem();
             this.btnBoQua = new DevExpress.XtraBars.BarButtonItem();
             this.btnTraSach = new DevExpress.XtraBars.BarButtonItem();
+            this.btnMail = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -91,7 +92,6 @@
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnTra = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.btnMail = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabQLSach)).BeginInit();
             this.tabQLSach.SuspendLayout();
@@ -153,8 +153,8 @@
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnXoa, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnLuu, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnBoQua, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnTraSach, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnMail)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnTraSach, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnMail, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar1.OptionsBar.AllowQuickCustomization = false;
             this.bar1.OptionsBar.MinHeight = 40;
             this.bar1.Text = "Tools";
@@ -207,6 +207,14 @@
             this.btnTraSach.ImageOptions.SvgImage = global::QuanLyThuVien.UI.Properties.Resources.layers4;
             this.btnTraSach.Name = "btnTraSach";
             this.btnTraSach.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnTraSach_ItemClick);
+            // 
+            // btnMail
+            // 
+            this.btnMail.Caption = "Gửi Mail";
+            this.btnMail.Id = 8;
+            this.btnMail.ImageOptions.SvgImage = global::QuanLyThuVien.UI.Properties.Resources.glyph_mail1;
+            this.btnMail.Name = "btnMail";
+            this.btnMail.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnMail_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -745,13 +753,6 @@
             this.btnTra.Name = "btnTra";
             this.btnTra.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btnTra.Click += new System.EventHandler(this.btnTra_Click);
-            // 
-            // btnMail
-            // 
-            this.btnMail.Caption = "Gửi Mail";
-            this.btnMail.Id = 8;
-            this.btnMail.Name = "btnMail";
-            this.btnMail.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnMail_ItemClick);
             // 
             // ucMuonTra
             // 
