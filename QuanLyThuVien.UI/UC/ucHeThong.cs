@@ -49,7 +49,7 @@ namespace QuanLyThuVien.UI.UC
         }
         private void InitializeControls()
         {
-            var dbContext = new QuanLyThuVienContext();
+            var dbContext = ContextFactory.CreateContext(); 
             var auditlogRepo = new GenericRepository<AuditLog>(dbContext);
             _cauHinhService = new CauHinhService(auditlogRepo);
 

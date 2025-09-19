@@ -19,7 +19,8 @@ namespace QuanLyThuVien.UI
 {
     public partial class frmMain : DevExpress.XtraBars.FluentDesignSystem.FluentDesignForm
     {
-        private readonly string _connectionString;
+        private string _connectionString; 
+        private readonly string _integratedConnString; 
 
         public frmMain()
         {
@@ -27,7 +28,8 @@ namespace QuanLyThuVien.UI
         }
         public frmMain(Users user) : this()
         {
-            _connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVienConnectionString"].ConnectionString;
+            _integratedConnString = ConfigurationManager.ConnectionStrings["QuanLyThuVien_Integrated"]?.ConnectionString;
+            _connectionString = _integratedConnString;
             UpdateOverdueStatus();
             this._user = user;
             if (user.RoleId == 2) 
@@ -38,7 +40,20 @@ namespace QuanLyThuVien.UI
             CurrentUser = user.UserId; 
             mnTrangChu_Click(this, EventArgs.Empty);
         }
-        Users _user;
+        public frmMain(Users user, string connectionString) : this(user)
+        {
+            _connectionString = connectionString ?? _integratedConnString;
+            UpdateOverdueStatus();
+            this._user = user;
+            if (user.RoleId == 2)
+            {
+                btnHeThong.Visible = false;
+            }
+            lblUser.Text = $"{user.FullName}";
+            CurrentUser = user.UserId;
+            mnTrangChu_Click(this, EventArgs.Empty);
+        }
+        private Users _user;
 
         ucSach _ucSach;
         ucThanhVien _ucThanhVien;

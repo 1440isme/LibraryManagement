@@ -105,7 +105,7 @@ namespace QuanLyThuVien.UI.UC
         {
             try
             {
-                using (var freshContext = new QuanLyThuVienContext())
+                using (var freshContext = ContextFactory.CreateContext())
                 {
                     var freshRepo = new GenericRepository<PhieuMuon>(freshContext);
                     var freshService = new PhieuMuonService(freshRepo);
@@ -138,7 +138,7 @@ namespace QuanLyThuVien.UI.UC
         {
             try
             {
-                using (var freshContext = new QuanLyThuVienContext())
+                using (var freshContext = ContextFactory.CreateContext())
                 {
                     var freshRepo = new GenericRepository<BanSaoSach>(freshContext);
                     var freshService = new BanSaoSachService(freshRepo);
@@ -160,7 +160,7 @@ namespace QuanLyThuVien.UI.UC
             {
                 _currentPhieuMuonId = maPhieuMuon;
 
-                using (var freshContext = new QuanLyThuVienContext())
+                using (var freshContext = ContextFactory.CreateContext())
                 {
                     var freshCtRepo = new GenericRepository<ChiTietPhieuMuon>(freshContext);
                     var freshCtService = new ChiTietPhieuMuonService(freshCtRepo);
@@ -262,7 +262,7 @@ namespace QuanLyThuVien.UI.UC
             {
                 var currentSelectedValue = searchThanhVien.EditValue;
 
-                using (var freshContext = new QuanLyThuVienContext())
+                using (var freshContext = ContextFactory.CreateContext())
                 {
                     var freshRepo = new GenericRepository<ThanhVien>(freshContext);
                     var freshService = new ThanhVienService(freshRepo);
@@ -1377,7 +1377,7 @@ namespace QuanLyThuVien.UI.UC
         {
             try
             {
-                using (var freshContext = new QuanLyThuVienContext())
+                using (var freshContext = ContextFactory.CreateContext())
                 {
                     var freshCtRepo = new GenericRepository<ChiTietPhieuMuon>(freshContext);
                     var freshCtService = new ChiTietPhieuMuonService(freshCtRepo);
@@ -1416,7 +1416,7 @@ namespace QuanLyThuVien.UI.UC
 
         private void InitializeControls()
         {
-            var dbContext = new QuanLyThuVienContext();
+            var dbContext = ContextFactory.CreateContext(); 
             var repo = new GenericRepository<PhieuMuon>(dbContext);
             _phieuMuonService = new PhieuMuonService(repo);
 

@@ -12,6 +12,8 @@ namespace QuanLyThuVien.BLL.Services
     {
         private readonly IGenericRepository<Phat> _repository;
         private readonly IGenericRepository<ChiTietPhieuMuon> _chiTietRepository;
+        private readonly string _connectionString = ConnectionStringProvider.GetConnectionString();
+
 
         public PhatService(IGenericRepository<Phat> repository)
         {

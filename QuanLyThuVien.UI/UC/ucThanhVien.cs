@@ -54,7 +54,7 @@ namespace QuanLyThuVien.UI.UC
 
         private void InitializeControls()
         {
-            var dbContext = new QuanLyThuVienContext();
+            var dbContext = ContextFactory.CreateContext(); 
             var TVRepo = new GenericRepository<ThanhVien>(dbContext);
             _thanhVienService = new ThanhVienService(TVRepo);
 

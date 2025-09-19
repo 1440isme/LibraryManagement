@@ -27,7 +27,7 @@ namespace QuanLyThuVien.UI.UC.Pages
        
             gvSach.CustomUnboundColumnData += GvSach_CustomUnboundColumnData;
             this.UpdateStyles();
-            var dbContext = new QuanLyThuVienContext();
+            var dbContext = ContextFactory.CreateContext();
             var sachRepo = new GenericRepository<Sach>(dbContext);
             _sachService = new SachService(sachRepo);
 

@@ -24,7 +24,7 @@ namespace QuanLyThuVien.UI.UC.Pages
         {
             InitializeComponent();
         
-            var dbContext = new QuanLyThuVienContext();
+            var dbContext = ContextFactory.CreateContext(); 
             var tacGiaRepo = new GenericRepository<TacGia>(dbContext);
             _tacGiaService = new TacGiaService(tacGiaRepo);
         }

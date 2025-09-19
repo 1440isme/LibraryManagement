@@ -49,7 +49,7 @@ namespace QuanLyThuVien.DAL.Entities
         {
             if (!optionsBuilder.IsConfigured)
             {
-                var connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVienConnectionString"].ConnectionString;
+                var connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVienConnectionString"]?.ConnectionString;
                 optionsBuilder.UseSqlServer(connectionString);
             }
         }

@@ -19,7 +19,7 @@ namespace QuanLyThuVien.BLL.Services
         public CauHinhService(IGenericRepository<AuditLog> repository)
         {
             _repository = repository;
-            _connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVienConnectionString"].ConnectionString;
+            _connectionString = ConnectionStringProvider.GetConnectionString();
 
         }
         public IEnumerable<AuditLog> GetAllLogs()

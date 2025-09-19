@@ -11,7 +11,7 @@ namespace QuanLyThuVien.BLL.Services
 
         public ThanhToanPhatService()
         {
-            _connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVienConnectionString"].ConnectionString;
+            _connectionString = ConnectionStringProvider.GetConnectionString();
         }
 
         public void ExecuteThanhToanPhatProc(int maPhat, string note, string method = "Tiền mặt")

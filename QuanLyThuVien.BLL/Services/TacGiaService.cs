@@ -19,12 +19,12 @@ namespace QuanLyThuVien.BLL.Services
         public TacGiaService(IGenericRepository<TacGia> repository)
         {
             _repository = repository;
-            _connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVienConnectionString"].ConnectionString;
+            _connectionString = ConnectionStringProvider.GetConnectionString();
         }
         
         public IEnumerable<TacGia> GetAllAuthors()
         {
-            using (var newContext = new QuanLyThuVienContext())
+            using (var newContext = ContextFactory.CreateContext())
             {
                 return newContext.TacGia.ToList();
             }

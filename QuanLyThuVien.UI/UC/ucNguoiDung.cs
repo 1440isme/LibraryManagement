@@ -52,7 +52,7 @@ namespace QuanLyThuVien.UI.UC
         
         private void InitializeControls()
         {
-            var dbContext = new QuanLyThuVienContext();
+            var dbContext = ContextFactory.CreateContext(); 
             var userRepository = new GenericRepository<Users>(dbContext);
             var roleRepository = new GenericRepository<Roles>(dbContext);
             _nguoiDungService = new NguoiDungService(userRepository);
@@ -151,21 +151,26 @@ namespace QuanLyThuVien.UI.UC
                     var user = gvUser.GetFocusedRow() as Users;
                     if (user != null)
                     {
-                        if (MessageBox.Show("Bạn có chắc chắn muốn xóa thành viên này không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        if (MessageBox.Show("Bạn có chắc chắn muốn xóa người dùng này không?", "Thông báo",
+                            MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
+                            _nguoiDungService.SyncUser(user.UserName, user.PasswordHash, user.RoleId ?? 0, "DELETE");
                             _nguoiDungService.DeleteUser(user.UserId);
-                            
                             _usersList = _nguoiDungService.GetAllUsers().ToList();
                             gcUser.DataSource = _usersList;
-                            
+
                             MessageBox.Show("Xóa người dùng thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                 }
             }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show($"Lỗi bảo mật: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi xoá người dùng: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Lỗi khi xóa người dùng: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -186,12 +191,18 @@ namespace QuanLyThuVien.UI.UC
                 MessageBox.Show("Mật khẩu không được để trống.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            if (cboRole.SelectedItem == null)
+            {
+                MessageBox.Show("Vui lòng chọn vai trò cho người dùng.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             try
             {
                 if (_them)
                 {
                     _nguoiDungService.AddUser(txtUsername.Text.Trim(), txtFullname.Text.Trim(), txtPassword.Text.Trim(), txtEmail.Text.Trim(), cboRole.SelectedItem != null ? (int)cboRole.SelectedValue : (int?)null, chkHoatDong.Checked);
-                    
+                    _nguoiDungService.SyncUser(txtUsername.Text.Trim(), txtPassword.Text.Trim(), cboRole.SelectedItem != null ? (int)cboRole.SelectedValue : 0, "INSERT");
+                                   
                     _usersList = _nguoiDungService.GetAllUsers().ToList();
                     gcUser.DataSource = _usersList;
                     
@@ -209,7 +220,8 @@ namespace QuanLyThuVien.UI.UC
                     }
                     
                     _nguoiDungService.UpdateUser(user.UserId, txtUsername.Text.Trim(), txtFullname.Text.Trim(), txtPassword.Text.Trim(), txtEmail.Text.Trim(), cboRole.SelectedItem != null ? (int)cboRole.SelectedValue : (int?)null, chkHoatDong.Checked);
-
+                    _nguoiDungService.SyncUser(txtUsername.Text.Trim(), txtPassword.Text.Trim(), cboRole.SelectedItem != null ? (int)cboRole.SelectedValue : 0, "UPDATE");
+                    
                     _usersList = _nguoiDungService.GetAllUsers().ToList();
                     gcUser.DataSource = _usersList;
                     
@@ -218,9 +230,17 @@ namespace QuanLyThuVien.UI.UC
                     _enable(false);
                 }    
             }
+            catch (InvalidOperationException ex) 
+            {
+                MessageBox.Show($"Lỗi bảo mật: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                MessageBox.Show($"Không có quyền: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi lưu người dùng: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Lỗi khi lưu người dùng: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

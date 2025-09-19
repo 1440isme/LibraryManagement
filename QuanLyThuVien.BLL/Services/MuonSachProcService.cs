@@ -15,7 +15,7 @@ namespace QuanLyThuVien.BLL.Services
 
         public MuonSachProcService()
         {
-            _connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVienConnectionString"].ConnectionString;
+            _connectionString = ConnectionStringProvider.GetConnectionString();
         }
 
         public int ExecuteMuonSachProc(int maThanhVien, int userId, DateTime ngayTraDuKien, List<int> listMaBanSao, string ghichu, int? maPhieuMuon = null)

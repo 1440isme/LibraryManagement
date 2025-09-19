@@ -78,7 +78,7 @@ namespace QuanLyThuVien.BLL.Services
 
         public List<ChiTietPhieuMuonViewModel> GetChiTietPhieuMuonViewModels(int maPhieuMuon)
         {
-            using (var context = new QuanLyThuVienContext())
+            using (var context = ContextFactory.CreateContext())
             {
                 var result = (from ct in context.ChiTietPhieuMuon
                               join pm in context.PhieuMuon on ct.MaPhieuMuon equals pm.MaPhieuMuon

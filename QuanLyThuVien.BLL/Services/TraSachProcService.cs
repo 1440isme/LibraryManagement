@@ -13,7 +13,7 @@ namespace QuanLyThuVien.BLL.Services
 
         public TraSachProcService()
         {
-            _connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVienConnectionString"].ConnectionString;
+            _connectionString = ConnectionStringProvider.GetConnectionString();
         }
 
         public void ExecuteTraNhieuSachProc(List<int> listMaBanSao, int userId, string tinhTrangSach, string ghiChu = null)

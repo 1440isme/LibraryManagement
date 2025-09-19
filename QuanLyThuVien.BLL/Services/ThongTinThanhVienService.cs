@@ -12,7 +12,7 @@ namespace QuanLyThuVien.BLL.Services
     {
         public List<ThongTinThanhVienProc> GetThongTinThanhVien(int maThanhVien)
         {
-            using (QuanLyThuVienContext context = new QuanLyThuVienContext())
+            using (QuanLyThuVienContext context = ContextFactory.CreateContext())
             {
                 var result = context.ThongTinThanhVien
                     .FromSqlInterpolated($"EXEC sp_GetThongTinThanhVienMuonTra @MaThanhVien = {maThanhVien}")

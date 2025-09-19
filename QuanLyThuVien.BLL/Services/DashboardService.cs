@@ -14,7 +14,7 @@ namespace QuanLyThuVien.BLL.Services
         private readonly string _connectionString;
         public DashboardService()
         {
-            _connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVienConnectionString"].ConnectionString;
+            _connectionString = ConnectionStringProvider.GetConnectionString();
 
         }
         public DataSet GetSummary()

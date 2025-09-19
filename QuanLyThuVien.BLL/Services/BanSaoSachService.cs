@@ -54,7 +54,7 @@ namespace QuanLyThuVien.BLL.Services
 
         public List<BanSaoSachViewModel> GetAvailableBooksViewModel()
         {
-            using (var context = new QuanLyThuVienContext())
+            using (var context = ContextFactory.CreateContext())
             {
                 var result = (from bs in context.BanSaoSach
                               join s in context.Sach on bs.MaSach equals s.MaSach

@@ -9,12 +9,18 @@ using QuanLyThuVien.DAL.Repositories;
 public class GenericRepository<T> : IGenericRepository<T> where T : class
 {
     private readonly QuanLyThuVienContext _context;
+    private readonly string _connectionString;
     private readonly DbSet<T> _dbSet;
 
-    public GenericRepository(QuanLyThuVienContext context)
+    public GenericRepository(QuanLyThuVienContext context, string connectionString = null)
     {
         _context = context;
+        _connectionString = connectionString ?? context.Database.GetDbConnection().ConnectionString;
         _dbSet = _context.Set<T>();
+    }
+    public string GetConnectionString()
+    {
+        return _connectionString;
     }
 
     public IEnumerable<T> GetAll()

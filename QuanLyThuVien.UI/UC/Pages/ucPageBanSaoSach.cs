@@ -20,8 +20,8 @@ namespace QuanLyThuVien.UI.UC.Pages
         public ucPageBanSaoSach()
         {
             InitializeComponent();
-         
-            var dbContext = new QuanLyThuVienContext();
+
+            var dbContext = ContextFactory.CreateContext(); 
             var banSSRepo = new GenericRepository<BanSaoSach>(dbContext);
             _banSaoSachService = new BanSaoSachService(banSSRepo);
         }

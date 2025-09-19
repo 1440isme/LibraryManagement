@@ -20,12 +20,12 @@ namespace QuanLyThuVien.BLL.Services
         public SachService(IGenericRepository<Sach> repository)
         {
             _repository = repository;
-            _connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVienConnectionString"].ConnectionString;
+            _connectionString = ConnectionStringProvider.GetConnectionString();
         }
 
         public IEnumerable<Sach> GetAllBooks()
         {
-            using (var newContext = new QuanLyThuVienContext())
+            using (var newContext = ContextFactory.CreateContext())
             {
                 return newContext.Sach
                     .Include(s => s.MaTacGiaNavigation)

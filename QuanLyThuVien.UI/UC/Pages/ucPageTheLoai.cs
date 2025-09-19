@@ -20,7 +20,7 @@ namespace QuanLyThuVien.UI.UC.Pages
         public ucPageTheLoai()
         {
             InitializeComponent();
-            var dbContext = new QuanLyThuVienContext();
+            var dbContext = ContextFactory.CreateContext(); 
             var theLoaiRepo = new GenericRepository<TheLoai>(dbContext);
             _theLoaiService = new TheLoaiService(theLoaiRepo);
         }

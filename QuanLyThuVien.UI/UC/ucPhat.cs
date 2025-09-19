@@ -52,7 +52,7 @@ namespace QuanLyThuVien.UI.UC
 
         private void InitializeServices()
         {
-            var dbContext = new QuanLyThuVienContext();
+            var dbContext = ContextFactory.CreateContext(); 
             var repo = new GenericRepository<Phat>(dbContext);
             var ctMuonRepo = new GenericRepository<ChiTietPhieuMuon>(dbContext);
             var thanhToanRepo = new GenericRepository<PaymentHistory>(dbContext);
@@ -112,7 +112,7 @@ namespace QuanLyThuVien.UI.UC
         {
             try
             {
-                using (var freshContext = new QuanLyThuVienContext())
+                using (var freshContext = ContextFactory.CreateContext())
                 {
                     var freshRepo = new GenericRepository<Phat>(freshContext);
                     var freshCtMuonRepo = new GenericRepository<ChiTietPhieuMuon>(freshContext);

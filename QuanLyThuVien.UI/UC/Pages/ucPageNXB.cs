@@ -19,7 +19,7 @@ namespace QuanLyThuVien.UI.UC.Pages
         public ucPageNXB()
         {
             InitializeComponent();
-            var dbContext = new QuanLyThuVienContext();
+            var dbContext = ContextFactory.CreateContext(); 
             var nxbRepo = new GenericRepository<NhaXuatBan>(dbContext);
             _nxbService = new NXBService(nxbRepo);
         }

@@ -37,7 +37,6 @@
             this.mnThanhVien = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.mnMuonTra = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.mnPhat = new DevExpress.XtraBars.Navigation.AccordionControlElement();
-            this.mnDatTruoc = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.mnTKBC = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.btnHeThong = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.mnUser = new DevExpress.XtraBars.Navigation.AccordionControlElement();
@@ -88,7 +87,6 @@
             this.mnThanhVien,
             this.mnMuonTra,
             this.mnPhat,
-            this.mnDatTruoc,
             this.mnTKBC});
             this.btnDanhMuc.Expanded = true;
             this.btnDanhMuc.Name = "btnDanhMuc";
@@ -128,12 +126,6 @@
             this.mnPhat.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             this.mnPhat.Text = "Quản lý Phạt - Lịch sử thanh toán";
             this.mnPhat.Click += new System.EventHandler(this.mnPhat_Click);
-            // 
-            // mnDatTruoc
-            // 
-            this.mnDatTruoc.Name = "mnDatTruoc";
-            this.mnDatTruoc.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
-            this.mnDatTruoc.Text = "Quản lý danh sách đặt trước";
             // 
             // mnTKBC
             // 
@@ -251,7 +243,6 @@
         private DevExpress.XtraBars.Navigation.AccordionControlElement mnSetup;
         private DevExpress.XtraBars.Navigation.AccordionControlElement mnUser;
         private DevExpress.XtraBars.BarStaticItem lblTieuDe;
-        private DevExpress.XtraBars.Navigation.AccordionControlElement mnDatTruoc;
         private DevExpress.XtraBars.Navigation.AccordionControlElement mnPhat;
         private DevExpress.XtraBars.Navigation.AccordionControlElement lblUser;
         private DevExpress.XtraBars.Navigation.AccordionControlElement btnLogout;

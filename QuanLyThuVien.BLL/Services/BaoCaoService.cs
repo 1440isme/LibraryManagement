@@ -15,7 +15,7 @@ namespace QuanLyThuVien.BLL.Services
 
         public BaoCaoService()
         {
-            _connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVienConnectionString"].ConnectionString;
+            _connectionString = ConnectionStringProvider.GetConnectionString();
         }
         public DataTable GetTopSachMuon(DateTime fromDate, DateTime toDate)
         {

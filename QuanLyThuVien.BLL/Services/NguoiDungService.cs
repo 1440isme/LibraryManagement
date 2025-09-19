@@ -4,11 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuanLyThuVien.BLL.Services
 {
@@ -16,19 +13,21 @@ namespace QuanLyThuVien.BLL.Services
     {
         private readonly IGenericRepository<Users> _repository;
         private readonly string _connectionString;
-        
+        private readonly string _sysAdminConStr;
+
         public NguoiDungService(IGenericRepository<Users> repository)
         {
             _repository = repository;
-            _connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVienConnectionString"].ConnectionString;
+            _connectionString = ConnectionStringProvider.GetConnectionString();
+            _sysAdminConStr = ConnectionStringProvider.GetIntegratedConnectionString();
         }
         
         public IEnumerable<Users> GetAllUsers()
         {
-            using (var newContext = new QuanLyThuVienContext())
+            using (var context = ContextFactory.CreateContext())
             {
-                var users = newContext.Users.ToList();
-                var roles = newContext.Roles.ToList();
+                var users = context.Users.ToList();
+                var roles = context.Roles.ToList();
                 
                 foreach (var user in users)
                 {
@@ -50,7 +49,9 @@ namespace QuanLyThuVien.BLL.Services
             if (string.IsNullOrWhiteSpace(passwordHash))
                 throw new ArgumentException("Mật khẩu không được để trống", nameof(passwordHash));
 
-            using (var connection = new SqlConnection(_connectionString))
+            var currentConnectionString = ConnectionStringProvider.GetConnectionString();
+            
+            using (var connection = new SqlConnection(currentConnectionString))
             {
                 using (var command = new SqlCommand("[dbo].[ThemUsers]", connection))
                 {
@@ -85,7 +86,9 @@ namespace QuanLyThuVien.BLL.Services
             if (string.IsNullOrWhiteSpace(passwordHash))
                 throw new ArgumentException("Mật khẩu không được để trống", nameof(passwordHash));
 
-            using (var connection = new SqlConnection(_connectionString))
+            var currentConnectionString = ConnectionStringProvider.GetConnectionString(); 
+
+            using (var connection = new SqlConnection(currentConnectionString))
             {
                 using (var command = new SqlCommand("[dbo].[SuaUsers]", connection))
                 {
@@ -114,7 +117,9 @@ namespace QuanLyThuVien.BLL.Services
             if (userId <= 0)
                 throw new ArgumentException("ID người dùng không hợp lệ", nameof(userId));
 
-            using (var connection = new SqlConnection(_connectionString))
+            var currentConnectionString = ConnectionStringProvider.GetConnectionString(); 
+
+            using (var connection = new SqlConnection(currentConnectionString))
             {
                 using (var command = new SqlCommand("[dbo].[XoaUsers]", connection))
                 {
@@ -126,6 +131,52 @@ namespace QuanLyThuVien.BLL.Services
                     connection.Open();
                     command.ExecuteNonQuery();
                 }
+            }
+        }
+        public bool SyncUser(string userName, string plainPassword, int roleId, string action)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(_sysAdminConStr))
+                {
+                    using (var command = new SqlCommand("[dbo].[SyncUserToDBSecurity]", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.CommandTimeout = 30;
+
+                        command.Parameters.AddWithValue("@UserName", userName);
+                        command.Parameters.AddWithValue("@RoleID", roleId);
+                        command.Parameters.AddWithValue("@Action", action);
+
+                        if (action == "INSERT" || action == "UPDATE")
+                        {
+                            if (string.IsNullOrEmpty(plainPassword))
+                                throw new ArgumentException("Plain password bắt buộc cho INSERT/UPDATE");
+
+                            command.Parameters.AddWithValue("@PlainPassword", plainPassword);
+                        }
+                        else
+                        {
+                            command.Parameters.AddWithValue("@PlainPassword", (object)DBNull.Value);
+                        }
+
+                        connection.Open();
+                        int result = command.ExecuteNonQuery();
+                        return result > 0;
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                string errorMsg = $"SQL Error #{sqlEx.Number}: {sqlEx.Message} | User: {userName} | Action: {action}";
+                System.Diagnostics.Debug.WriteLine(errorMsg);
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Sync Error: {ex.Message} | User: {userName}");
+                return false;
             }
         }
 

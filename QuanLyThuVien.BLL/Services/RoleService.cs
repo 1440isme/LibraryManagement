@@ -19,7 +19,7 @@ namespace QuanLyThuVien.BLL.Services
         
         public IEnumerable<Roles> GetAllRoles()
         {
-            using (var newContext = new QuanLyThuVienContext())
+            using (var newContext = ContextFactory.CreateContext())
             {
                 return newContext.Roles.ToList();
             }

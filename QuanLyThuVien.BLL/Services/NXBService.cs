@@ -19,12 +19,12 @@ namespace QuanLyThuVien.BLL.Services
         public NXBService(IGenericRepository<NhaXuatBan> repository)
         {
             _repository = repository;
-            _connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVienConnectionString"].ConnectionString;
+            _connectionString = ConnectionStringProvider.GetConnectionString();
         }
         
         public IEnumerable<NhaXuatBan> GetAllPublishers()
         {
-            using (var newContext = new QuanLyThuVienContext())
+            using (var newContext = ContextFactory.CreateContext())
             {
                 return newContext.NhaXuatBan.ToList();
             }

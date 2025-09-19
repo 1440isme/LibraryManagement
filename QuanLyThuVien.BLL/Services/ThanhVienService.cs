@@ -19,12 +19,12 @@ namespace QuanLyThuVien.BLL.Services
         public ThanhVienService(IGenericRepository<ThanhVien> repository)
         {
             _repository = repository;
-            _connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVienConnectionString"].ConnectionString;
+            _connectionString = ConnectionStringProvider.GetConnectionString();
         }
         
         public IEnumerable<ThanhVien> GetAllMembers()
         {
-            using (var newContext = new QuanLyThuVienContext())
+            using (var newContext = ContextFactory.CreateContext())
             {
                 return newContext.ThanhVien.ToList();
             }

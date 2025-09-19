@@ -1,12 +1,13 @@
 ﻿using DevExpress.XtraEditors;
+using QuanLyThuVien.BLL.Services;
 using System;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Net.Mail;
 using System.Text;
-using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace QuanLyThuVien.UI
 {
@@ -18,7 +19,7 @@ namespace QuanLyThuVien.UI
         public frmGuiMail(int maThanhVien)
         {
             InitializeComponent();
-            _connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVienConnectionString"].ConnectionString;
+            _connectionString = ConnectionStringProvider.GetConnectionString();
             this.maThanhVien = maThanhVien;
             LoadMemberDetails();
         }
@@ -188,7 +189,7 @@ namespace QuanLyThuVien.UI
             emailBody.AppendLine();
             emailBody.AppendLine($"• Số lượng sách quá hạn: {txtTongSoSach.Text} cuốn");
             emailBody.AppendLine($"• Tổng số ngày quá hạn: {txtTongNgayQuaHan.Text} ngày");
-            emailBody.AppendLine($"• Tổng tiền phạt: {txtTongPhat.Text}");
+            emailBody.AppendLine($"• Tổng tiền phạt dự kiến: {txtTongPhat.Text}");
             emailBody.AppendLine();
             emailBody.AppendLine("Danh sách sách quá hạn:");
             emailBody.AppendLine(txtDanhSachSach.Text);
