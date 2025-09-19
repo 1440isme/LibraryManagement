@@ -297,7 +297,7 @@
             0});
             this.numNamXB.Name = "numNamXB";
             this.numNamXB.Size = new System.Drawing.Size(231, 23);
-            this.numNamXB.TabIndex = 61;
+            this.numNamXB.TabIndex = 50;
             // 
             // chkTrangThai
             // 
@@ -326,7 +326,7 @@
             this.numSoLuong.Location = new System.Drawing.Point(955, 78);
             this.numSoLuong.Name = "numSoLuong";
             this.numSoLuong.Size = new System.Drawing.Size(174, 23);
-            this.numSoLuong.TabIndex = 58;
+            this.numSoLuong.TabIndex = 52;
             // 
             // label7
             // 
@@ -349,7 +349,7 @@
             0});
             this.numGia.Name = "numGia";
             this.numGia.Size = new System.Drawing.Size(174, 23);
-            this.numGia.TabIndex = 56;
+            this.numGia.TabIndex = 51;
             // 
             // label6
             // 
@@ -368,7 +368,7 @@
             this.cboTheLoai.Location = new System.Drawing.Point(537, 75);
             this.cboTheLoai.Name = "cboTheLoai";
             this.cboTheLoai.Size = new System.Drawing.Size(231, 24);
-            this.cboTheLoai.TabIndex = 53;
+            this.cboTheLoai.TabIndex = 49;
             // 
             // label5
             // 
@@ -387,7 +387,7 @@
             this.cboNXB.Location = new System.Drawing.Point(537, 26);
             this.cboNXB.Name = "cboNXB";
             this.cboNXB.Size = new System.Drawing.Size(231, 24);
-            this.cboNXB.TabIndex = 51;
+            this.cboNXB.TabIndex = 48;
             // 
             // label4
             // 
@@ -406,7 +406,7 @@
             this.cboTacGia.Location = new System.Drawing.Point(152, 123);
             this.cboTacGia.Name = "cboTacGia";
             this.cboTacGia.Size = new System.Drawing.Size(231, 24);
-            this.cboTacGia.TabIndex = 49;
+            this.cboTacGia.TabIndex = 47;
             // 
             // label3
             // 
@@ -424,7 +424,7 @@
             this.txtISBN.Location = new System.Drawing.Point(152, 75);
             this.txtISBN.Name = "txtISBN";
             this.txtISBN.Size = new System.Drawing.Size(231, 23);
-            this.txtISBN.TabIndex = 47;
+            this.txtISBN.TabIndex = 46;
             // 
             // label2
             // 

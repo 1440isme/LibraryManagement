@@ -158,7 +158,7 @@
             this.txtSDT.Location = new System.Drawing.Point(894, 29);
             this.txtSDT.Name = "txtSDT";
             this.txtSDT.Size = new System.Drawing.Size(231, 23);
-            this.txtSDT.TabIndex = 59;
+            this.txtSDT.TabIndex = 47;
             // 
             // txtDiaChi
             // 
@@ -166,7 +166,7 @@
             this.txtDiaChi.Location = new System.Drawing.Point(503, 29);
             this.txtDiaChi.Name = "txtDiaChi";
             this.txtDiaChi.Size = new System.Drawing.Size(231, 23);
-            this.txtDiaChi.TabIndex = 58;
+            this.txtDiaChi.TabIndex = 46;
             // 
             // lbl
             // 

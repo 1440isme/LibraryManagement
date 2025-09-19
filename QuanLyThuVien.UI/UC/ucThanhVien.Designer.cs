@@ -337,7 +337,7 @@
             this.txtMaThanhVien.Location = new System.Drawing.Point(152, 30);
             this.txtMaThanhVien.Name = "txtMaThanhVien";
             this.txtMaThanhVien.Size = new System.Drawing.Size(148, 23);
-            this.txtMaThanhVien.TabIndex = 71;
+            this.txtMaThanhVien.TabIndex = 45;
             // 
             // label7
             // 
@@ -356,7 +356,7 @@
             this.txtSDT.Location = new System.Drawing.Point(515, 77);
             this.txtSDT.Name = "txtSDT";
             this.txtSDT.Size = new System.Drawing.Size(231, 23);
-            this.txtSDT.TabIndex = 69;
+            this.txtSDT.TabIndex = 50;
             // 
             // txtDiaChi
             // 
@@ -364,7 +364,7 @@
             this.txtDiaChi.Location = new System.Drawing.Point(705, 30);
             this.txtDiaChi.Name = "txtDiaChi";
             this.txtDiaChi.Size = new System.Drawing.Size(148, 23);
-            this.txtDiaChi.TabIndex = 68;
+            this.txtDiaChi.TabIndex = 47;
             // 
             // dtNgayDK
             // 
@@ -394,7 +394,7 @@
             this.cboLoaiThanhVien.Location = new System.Drawing.Point(993, 30);
             this.cboLoaiThanhVien.Name = "cboLoaiThanhVien";
             this.cboLoaiThanhVien.Size = new System.Drawing.Size(148, 24);
-            this.cboLoaiThanhVien.TabIndex = 53;
+            this.cboLoaiThanhVien.TabIndex = 48;
             // 
             // label5
             // 
@@ -432,7 +432,7 @@
             this.txtEmail.Location = new System.Drawing.Point(152, 77);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(231, 23);
-            this.txtEmail.TabIndex = 47;
+            this.txtEmail.TabIndex = 49;
             // 
             // label2
             // 
@@ -450,7 +450,7 @@
             this.txtTenThanhVien.Location = new System.Drawing.Point(452, 30);
             this.txtTenThanhVien.Name = "txtTenThanhVien";
             this.txtTenThanhVien.Size = new System.Drawing.Size(148, 23);
-            this.txtTenThanhVien.TabIndex = 45;
+            this.txtTenThanhVien.TabIndex = 46;
             // 
             // label1
             // 

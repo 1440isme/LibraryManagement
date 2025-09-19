@@ -77,10 +77,9 @@
             // txtUsername
             // 
             this.txtUsername.Font = new System.Drawing.Font("SF Pro Display", 10F);
-            this.txtUsername.Location = new System.Drawing.Point(486, 156);
-            this.txtUsername.Multiline = true;
+            this.txtUsername.Location = new System.Drawing.Point(486, 159);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(243, 27);
+            this.txtUsername.Size = new System.Drawing.Size(243, 23);
             this.txtUsername.TabIndex = 3;
             // 
             // label3
@@ -108,11 +107,10 @@
             // txtPassword
             // 
             this.txtPassword.Font = new System.Drawing.Font("SF Pro Display", 10F);
-            this.txtPassword.Location = new System.Drawing.Point(486, 208);
-            this.txtPassword.Multiline = true;
+            this.txtPassword.Location = new System.Drawing.Point(486, 212);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(243, 27);
+            this.txtPassword.Size = new System.Drawing.Size(243, 23);
             this.txtPassword.TabIndex = 5;
             // 
             // btnThoat

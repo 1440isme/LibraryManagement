@@ -27,6 +27,11 @@ namespace QuanLyThuVien.UI
             var dbContext = new QuanLyThuVienContext();
             var userRepository = new GenericRepository<Users>(dbContext);
             _nguoiDungService = new NguoiDungService(userRepository);
+
+            this.AcceptButton = btnXacNhan;
+            this.CancelButton = btnThoat;
+
+            txtUsername.Focus();
         }
 
         private void btnXacNhan_Click(object sender, EventArgs e)

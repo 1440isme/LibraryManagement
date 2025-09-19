@@ -150,7 +150,7 @@
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(1200, 109);
-            this.panelControl1.TabIndex = 9;
+            this.panelControl1.TabIndex = 47;
             // 
             // txtNamSinh
             // 
@@ -158,7 +158,7 @@
             this.txtNamSinh.Location = new System.Drawing.Point(879, 30);
             this.txtNamSinh.Name = "txtNamSinh";
             this.txtNamSinh.Size = new System.Drawing.Size(231, 23);
-            this.txtNamSinh.TabIndex = 59;
+            this.txtNamSinh.TabIndex = 47;
             // 
             // txtQuocTich
             // 
@@ -166,7 +166,7 @@
             this.txtQuocTich.Location = new System.Drawing.Point(515, 30);
             this.txtQuocTich.Name = "txtQuocTich";
             this.txtQuocTich.Size = new System.Drawing.Size(231, 23);
-            this.txtQuocTich.TabIndex = 58;
+            this.txtQuocTich.TabIndex = 46;
             // 
             // lbl
             // 

@@ -141,7 +141,7 @@
             this.txtMoTa.Location = new System.Drawing.Point(654, 28);
             this.txtMoTa.Name = "txtMoTa";
             this.txtMoTa.Size = new System.Drawing.Size(231, 23);
-            this.txtMoTa.TabIndex = 58;
+            this.txtMoTa.TabIndex = 46;
             // 
             // label4
             // 
