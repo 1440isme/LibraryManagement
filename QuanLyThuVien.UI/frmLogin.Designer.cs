@@ -76,7 +76,7 @@
             // 
             // txtUsername
             // 
-            this.txtUsername.Font = new System.Drawing.Font("SF Pro Display", 10F);
+            this.txtUsername.Font = new System.Drawing.Font("SF Pro Display", 10F, System.Drawing.FontStyle.Bold);
             this.txtUsername.Location = new System.Drawing.Point(486, 159);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(243, 23);
@@ -106,7 +106,7 @@
             // 
             // txtPassword
             // 
-            this.txtPassword.Font = new System.Drawing.Font("SF Pro Display", 10F);
+            this.txtPassword.Font = new System.Drawing.Font("SF Pro Display", 10F, System.Drawing.FontStyle.Bold);
             this.txtPassword.Location = new System.Drawing.Point(486, 212);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';

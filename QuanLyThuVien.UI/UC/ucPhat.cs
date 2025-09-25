@@ -82,6 +82,7 @@ namespace QuanLyThuVien.UI.UC
             {
                 LoadPhatData();
                 gcHistory.DataSource = _lichSuThanhToanService.GetAllPaymentHistories();
+                ConfigureUnboundColumns(); 
                 _isDataLoaded = true;
             }
             catch (Exception ex)
@@ -96,6 +97,7 @@ namespace QuanLyThuVien.UI.UC
             {
                 LoadPhatData();
                 gcHistory.DataSource = _lichSuThanhToanService.GetAllPaymentHistories();
+                ConfigureUnboundColumns(); 
             }
             catch (Exception ex)
             {
@@ -123,12 +125,46 @@ namespace QuanLyThuVien.UI.UC
                     gcPhat.DataSource = phatWithInfo;
                     gcPhat.RefreshDataSource(); 
                     gvPhat.RefreshData();
+                    ConfigureUnboundColumns(); 
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi khi tải dữ liệu phạt: {ex.Message}", "Lỗi", 
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ConfigureUnboundColumns()
+        {
+            var barcodeColumn = gvPhat.Columns["Barcode"];
+            if (barcodeColumn != null)
+            {
+                barcodeColumn.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            }
+            
+            var tenSachColumn = gvPhat.Columns["TenSach"];
+            if (tenSachColumn != null)
+            {
+                tenSachColumn.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            }
+            
+            var maThanhVienColumn = gvPhat.Columns["MaThanhVien"];
+            if (maThanhVienColumn != null)
+            {
+                maThanhVienColumn.UnboundType = DevExpress.Data.UnboundColumnType.Integer;
+            }
+            
+            var tenThanhVienPhatColumn = gvPhat.Columns["TenThanhVien"];
+            if (tenThanhVienPhatColumn != null)
+            {
+                tenThanhVienPhatColumn.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            }
+            
+            var tenThanhVienHistoryColumn = gvHistory.Columns["TenThanhVien"];
+            if (tenThanhVienHistoryColumn != null)
+            {
+                tenThanhVienHistoryColumn.UnboundType = DevExpress.Data.UnboundColumnType.String;
             }
         }
 
@@ -142,16 +178,44 @@ namespace QuanLyThuVien.UI.UC
                     switch (e.Column.FieldName)
                     {
                         case "Barcode":
-                            e.Value = _phatService.GetBarcodeByMaMuonSach(phat.MaMuonSach);
+                            try
+                            {
+                                e.Value = _phatService.GetBarcodeByMaMuonSach(phat.MaMuonSach);
+                            }
+                            catch
+                            {
+                                e.Value = "";
+                            }
                             break;
                         case "TenSach":
-                            e.Value = _phatService.GetTenSachByMaMuonSach(phat.MaMuonSach);
+                            try
+                            {
+                                e.Value = _phatService.GetTenSachByMaMuonSach(phat.MaMuonSach);
+                            }
+                            catch
+                            {
+                                e.Value = "";
+                            }
                             break;
                         case "MaThanhVien":
-                            e.Value = _phatService.GetMaThanhVienByMaMuonSach(phat.MaMuonSach);
+                            try
+                            {
+                                e.Value = _phatService.GetMaThanhVienByMaMuonSach(phat.MaMuonSach);
+                            }
+                            catch
+                            {
+                                e.Value = 0;
+                            }
                             break;
                         case "TenThanhVien":
-                            e.Value = _phatService.GetTenThanhVienByMaMuonSach(phat.MaMuonSach);
+                            try
+                            {
+                                e.Value = _phatService.GetTenThanhVienByMaMuonSach(phat.MaMuonSach);
+                            }
+                            catch
+                            {
+                                e.Value = "";
+                            }
                             break;
                     }
                 }
@@ -223,10 +287,31 @@ namespace QuanLyThuVien.UI.UC
                 var lsu = e.Row as PaymentHistory;
                 if (lsu != null)
                 {
-                    if (e.Column.FieldName == "TenThanhVien" && lsu.MaThanhVienNavigation != null)
-                        e.Value = lsu.MaThanhVienNavigation.TenThanhVien;
-                    else if (e.Column.FieldName == "TenThanhVien")
-                        e.Value = string.Empty; 
+                    if (e.Column.FieldName == "TenThanhVien")
+                    {
+                        if (lsu.MaThanhVienNavigation?.TenThanhVien != null)
+                        {
+                            e.Value = lsu.MaThanhVienNavigation.TenThanhVien;
+                        }
+                        else
+                        {
+                            try
+                            {
+                                using (var freshContext = ContextFactory.CreateContext())
+                                {
+                                    var thanhVienRepo = new GenericRepository<ThanhVien>(freshContext);
+                                    var thanhVienService = new ThanhVienService(thanhVienRepo);
+                                    var thanhVien = thanhVienService.GetAllMembers()
+                                        .FirstOrDefault(tv => tv.MaThanhVien == lsu.MaThanhVien);
+                                    e.Value = thanhVien?.TenThanhVien ?? "";
+                                }
+                            }
+                            catch
+                            {
+                                e.Value = "";
+                            }
+                        }
+                    }
                 }
             }
         }

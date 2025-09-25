@@ -47,6 +47,8 @@ namespace QuanLyThuVien.UI.UC.Pages
             var danhSachSach = _sachService.GetAllBooks();
             gcSach.DataSource = danhSachSach;
             
+            ConfigureUnboundColumns();
+            
             LoadTacGia();
             LoadTheLoai();
             LoadNXB();
@@ -61,6 +63,27 @@ namespace QuanLyThuVien.UI.UC.Pages
             Console.WriteLine($"gcSach Design Size: 1200x464");
             Console.WriteLine($"gcSach Actual Size: {gcSach.Width}x{gcSach.Height}");
             Console.WriteLine($"Panel1 Size: {splitContainerControl1.Panel1.Width}x{splitContainerControl1.Panel1.Height}");
+        }
+
+        private void ConfigureUnboundColumns()
+        {
+            var tenTacGiaColumn = gvSach.Columns["TenTacGia"];
+            if (tenTacGiaColumn != null)
+            {
+                tenTacGiaColumn.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            }
+            
+            var tenTheLoaiColumn = gvSach.Columns["TenTheLoai"];
+            if (tenTheLoaiColumn != null)
+            {
+                tenTheLoaiColumn.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            }
+            
+            var tenNhaXuatBanColumn = gvSach.Columns["TenNhaXuatBan"];
+            if (tenNhaXuatBanColumn != null)
+            {
+                tenNhaXuatBanColumn.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            }
         }
 
         void LoadTacGia()
@@ -103,13 +126,36 @@ namespace QuanLyThuVien.UI.UC.Pages
                 var sach = e.Row as Sach;
                 if (sach != null)
                 {
-
                     if (e.Column.FieldName == "TenTacGia")
-                        e.Value = sach.MaTacGiaNavigation?.TenTacGia ?? "";
+                    {
+                        if (sach.MaTacGiaNavigation?.TenTacGia != null)
+                            e.Value = sach.MaTacGiaNavigation.TenTacGia;
+                        else
+                        {
+                            var tacGia = _tacGiaService.GetAllAuthors().FirstOrDefault(t => t.MaTacGia == sach.MaTacGia);
+                            e.Value = tacGia?.TenTacGia ?? "";
+                        }
+                    }
                     else if (e.Column.FieldName == "TenTheLoai")
-                        e.Value = sach.MaTheLoaiNavigation?.TenTheLoai ?? "";
+                    {
+                        if (sach.MaTheLoaiNavigation?.TenTheLoai != null)
+                            e.Value = sach.MaTheLoaiNavigation.TenTheLoai;
+                        else
+                        {
+                            var theLoai = _theLoaiService.GetAllCategories().FirstOrDefault(t => t.MaTheLoai == sach.MaTheLoai);
+                            e.Value = theLoai?.TenTheLoai ?? "";
+                        }
+                    }
                     else if (e.Column.FieldName == "TenNhaXuatBan")
-                        e.Value = sach.MaNhaXuatBanNavigation?.TenNhaXuatBan ?? "";
+                    {
+                        if (sach.MaNhaXuatBanNavigation?.TenNhaXuatBan != null)
+                            e.Value = sach.MaNhaXuatBanNavigation.TenNhaXuatBan;
+                        else
+                        {
+                            var nxb = _nxbService.GetAllPublishers().FirstOrDefault(n => n.MaNhaXuatBan == sach.MaNhaXuatBan);
+                            e.Value = nxb?.TenNhaXuatBan ?? "";
+                        }
+                    }
                 }
             }
         }
@@ -258,6 +304,7 @@ namespace QuanLyThuVien.UI.UC.Pages
         public void RefreshData()
         {
             gcSach.DataSource = _sachService.GetAllBooks();
+            ConfigureUnboundColumns(); 
         }
 
         private void gvSach_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
