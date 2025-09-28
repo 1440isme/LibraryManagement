@@ -273,7 +273,10 @@
             this.cboTinhTrang.FormattingEnabled = true;
             this.cboTinhTrang.Items.AddRange(new object[] {
             "Sẵn sàng",
-            "Đang mượn"});
+            "Đang mượn",
+            "Hư hỏng",
+            "Bị ẩn",
+            "Mất"});
             this.cboTinhTrang.Location = new System.Drawing.Point(517, 71);
             this.cboTinhTrang.Name = "cboTinhTrang";
             this.cboTinhTrang.Size = new System.Drawing.Size(231, 24);

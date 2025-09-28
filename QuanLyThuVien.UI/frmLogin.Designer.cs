@@ -45,9 +45,10 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(32, 50);
+            this.pictureBox1.Location = new System.Drawing.Point(41, 59);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(297, 313);
+            this.pictureBox1.Size = new System.Drawing.Size(382, 372);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -57,7 +58,8 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("SF Pro Display", 20F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(132, 24);
+            this.label1.Location = new System.Drawing.Point(297, 23);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(514, 32);
             this.label1.TabIndex = 1;
@@ -68,7 +70,8 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("SF Pro Display", 20F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(463, 95);
+            this.label2.Location = new System.Drawing.Point(595, 113);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(144, 32);
             this.label2.TabIndex = 2;
@@ -76,10 +79,11 @@
             // 
             // txtUsername
             // 
-            this.txtUsername.Font = new System.Drawing.Font("SF Pro Display", 10F, System.Drawing.FontStyle.Bold);
-            this.txtUsername.Location = new System.Drawing.Point(486, 159);
+            this.txtUsername.Font = new System.Drawing.Font("SF Pro Display", 12F, System.Drawing.FontStyle.Bold);
+            this.txtUsername.Location = new System.Drawing.Point(625, 189);
+            this.txtUsername.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(243, 23);
+            this.txtUsername.Size = new System.Drawing.Size(311, 27);
             this.txtUsername.TabIndex = 3;
             // 
             // label3
@@ -87,7 +91,8 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("SF Pro Display", 15F, System.Drawing.FontStyle.Bold);
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(339, 159);
+            this.label3.Location = new System.Drawing.Point(457, 189);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(141, 24);
             this.label3.TabIndex = 4;
@@ -98,7 +103,8 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("SF Pro Display", 15F, System.Drawing.FontStyle.Bold);
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(339, 211);
+            this.label4.Location = new System.Drawing.Point(459, 251);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(92, 24);
             this.label4.TabIndex = 6;
@@ -106,11 +112,12 @@
             // 
             // txtPassword
             // 
-            this.txtPassword.Font = new System.Drawing.Font("SF Pro Display", 10F, System.Drawing.FontStyle.Bold);
-            this.txtPassword.Location = new System.Drawing.Point(486, 212);
+            this.txtPassword.Font = new System.Drawing.Font("SF Pro Display", 12F, System.Drawing.FontStyle.Bold);
+            this.txtPassword.Location = new System.Drawing.Point(625, 252);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(243, 23);
+            this.txtPassword.Size = new System.Drawing.Size(311, 27);
             this.txtPassword.TabIndex = 5;
             // 
             // btnThoat
@@ -118,9 +125,10 @@
             this.btnThoat.Appearance.Font = new System.Drawing.Font("SF Pro Display", 14F, System.Drawing.FontStyle.Bold);
             this.btnThoat.Appearance.Options.UseFont = true;
             this.btnThoat.ImageOptions.SvgImage = global::QuanLyThuVien.UI.Properties.Resources.del;
-            this.btnThoat.Location = new System.Drawing.Point(565, 290);
+            this.btnThoat.Location = new System.Drawing.Point(726, 344);
+            this.btnThoat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(128, 53);
+            this.btnThoat.Size = new System.Drawing.Size(165, 63);
             this.btnThoat.TabIndex = 61;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
@@ -130,9 +138,10 @@
             this.btnXacNhan.Appearance.Font = new System.Drawing.Font("SF Pro Display", 14F, System.Drawing.FontStyle.Bold);
             this.btnXacNhan.Appearance.Options.UseFont = true;
             this.btnXacNhan.ImageOptions.SvgImage = global::QuanLyThuVien.UI.Properties.Resources.bo_validation;
-            this.btnXacNhan.Location = new System.Drawing.Point(416, 290);
+            this.btnXacNhan.Location = new System.Drawing.Point(535, 344);
+            this.btnXacNhan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnXacNhan.Name = "btnXacNhan";
-            this.btnXacNhan.Size = new System.Drawing.Size(128, 53);
+            this.btnXacNhan.Size = new System.Drawing.Size(165, 63);
             this.btnXacNhan.TabIndex = 60;
             this.btnXacNhan.Text = "Xác nhận";
             this.btnXacNhan.Click += new System.EventHandler(this.btnXacNhan_Click);
@@ -142,7 +151,8 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("SF Pro Display", 10F);
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(544, 379);
+            this.label5.Location = new System.Drawing.Point(766, 455);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(224, 17);
             this.label5.TabIndex = 62;
@@ -152,9 +162,9 @@
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(148)))), ((int)(((byte)(197)))));
             this.Appearance.Options.UseBackColor = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(780, 405);
+            this.ClientSize = new System.Drawing.Size(1003, 481);
             this.ControlBox = false;
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnThoat);
@@ -168,6 +178,7 @@
             this.Controls.Add(this.pictureBox1);
             this.FormBorderEffect = DevExpress.XtraEditors.FormBorderEffect.Glow;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmLogin";

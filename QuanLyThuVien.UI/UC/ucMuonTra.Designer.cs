@@ -67,8 +67,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.dtNgayMuon = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtTongNoPhat = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.txtSoSachDangMuon = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtSoPhieuDangMuon = new System.Windows.Forms.TextBox();
@@ -406,8 +404,6 @@
             this.splitContainerControl1.Panel1.Controls.Add(this.label5);
             this.splitContainerControl1.Panel1.Controls.Add(this.dtNgayMuon);
             this.splitContainerControl1.Panel1.Controls.Add(this.label4);
-            this.splitContainerControl1.Panel1.Controls.Add(this.txtTongNoPhat);
-            this.splitContainerControl1.Panel1.Controls.Add(this.label3);
             this.splitContainerControl1.Panel1.Controls.Add(this.txtSoSachDangMuon);
             this.splitContainerControl1.Panel1.Controls.Add(this.label2);
             this.splitContainerControl1.Panel1.Controls.Add(this.txtSoPhieuDangMuon);
@@ -448,7 +444,7 @@
             this.dtNgayTraDuKien.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtNgayTraDuKien.Location = new System.Drawing.Point(738, 64);
             this.dtNgayTraDuKien.Name = "dtNgayTraDuKien";
-            this.dtNgayTraDuKien.Size = new System.Drawing.Size(138, 23);
+            this.dtNgayTraDuKien.Size = new System.Drawing.Size(138, 27);
             this.dtNgayTraDuKien.TabIndex = 70;
             // 
             // label5
@@ -466,7 +462,7 @@
             this.dtNgayMuon.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtNgayMuon.Location = new System.Drawing.Point(738, 18);
             this.dtNgayMuon.Name = "dtNgayMuon";
-            this.dtNgayMuon.Size = new System.Drawing.Size(138, 23);
+            this.dtNgayMuon.Size = new System.Drawing.Size(138, 27);
             this.dtNgayMuon.TabIndex = 68;
             // 
             // label4
@@ -478,25 +474,6 @@
             this.label4.Size = new System.Drawing.Size(74, 16);
             this.label4.TabIndex = 61;
             this.label4.Text = "Ngày mượn";
-            // 
-            // txtTongNoPhat
-            // 
-            this.txtTongNoPhat.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTongNoPhat.Location = new System.Drawing.Point(136, 64);
-            this.txtTongNoPhat.Name = "txtTongNoPhat";
-            this.txtTongNoPhat.ReadOnly = true;
-            this.txtTongNoPhat.Size = new System.Drawing.Size(140, 23);
-            this.txtTongNoPhat.TabIndex = 60;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("SF Pro Display", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(33, 67);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(82, 16);
-            this.label3.TabIndex = 59;
-            this.label3.Text = "Tổng nợ phạt";
             // 
             // txtSoSachDangMuon
             // 
@@ -550,7 +527,6 @@
             // 
             this.searchThanhVien.Location = new System.Drawing.Point(136, 16);
             this.searchThanhVien.Name = "searchThanhVien";
-            this.searchThanhVien.Properties.Appearance.Font = new System.Drawing.Font("SF Pro Display", 12F);
             this.searchThanhVien.Properties.Appearance.Options.UseFont = true;
             this.searchThanhVien.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -649,7 +625,6 @@
             // 
             // MaChiTiet
             // 
-            this.MaChiTiet.AppearanceCell.Font = new System.Drawing.Font("SF Pro Display", 12F);
             this.MaChiTiet.AppearanceCell.Options.UseFont = true;
             this.MaChiTiet.Caption = "gridColumn1";
             this.MaChiTiet.FieldName = "MaChiTiet";
@@ -830,8 +805,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker dtNgayMuon;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtTongNoPhat;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtSoSachDangMuon;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtSoPhieuDangMuon;

@@ -503,7 +503,6 @@ namespace QuanLyThuVien.UI.UC
 
                         txtSoPhieuDangMuon.Text = ttThanhVien.SoPhieuDangMuon.ToString();
                         txtSoSachDangMuon.Text = ttThanhVien.SoSachDangMuon.ToString();
-                        txtTongNoPhat.Text = ttThanhVien.TongNoPhat.ToString("N0") + " VNĐ";
                     }
                     else
                     {
@@ -526,7 +525,6 @@ namespace QuanLyThuVien.UI.UC
         {
             txtSoPhieuDangMuon.Text = "";
             txtSoSachDangMuon.Text = "";
-            txtTongNoPhat.Text = "";
         }
 
 
@@ -1070,7 +1068,6 @@ namespace QuanLyThuVien.UI.UC
                         var ttThanhVien = ttThanhVienList.First();
                         txtSoPhieuDangMuon.Text = ttThanhVien.SoPhieuDangMuon.ToString();
                         txtSoSachDangMuon.Text = ttThanhVien.SoSachDangMuon.ToString();
-                        txtTongNoPhat.Text = ttThanhVien.TongNoPhat.ToString("N0") + " VNĐ";
                     }
                 }
             }
@@ -1461,6 +1458,19 @@ namespace QuanLyThuVien.UI.UC
         {
             try
             {
+                gvSach.OptionsFind.HighlightFindResults = false;
+                gvSach.OptionsFind.FindNullPrompt = "Tìm kiếm...";
+                gvSach.OptionsFind.ShowClearButton = true;
+                gvSach.OptionsFind.ShowFindButton = true;
+
+                foreach (DevExpress.XtraGrid.Columns.GridColumn col in gvSach.Columns)
+                {
+                    if (col.ColumnType == typeof(string))
+                    {
+                        col.AppearanceCell.TextOptions.Trimming = DevExpress.Utils.Trimming.EllipsisCharacter;
+                        col.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
+                    }
+                }
                 loadDanhSachMuon();
                 loadBanSaoChuaMuon();
                 loadThanhVien();

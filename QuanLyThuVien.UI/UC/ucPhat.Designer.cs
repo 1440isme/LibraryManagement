@@ -128,6 +128,7 @@
             this.ThanhToanButtonCol});
             this.gvPhat.GridControl = this.gcPhat;
             this.gvPhat.Name = "gvPhat";
+            this.gvPhat.OptionsFind.HighlightFindResults = false;
             this.gvPhat.RowHeight = 30;
             this.gvPhat.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gvPhat_RowCellStyle);
             this.gvPhat.CustomUnboundColumnData += new DevExpress.XtraGrid.Views.Base.CustomColumnDataEventHandler(this.gvPhat_CustomUnboundColumnData);

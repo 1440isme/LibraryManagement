@@ -131,14 +131,16 @@ namespace QuanLyThuVien.UI.UI
 
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            showHideControl(false);
             GetActiveCrudPage()?.Add();
+            showHideControl(false);
+
         }
 
         private void btnSua_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            showHideControl(false);
             GetActiveCrudPage()?.Edit();
+            showHideControl(false);
+
         }
 
         private void btnXoa_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -148,14 +150,16 @@ namespace QuanLyThuVien.UI.UI
 
         private void btnLuu_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            showHideControl(true);
             GetActiveCrudPage()?.Save();
+            showHideControl(true);
+
         }
 
         private void btnBoQua_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            showHideControl(true);
             GetActiveCrudPage()?.Cancel();
+            showHideControl(true);
+
         }
     }
 }

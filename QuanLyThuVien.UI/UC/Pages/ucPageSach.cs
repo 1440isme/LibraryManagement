@@ -49,6 +49,20 @@ namespace QuanLyThuVien.UI.UC.Pages
             
             ConfigureUnboundColumns();
             
+            gvSach.OptionsFind.HighlightFindResults = false;
+            gvSach.OptionsFind.FindNullPrompt = "Tìm kiếm...";
+            gvSach.OptionsFind.ShowClearButton = true;
+            gvSach.OptionsFind.ShowFindButton = true;
+            
+            foreach (DevExpress.XtraGrid.Columns.GridColumn col in gvSach.Columns)
+            {
+                if (col.ColumnType == typeof(string))
+                {
+                    col.AppearanceCell.TextOptions.Trimming = DevExpress.Utils.Trimming.EllipsisCharacter;
+                    col.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
+                }
+            }
+            
             LoadTacGia();
             LoadTheLoai();
             LoadNXB();
@@ -126,36 +140,57 @@ namespace QuanLyThuVien.UI.UC.Pages
                 var sach = e.Row as Sach;
                 if (sach != null)
                 {
-                    if (e.Column.FieldName == "TenTacGia")
+                    try
                     {
-                        if (sach.MaTacGiaNavigation?.TenTacGia != null)
-                            e.Value = sach.MaTacGiaNavigation.TenTacGia;
-                        else
+                        if (e.Column.FieldName == "TenTacGia")
                         {
-                            var tacGia = _tacGiaService.GetAllAuthors().FirstOrDefault(t => t.MaTacGia == sach.MaTacGia);
-                            e.Value = tacGia?.TenTacGia ?? "";
+                            string tenTacGia = "";
+                            if (sach.MaTacGiaNavigation?.TenTacGia != null)
+                                tenTacGia = sach.MaTacGiaNavigation.TenTacGia;
+                            else
+                            {
+                                var tacGia = _tacGiaService.GetAllAuthors().FirstOrDefault(t => t.MaTacGia == sach.MaTacGia);
+                                tenTacGia = tacGia?.TenTacGia ?? "";
+                            }
+                            
+                            e.Value = string.IsNullOrEmpty(tenTacGia) ? " " : tenTacGia;
+                        }
+                        else if (e.Column.FieldName == "TenTheLoai")
+                        {
+                            string tenTheLoai = "";
+                            if (sach.MaTheLoaiNavigation?.TenTheLoai != null)
+                                tenTheLoai = sach.MaTheLoaiNavigation.TenTheLoai;
+                            else
+                            {
+                                var theLoai = _theLoaiService.GetAllCategories().FirstOrDefault(t => t.MaTheLoai == sach.MaTheLoai);
+                                tenTheLoai = theLoai?.TenTheLoai ?? "";
+                            }
+                            
+                            e.Value = string.IsNullOrEmpty(tenTheLoai) ? " " : tenTheLoai;
+                        }
+                        else if (e.Column.FieldName == "TenNhaXuatBan")
+                        {
+                            string tenNXB = "";
+                            if (sach.MaNhaXuatBanNavigation?.TenNhaXuatBan != null)
+                                tenNXB = sach.MaNhaXuatBanNavigation.TenNhaXuatBan;
+                            else
+                            {
+                                var nxb = _nxbService.GetAllPublishers().FirstOrDefault(n => n.MaNhaXuatBan == sach.MaNhaXuatBan);
+                                tenNXB = nxb?.TenNhaXuatBan ?? "";
+                            }
+                            
+                            e.Value = string.IsNullOrEmpty(tenNXB) ? " " : tenNXB;
                         }
                     }
-                    else if (e.Column.FieldName == "TenTheLoai")
+                    catch (Exception ex)
                     {
-                        if (sach.MaTheLoaiNavigation?.TenTheLoai != null)
-                            e.Value = sach.MaTheLoaiNavigation.TenTheLoai;
-                        else
-                        {
-                            var theLoai = _theLoaiService.GetAllCategories().FirstOrDefault(t => t.MaTheLoai == sach.MaTheLoai);
-                            e.Value = theLoai?.TenTheLoai ?? "";
-                        }
+                        e.Value = " ";
+                        System.Diagnostics.Debug.WriteLine($"Error in CustomUnboundColumnData: {ex.Message}");
                     }
-                    else if (e.Column.FieldName == "TenNhaXuatBan")
-                    {
-                        if (sach.MaNhaXuatBanNavigation?.TenNhaXuatBan != null)
-                            e.Value = sach.MaNhaXuatBanNavigation.TenNhaXuatBan;
-                        else
-                        {
-                            var nxb = _nxbService.GetAllPublishers().FirstOrDefault(n => n.MaNhaXuatBan == sach.MaNhaXuatBan);
-                            e.Value = nxb?.TenNhaXuatBan ?? "";
-                        }
-                    }
+                }
+                else
+                {
+                    e.Value = " "; 
                 }
             }
         }
@@ -241,56 +276,154 @@ namespace QuanLyThuVien.UI.UC.Pages
                     }
                 }
             }
+            catch (InvalidOperationException invOpEx)
+            {
+                MessageBox.Show("Không thể xóa sách này vì có liên quan đến dữ liệu khác: " + invOpEx.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi xóa sách: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi khi xoá sách: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
         }
 
         public void Save()
         {
+            List<string> validationErrors = new List<string>();
+            
             if (cboTacGia.SelectedValue == null || cboNXB.SelectedValue == null || cboTheLoai.SelectedValue == null)
             {
-                MessageBox.Show("Vui lòng chọn Tác giả, NXB và Thể loại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                validationErrors.Add("Vui lòng chọn đầy đủ Tác giả, NXB và Thể loại.");
+            }
+            
+            if (string.IsNullOrWhiteSpace(txtTenSach.Text))
+            {
+                validationErrors.Add("Tên sách không được để trống.");
+            }
+
+            if (string.IsNullOrWhiteSpace(txtISBN.Text))
+            {
+                validationErrors.Add("ISBN không được để trống.");
+            }
+
+            if (numNamXB.Value <= 0)
+            {
+                validationErrors.Add("Năm xuất bản phải lớn hơn 0.");
+            }
+
+            if (numGia.Value <= 0)
+            {
+                validationErrors.Add("Giá sách phải lớn hơn 0.");
+            }
+
+            if (validationErrors.Count > 0)
+            {
+                string errorMessage = "Vui lòng kiểm tra lại thông tin:\n\n" + string.Join("\n", validationErrors);
+                MessageBox.Show(errorMessage, "Thông tin chưa hợp lệ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                
+                if (cboTacGia.SelectedValue == null)
+                    cboTacGia.Focus();
+                else if (string.IsNullOrWhiteSpace(txtTenSach.Text))
+                    txtTenSach.Focus();
+                else if (string.IsNullOrWhiteSpace(txtISBN.Text))
+                    txtISBN.Focus();
+                else if (numNamXB.Value <= 0)
+                    numNamXB.Focus();
+                else if (numGia.Value <= 0)
+                    numGia.Focus();
+                    
                 return;
             }
+
+            bool saveSuccessful = false;
+
             try
             {
                 if (_them)
                 {
+                    _sachService.AddBook(
+                        txtTenSach.Text, 
+                        txtISBN.Text, 
+                        Convert.ToInt32(cboTacGia.SelectedValue), 
+                        Convert.ToInt32(cboNXB.SelectedValue), 
+                        Convert.ToInt32(cboTheLoai.SelectedValue),
+                        (int)numNamXB.Value, 
+                        numGia.Value, 
+                        (int)numSoLuong.Value, 
+                        chkTrangThai.Checked
+                    );
                     
-                    _sachService.AddBook(txtTenSach.Text, txtISBN.Text, Convert.ToInt32(cboTacGia.SelectedValue), Convert.ToInt32(cboNXB.SelectedValue), Convert.ToInt32(cboTheLoai.SelectedValue),
-                        (int)numNamXB.Value, numGia.Value, (int)numSoLuong.Value, chkTrangThai.Checked);
-                    gcSach.DataSource = _sachService.GetAllBooks();
-                    MessageBox.Show("Thêm sách thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    _enable(false);
-                    DataChanged?.Invoke(this, EventArgs.Empty);
+                    saveSuccessful = true;
+                    MessageBox.Show("✅ Thêm sách thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
                     var sach = gvSach.GetFocusedRow() as Sach;
-                    if (sach.MaSach == 0)
+                    if (sach == null || sach.MaSach == 0)
                     {
-                        MessageBox.Show("Vui lòng chọn sách để sửa.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
+                        MessageBox.Show("Vui lòng chọn sách để sửa.", "Chưa chọn dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return; 
                     }
-                    if (sach != null)
-                    {
-                        
-                        _sachService.UpdateBook(sach.MaSach, txtTenSach.Text, txtISBN.Text, Convert.ToInt32(cboTacGia.SelectedValue), Convert.ToInt32(cboNXB.SelectedValue), Convert.ToInt32(cboTheLoai.SelectedValue),
-                        (int)numNamXB.Value, numGia.Value, (int)numSoLuong.Value, chkTrangThai.Checked);
-                    }
-                    gcSach.DataSource = _sachService.GetAllBooks();                    
-                    MessageBox.Show("Sửa sách thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    _enable(false);
-                    DataChanged?.Invoke(this, EventArgs.Empty);
+
+                    _sachService.UpdateBook(
+                        sach.MaSach, 
+                        txtTenSach.Text, 
+                        txtISBN.Text, 
+                        Convert.ToInt32(cboTacGia.SelectedValue), 
+                        Convert.ToInt32(cboNXB.SelectedValue), 
+                        Convert.ToInt32(cboTheLoai.SelectedValue),
+                        (int)numNamXB.Value, 
+                        numGia.Value, 
+                        (int)numSoLuong.Value, 
+                        chkTrangThai.Checked
+                    );
+                    
+                    saveSuccessful = true;
+                    MessageBox.Show("✅ Cập nhật sách thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+            }
+            catch (ArgumentException argEx)
+            {
+                MessageBox.Show($"❌ Dữ liệu không hợp lệ:\n\n{argEx.Message}\n\nVui lòng kiểm tra lại và thử lưu lần nữa.", 
+                               "Lỗi dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
+                FocusToErrorField(argEx.Message);
+                
+                return;
+            }
+            catch (System.Data.SqlClient.SqlException sqlEx)
+            {
+             
+                FocusToSqlErrorField(sqlEx.Message);
+                
+                return;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi lưu sách: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"❌ Có lỗi xảy ra:\n\n{ex.Message}\n\nVui lòng thử lại.", 
+                               "Lỗi hệ thống", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
+                return;
+            }
 
-
+            if (saveSuccessful)
+            {
+                try
+                {
+                    gcSach.DataSource = _sachService.GetAllBooks();
+                    DataChanged?.Invoke(this, EventArgs.Empty);
+            
+                    _enable(false);
+                    _reset();
+                    _them = false;
+            
+                    gcSach.Focus();
+                }
+                catch (Exception refreshEx)
+                {
+                    MessageBox.Show($"Lưu thành công nhưng có lỗi khi refresh dữ liệu:\n\n{refreshEx.Message}", 
+                                   "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
         }
 
@@ -317,6 +450,53 @@ namespace QuanLyThuVien.UI.UC.Pages
                 else
                     e.Appearance.BackColor = Color.LightCoral;
 
+            }
+        }
+
+        private void FocusToErrorField(string errorMessage)
+        {
+            if (errorMessage.Contains("Tên sách"))
+            {
+                txtTenSach.Focus();
+                txtTenSach.SelectAll();
+            }
+            else if (errorMessage.Contains("ISBN"))
+            {
+                txtISBN.Focus(); 
+                txtISBN.SelectAll();
+            }
+            else if (errorMessage.Contains("Năm xuất bản"))
+            {
+                numNamXB.Focus();
+            }
+            else if (errorMessage.Contains("Giá"))
+            {
+                numGia.Focus();
+            }
+            else if (errorMessage.Contains("Số lượng"))
+            {
+                numSoLuong.Focus();
+            }
+        }
+
+        private void FocusToSqlErrorField(string sqlErrorMessage)
+        {
+            if (sqlErrorMessage.Contains("CHK_Gia"))
+            {
+                numGia.Focus();
+            }
+            else if (sqlErrorMessage.Contains("CHK_NamXuatBan"))
+            {
+                numNamXB.Focus();
+            }
+            else if (sqlErrorMessage.Contains("CHK_SoLuong"))
+            {
+                numSoLuong.Focus();
+            }
+            else if (sqlErrorMessage.Contains("ISBN"))
+            {
+                txtISBN.Focus();
+                txtISBN.SelectAll();
             }
         }
     }

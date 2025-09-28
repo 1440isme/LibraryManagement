@@ -1,6 +1,7 @@
 ﻿using QuanLyThuVien.BLL.Services;
 using QuanLyThuVien.DAL.Entities;
 using QuanLyThuVien.UI.Interfaces;
+using QuanLyThuVien.UI.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -80,6 +81,19 @@ namespace QuanLyThuVien.UI.UC
         {
             try
             {
+                gvHistory.OptionsFind.HighlightFindResults = false;
+                gvHistory.OptionsFind.FindNullPrompt = "Tìm kiếm...";
+                gvHistory.OptionsFind.ShowClearButton = true;
+                gvHistory.OptionsFind.ShowFindButton = true;
+
+                foreach (DevExpress.XtraGrid.Columns.GridColumn col in gvHistory.Columns)
+                {
+                    if (col.ColumnType == typeof(string))
+                    {
+                        col.AppearanceCell.TextOptions.Trimming = DevExpress.Utils.Trimming.EllipsisCharacter;
+                        col.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
+                    }
+                }
                 LoadPhatData();
                 gcHistory.DataSource = _lichSuThanhToanService.GetAllPaymentHistories();
                 ConfigureUnboundColumns(); 

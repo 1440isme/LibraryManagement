@@ -419,6 +419,7 @@ namespace QuanLyThuVien.UI.UC
             this.gvQuaHan.Appearance.ViewCaption.Options.UseFont = true;
             this.gvQuaHan.GridControl = this.gcQuaHan;
             this.gvQuaHan.Name = "gvQuaHan";
+            this.gvQuaHan.OptionsBehavior.Editable = false;
             this.gvQuaHan.OptionsView.ShowGroupPanel = false;
             this.gvQuaHan.OptionsView.ShowViewCaption = true;
             this.gvQuaHan.RowHeight = 30;

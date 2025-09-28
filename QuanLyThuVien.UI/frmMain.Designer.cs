@@ -54,10 +54,10 @@
             // mainContainer
             // 
             this.mainContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainContainer.Location = new System.Drawing.Point(303, 31);
-            this.mainContainer.Margin = new System.Windows.Forms.Padding(4);
+            this.mainContainer.Location = new System.Drawing.Point(390, 31);
+            this.mainContainer.Margin = new System.Windows.Forms.Padding(5);
             this.mainContainer.Name = "mainContainer";
-            this.mainContainer.Size = new System.Drawing.Size(1395, 868);
+            this.mainContainer.Size = new System.Drawing.Size(1793, 1037);
             this.mainContainer.TabIndex = 0;
             // 
             // accordionControl1
@@ -71,11 +71,11 @@
             this.lblUser});
             this.accordionControl1.GroupHeight = 30;
             this.accordionControl1.Location = new System.Drawing.Point(0, 31);
-            this.accordionControl1.Margin = new System.Windows.Forms.Padding(4);
+            this.accordionControl1.Margin = new System.Windows.Forms.Padding(5);
             this.accordionControl1.Name = "accordionControl1";
             this.accordionControl1.OptionsMinimizing.ElementHeight = 30;
             this.accordionControl1.ScrollBarMode = DevExpress.XtraBars.Navigation.ScrollBarMode.Hidden;
-            this.accordionControl1.Size = new System.Drawing.Size(303, 868);
+            this.accordionControl1.Size = new System.Drawing.Size(390, 1037);
             this.accordionControl1.TabIndex = 1;
             this.accordionControl1.ViewType = DevExpress.XtraBars.Navigation.AccordionControlViewType.HamburgerMenu;
             // 
@@ -179,9 +179,9 @@
             this.lblTieuDe});
             this.fluentDesignFormControl1.Location = new System.Drawing.Point(0, 0);
             this.fluentDesignFormControl1.Manager = this.fluentFormDefaultManager1;
-            this.fluentDesignFormControl1.Margin = new System.Windows.Forms.Padding(4);
+            this.fluentDesignFormControl1.Margin = new System.Windows.Forms.Padding(5);
             this.fluentDesignFormControl1.Name = "fluentDesignFormControl1";
-            this.fluentDesignFormControl1.Size = new System.Drawing.Size(1698, 31);
+            this.fluentDesignFormControl1.Size = new System.Drawing.Size(2183, 31);
             this.fluentDesignFormControl1.TabIndex = 2;
             this.fluentDesignFormControl1.TabStop = false;
             this.fluentDesignFormControl1.TitleItemLinks.Add(this.lblTieuDe);
@@ -190,11 +190,12 @@
             // 
             this.lblTieuDe.Caption = "Trương Công Bình";
             this.lblTieuDe.Id = 0;
-            this.lblTieuDe.ItemAppearance.Normal.Font = new System.Drawing.Font("SF Pro Display", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTieuDe.ItemAppearance.Normal.Font = new System.Drawing.Font("SF Pro Display", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTieuDe.ItemAppearance.Normal.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.lblTieuDe.ItemAppearance.Normal.Options.UseFont = true;
             this.lblTieuDe.ItemAppearance.Normal.Options.UseForeColor = true;
-            this.lblTieuDe.MaxWidth = 50;
+            this.lblTieuDe.MaxWidth = 300;
+            this.lblTieuDe.MinWidth = 200;
             this.lblTieuDe.Name = "lblTieuDe";
             this.lblTieuDe.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             // 
@@ -207,15 +208,15 @@
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1698, 899);
+            this.ClientSize = new System.Drawing.Size(2183, 1068);
             this.ControlContainer = this.mainContainer;
             this.Controls.Add(this.mainContainer);
             this.Controls.Add(this.accordionControl1);
             this.Controls.Add(this.fluentDesignFormControl1);
             this.FluentDesignFormControl = this.fluentDesignFormControl1;
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.MaximizeBox = false;
             this.Name = "frmMain";
             this.NavigationControl = this.accordionControl1;
